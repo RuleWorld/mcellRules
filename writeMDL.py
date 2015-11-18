@@ -1,6 +1,7 @@
 import json
 import grammarDefinition as gd
 from StringIO import StringIO
+import argparse
 
 
 def readBNGLJSON(bngljson):
@@ -33,9 +34,7 @@ def writeRawSection(originalMDL, buffer, tab):
         else:
             for element in originalMDL:
                 writeRawSection(element, buffer, tab)
-            
     return buffer.getvalue()
-
 
 
 def writeSection(originalMDL, augmentedMDLr):
@@ -52,25 +51,40 @@ def readMDLr(mdlrfile):
         mdlr = f.read()
     return mdlr
 
-if __name__ == "__main__":
-    finalName = 'example_expanded'
-    jsonDict = readBNGLJSON('output_sbml.xml.json')
-    mdlr = readMDLr('example.mdlr')
+
+def constructMDL(jsonPath, mdlrPath, outputFileName):
+    """
+    Create an MDL readable by standard mcell.
+
+    Keyword arguments:
+    jsonPath -- A json dictionary containing structures and parameters extracted from the mdlr input
+    mdlrPath -- An mdlr file. In this method we will be mainly extracting the non RBM sections
+
+    Returns:
+    A string containing a plain MDL definition
+    """
+
+    # load up data structures
+    jsonDict = readBNGLJSON(jsonPath)
+    mdlr = readMDLr(mdlrPath)
     sectionMDLR = gd.nonhashedgrammar.parseString(mdlr)
     statementMDLR = gd.statementGrammar.parseString(mdlr)
+
+    # create output buffers
     finalMDL = StringIO()
     moleculeMDL = StringIO()
     reactionMDL = StringIO()
     outputMDL = StringIO()
     seedMDL = StringIO()
+
     # output statements as is
     for element in statementMDLR:
         finalMDL.write('{0} = {1}\n'.format(element[0], element[1]))
 
     finalMDL.write('\n')
-    finalMDL.write('INCLUDE_FILE = "{0}.molecules.mdl"\n'.format(finalName))
-    finalMDL.write('INCLUDE_FILE = "{0}.reactions.mdl"\n'.format(finalName))
-    finalMDL.write('INCLUDE_FILE = "{0}.seed.mdl"\n\n'.format(finalName))
+    finalMDL.write('INCLUDE_FILE = "{0}.molecules.mdl"\n'.format(outputFileName))
+    finalMDL.write('INCLUDE_FILE = "{0}.reactions.mdl"\n'.format(outputFileName))
+    finalMDL.write('INCLUDE_FILE = "{0}.seed.mdl"\n\n'.format(outputFileName))
 
     # output sections using json information
     sectionOrder = {'DEFINE_MOLECULES': moleculeMDL, 'DEFINE_REACTIONS': reactionMDL, 'REACTION_DATA_OUTPUT': outputMDL, 'INSTANTIATE': seedMDL}
@@ -78,7 +92,7 @@ if __name__ == "__main__":
         if element[0] not in sectionOrder:
             finalMDL.write(writeSection(element, jsonDict))
 
-    finalMDL.write('INCLUDE_FILE = "{0}.output.mdl"\n'.format(finalName))
+    finalMDL.write('INCLUDE_FILE = "{0}.output.mdl"\n'.format(outputFileName))
 
     dimensionalityDict = {}
     # molecules
@@ -112,13 +126,11 @@ if __name__ == "__main__":
             seedMDL.write(writeRawSection(element[-1], seedMDL, '') + '\n')
             #
     for seed in jsonDict['rel_list']:
-        print seed
         seedMDL.write('\t{0} RELEASE_SITE\n\t{{\n'.format(seed['name']))
         seedMDL.write('\t\tSHAPE = Scene.{0}\n'.format(seed['object_expr']))
         orientation = seed['orient'] if dimensionalityDict[seed['molecule']] == '2D' else ''
         seedMDL.write('\t\tMOLECULE = {0}{1}\n'.format(seed['molecule'], orientation))
         if seed['quantity_type'] == 'DENSITY':
-            print dimensionalityDict
             quantity_type = 'DENSITY' if dimensionalityDict[seed['molecule']] == '2D' else 'CONCENTRATION'
         else:
             quantity_type = seed['quantity_type']
@@ -129,13 +141,11 @@ if __name__ == "__main__":
     seedMDL.write('}\n')
 
     # rxn_output
-
     outputMDL.write('REACTION_DATA_OUTPUT\n{\n')
 
     if 'REACTION_DATA_OUTPUT' in sectionMDLR.keys():
         for element in sectionMDLR['REACTION_DATA_OUTPUT']:
             writeRawSection(element, outputMDL, '\t')
-
 
     for obs in jsonDict['obs_list']:
         if any([x != ['0'] for x in obs['value']]):
@@ -146,17 +156,39 @@ if __name__ == "__main__":
             outputMDL.write(' => "./react_data/{0}.dat"\n'.format(obs['name']))
     outputMDL.write('}\n')
 
+    return {'main': finalMDL, 'molecules': moleculeMDL, 'reactions': reactionMDL, 'rxnOutput': outputMDL, 'seeding': seedMDL}
 
-    with open('{0}.main.mdl'.format(finalName), 'w') as f:
-        f.write(finalMDL.getvalue())
-    with open('{0}.molecules.mdl'.format(finalName), 'w') as f:
-        f.write(moleculeMDL.getvalue())
-    with open('{0}.reactions.mdl'.format(finalName), 'w') as f:
-        f.write(reactionMDL.getvalue())
-    with open('{0}.seed.mdl'.format(finalName), 'w') as f:
-        f.write(seedMDL.getvalue())
-    with open('{0}.output.mdl'.format(finalName), 'w') as f:
-        f.write(outputMDL.getvalue())
+
+def defineConsole():
+    parser = argparse.ArgumentParser(description='SBML to BNGL translator')
+    parser.add_argument('-ij', '--input_json', type=str, help='input SBML-JSON file', required=True)
+    parser.add_argument('-im', '--input_mdl', type=str, help='input SBML-JSON file', required=True)
+    parser.add_argument('-o', '--output', type=str, help='output MDL file')
+    return parser
+
+
+def writeMDL(mdlDict, outputFileName):
+    with open('{0}.main.mdl'.format(outputFileName), 'w') as f:
+        f.write(mdlDict['main'].getvalue())
+    with open('{0}.molecules.mdl'.format(outputFileName), 'w') as f:
+        f.write(mdlDict['molecules'].getvalue())
+    with open('{0}.reactions.mdl'.format(outputFileName), 'w') as f:
+        f.write(mdlDict['reactions'].getvalue())
+    with open('{0}.seed.mdl'.format(outputFileName), 'w') as f:
+        f.write(mdlDict['seeding'].getvalue())
+    with open('{0}.output.mdl'.format(outputFileName), 'w') as f:
+        f.write(mdlDict['rxnOutput'].getvalue())
+
+
+if __name__ == "__main__":
+    parser = defineConsole()
+    namespace = parser.parse_args()
+
+    finalName = namespace.output if namespace.output else 'example_expanded'
+    mdlDict = constructMDL(namespace.input_json, namespace.input_mdl, finalName)
+    writeMDL(mdlDict)
+
+
 
 
     #print finalMDL.getvalue()

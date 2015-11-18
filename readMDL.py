@@ -130,7 +130,13 @@ def processReactionRules(rules):
     return rStr.getvalue()
 
 
-def constructBNGFromMDLR(statements, sections):
+def constructBNGFromMDLR(mdlrPath):
+
+    with open(mdlrPath, 'r') as f:
+        mldr = f.read()
+
+    statements = statementGrammar.parseString(mldr)
+    sections = grammar.parseString(mldr)
 
     finalBNGLStr = StringIO()
     finalBNGLStr.write('begin model\n')
@@ -157,27 +163,30 @@ def constructBNGFromMDLR(statements, sections):
 
 def bngl2json(bnglFile):
     call(['bngdev',bnglFile])
-    sbmlName = bnglFile.split('.')[0] + '_sbml.xml'
+    sbmlName = '.'.join(bnglFile.split('.')[:-1]) + '_sbml.xml'
+    print sbmlName
     call(['./sbml2json','-i', sbmlName])
 
 
-if __name__ == "__main__":
-    with open('example.mdlr', 'r') as f:
-        mldr = f.read()
+def outputBNGL(bnglStr, bnglPath):
+    with open(bnglPath, 'w') as f:
+        f.write(bnglStr)
 
-    #s = species_definition.parseString('@PM::Lig(l!+~P,l!1).Rec(r!1)@EC')
-    #pprint.pprint(s[0]['speciesPattern'][0]['components'][0])
-    #print '+++', molecule_definition.parseString('Rec(a~0~P)')
-    #print '---', species_definition.parseString('Rec(a!2~0).Lig(l!2,l!+)')
-    #pprint.pprint(reaction_definition.parseString('Rec(a!2~0).Lig(l!2,l!+) <-> Rec(a) + Lig(l,l!+) [4,3]').asList())
-    #print '/////'
-    statements = statementGrammar.parseString(mldr)
-    sections = grammar.parseString(mldr)
+
+if __name__ == "__main__":
+    
+    #with open('example.mdlr', 'r') as f:
+    #    mldr = f.read()
+    #statements = statementGrammar.parseString(mldr)
+    #sections = grammar.parseString(mldr)
     #bnglStr = constructBNGFromMDLR(statements, sections)
-    #bnglFile = 'output.bngl'
+    
+    bnglStr = constructBNGFromMDLR('example.mdlr')
+    bnglPath = 'output.bngl'
     #with open(bnglFile,'w') as f:
     #    f.write(bnglStr)
+    outputBNGL(bnglStr, bnglPath)
 
-    #bngl2json(bnglFile)
+    bngl2json(bnglFile)
 
 
