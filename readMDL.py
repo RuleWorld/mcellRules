@@ -2,6 +2,7 @@ from grammarDefinition import *
 from StringIO import StringIO
 import smallStructures as st
 import pprint
+from subprocess import call
 
 
 def processParameters(statements):
@@ -33,6 +34,7 @@ def createMoleculeFromPattern(moleculePattern, idx):
         tmpMolecule.addComponent(tmpComponent)
     return tmpMolecule
 
+
 def createSpeciesFromPattern(speciesPattern):
     tmpSpecies = st.Species()
     if 'speciesCompartment' in speciesPattern.keys():
@@ -40,6 +42,7 @@ def createSpeciesFromPattern(speciesPattern):
     for idx, element in enumerate(speciesPattern['speciesPattern']):
         tmpSpecies.addMolecule(createMoleculeFromPattern(element, idx))
     return tmpSpecies
+
 
 def processMolecules(molecules):
     mstr = StringIO()
@@ -50,12 +53,13 @@ def processMolecules(molecules):
     mstr.write('end molecule types\n')
     return mstr.getvalue()
 
+
 def processInitCompartments(initializations):
     sstr = StringIO()
     cstr = StringIO()
     sstr.write('begin seed species\n')
     cstr.write('begin compartments\n')
-    
+
     for initialization in initializations:
         #print initialization.keys()
         if 'name' in initialization.keys():
@@ -87,11 +91,10 @@ def processInitCompartments(initializations):
                 tmp = tmp.strip()
                 cstr.write('\t{0}\n'.format(tmp))
 
-
-
     sstr.write('end seed species\n')
     cstr.write('end compartments\n')
     return sstr.getvalue(), cstr.getvalue()
+
 
 def processObservables(observables):
     ostr = StringIO()
@@ -109,6 +112,7 @@ def processObservables(observables):
     ostr.write('end observables\n')
     return ostr.getvalue()
 
+
 def processReactionRules(rules):
     rStr = StringIO()
     rStr.write('begin reaction rules\n')
@@ -124,10 +128,12 @@ def processReactionRules(rules):
 
     rStr.write('end reaction rules\n')
     return rStr.getvalue()
-    
+
+
 def constructBNGFromMDLR(statements, sections):
 
     finalBNGLStr = StringIO()
+    finalBNGLStr.write('begin model\n')
     parameterStr = processParameters(statements)
     moleculeStr = processMolecules(sections['molecules'])
     seedspecies, compartments = processInitCompartments(sections['initialization']['entries'])
@@ -140,15 +146,19 @@ def constructBNGFromMDLR(statements, sections):
     finalBNGLStr.write(seedspecies)
     finalBNGLStr.write(observables)
     finalBNGLStr.write(reactions)
+    finalBNGLStr.write('end model\n')
+
+    #add processing actions
+    finalBNGLStr.write('generate_network({overwrite=>1})\n')
+    finalBNGLStr.write('writeSBML()\n')
 
     return finalBNGLStr.getvalue()
 
 
-
-    #construct molecules
-
-
-        #tmpmolecule = st.Molecule(mo)
+def bngl2json(bnglFile):
+    call(['bngdev',bnglFile])
+    sbmlName = bnglFile.split('.')[0] + '_sbml.xml'
+    call(['./sbml2json','-i', sbmlName])
 
 
 if __name__ == "__main__":
@@ -163,7 +173,11 @@ if __name__ == "__main__":
     #print '/////'
     statements = statementGrammar.parseString(mldr)
     sections = grammar.parseString(mldr)
+    #bnglStr = constructBNGFromMDLR(statements, sections)
+    #bnglFile = 'output.bngl'
+    #with open(bnglFile,'w') as f:
+    #    f.write(bnglStr)
 
-    bnglStr = constructBNGFromMDLR(statements, sections)
-    with open('output.bngl','w') as f:
-        f.write(bnglStr)
+    #bngl2json(bnglFile)
+
+
