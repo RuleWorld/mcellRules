@@ -14,7 +14,7 @@ if __name__ == "__main__":
     parser = defineConsole()
     namespace = parser.parse_args()
     bnglPath = namespace.input + '.bngl'
-    finalName = namespace.output if namespace.output else namespace.input + '.mdl'
+    finalName = namespace.output if namespace.output else namespace.input
 
     # mdl to bngl
     bnglStr = readMDL.constructBNGFromMDLR('example.mdlr')

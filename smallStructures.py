@@ -9,7 +9,8 @@ from lxml import etree
 import re
 from random import randint
 from pyparsing import Word, Suppress, Optional, alphanums, Group, ZeroOrMore
-from collections import Counter
+from collections import Counter, defaultdict
+import StringIO
 
 def parseReactions(reaction):
     components = (Word(alphanums + "_") + Optional(Group('~' + Word(alphanums+"_")))
@@ -270,7 +271,7 @@ class Species:
         name+= '.'.join([x.toString() for x in self.molecules])
         '''
         name = name.replace('~','')
-        
+
         name = name.replace('~','')
         name = name.replace(',','')
         name = name.replace('.','')
@@ -280,17 +281,45 @@ class Species:
         name = name.replace('_','')
         '''
         return name
-        
+
     def str2(self):
         return '.'.join([x.str2() for x in self.molecules])
+
+
+    def getBondDict(self):
+        bondDict = defaultdict(list)
+        bondIdx = 1
+        for idx, molecule in enumerate(self.molecules):
+            for idx2, component in enumerate(molecule.components):
+                for bond in component.bonds:
+                    bondDict[bond].append('M{0}_C{1}'.format(idx,idx2))
+        return bondDict
+
+
+    def toXML(self, identifier, tab=''):
+        xmlStr = StringIO.StringIO()
+        xmlStr.write('{0}<ListOfMolecules>\n'.format(tab))
+        for idx, molecule in enumerate(self.molecules):
+            xmlStr.write(molecule.toXML('{0}_M{1}'.format(identifier, idx), tab + '\t'))
+        xmlStr.write('{0}</ListOfMolecules>\n'.format(tab))
+        bondDict = self.getBondDict()
+        xmlStr.write('{0}<ListOfBonds>\n'.format(tab))
+        for key in bondDict:
+            xmlStr.write('{0}\t<Bond id="{1}_B{2}" site1="{1}_{3}" site2="{1}_{4}"/>\n'.format(tab, identifier,
+                                                                                               key, bondDict[key][0],
+                                                                                               bondDict[key][1]))
+        xmlStr.write('{0}</ListOfBonds>\n'.format(tab))
+
         
+        return xmlStr.getvalue()
+
     def reset(self):
         for element in self.molecules:
             element.reset()
-            
+
     def toString(self):
         return self.__str__()
-    
+
     def extractAtomicPatterns(self, action, site1, site2, differentiateDimers=False):
         atomicPatterns = {}
         bondedPatterns = {}
@@ -503,7 +532,16 @@ class Molecule:
         if self.compartment != '':
             finalStr += '@' + self.compartment
         return finalStr
-        
+
+    def toXML(self, identifier, tab):
+        buffer = StringIO.StringIO()
+        buffer.write('{2}<Molecule id="{0}" name="{1}">\n'.format(identifier, self.name, tab))
+        buffer.write('{0}<ListOfComponents>\n'.format(tab))
+        for idx, component in enumerate(self.components):
+            buffer.write(component.toXML('{0}_C{1}'.format(identifier, idx), tab + '\t'))
+        buffer.write('{0}</ListOfComponents>\n'.format(tab))
+        return buffer.getvalue()
+
     def toString(self):
         return self.__str__()
         
@@ -655,8 +693,16 @@ class Component:
             tmp += '!' + '!'.join([str(x) for x in self.bonds])
         if len(self.states) > 0:
             tmp += '~' + '~'.join([str(x) for x in self.states])
-        return tmp        
-        
+        return tmp
+
+    def toXML(self, identifier, tab):
+        if self.activeState != '':
+            return '{0}<Component id="{1}" name="{2}" state="{3}" numberOfBonds="{4}"/>\n'.format(tab, identifier,
+                                                                                                self.name, self.activeState, len(self.bonds))
+        else:
+            return '{0}<Component id="{1}" name="{2}" state="{3}" numberOfBonds="{4}"/>\n'.format(tab, identifier,
+                                                                                                self.name, self.activeState, len(self.bonds))
+
     def __hash__(self):
         return self.name
         
@@ -741,3 +787,4 @@ class Databases:
     
 if __name__ == "__main__":
     sp = readFromString('A(b!1,p~P).B(a!1)')
+    print sp.toXML('S1','\t')
