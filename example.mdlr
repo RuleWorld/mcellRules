@@ -2,7 +2,7 @@ ITERATIONS = 100000
 TIME_STEP = 5e-06
 VACANCY_SEARCH_DISTANCE = 100
  
-INCLUDE_FILE = "rec_dim.geometry.mdl"
+INCLUDE_FILE = "icogeometry.mdl"
  
 DEFINE_SURFACE_CLASSES
 {
@@ -76,6 +76,12 @@ MODIFY_SURFACE_REGIONS
  
 #INSTANTIATE Scene OBJECT
 {
+  EC OBJECT EC {}
+  CP OBJECT CP {
+    PARENT = EC
+    MEMBRANE = PM OBJECT CP[ALL]
+  }
+
    ligand_rel RELEASE_SITE
    {
     SHAPE = Scene.EC[ALL] - Scene.CP[ALL]
@@ -86,13 +92,11 @@ MODIFY_SURFACE_REGIONS
       receptor_rel RELEASE_SITE
    {
     SHAPE = Scene.CP[ALL]
-    MOLECULE = Rec(a)@PM ...
+    MOLECULE = Rec(a)@PM 
+    NUMBER_TO_RELEASE = Rec_tot
+    RELEASE_PROBABILITY = 1
+
    }
-  EC OBJECT EC {}
-  CP OBJECT CP {
-    PARENT = EC
-    MEMBRANE = PM OBJECT CP[ALL]
-  }
 }
  
 
@@ -102,11 +106,18 @@ MODIFY_SURFACE_REGIONS
 {
    STEP = 1e-6
  
-
+   /*RecFree*/
+   { COUNT[Rec(a)@PM, WORLD] }=> "./react_data/RecFree.dat"
+ 
+   /*RecBound*/
+   { COUNT[Lig(l!+,l)@EC, WORLD] + COUNT[@PM::Lig(l!+,l!+)@EC,WORLD] }=> "./react_data/RecBound.dat"
+ 
+   /*Dimers*/
+   { COUNT[Lig(l!+,l!+)@EC,WORLD] }=> "./react_data/Dimers.dat"
  
 }
 
- 
+
 VIZ_OUTPUT {
    MODE = CELLBLENDER
    FILENAME = "./viz_data/rec_dim"

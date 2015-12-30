@@ -51,6 +51,138 @@ def readMDLr(mdlrfile):
         mdlr = f.read()
     return mdlr
 
+def constructNFSimMDL(jsonPath, mdlrPath, outputFileName):
+    # load up data structures
+    jsonDict = readBNGLJSON(jsonPath)
+    mdlr = readMDLr(mdlrPath)
+    #print mdlr
+    sectionMDLR = gd.nonhashedgrammar.parseString(mdlr)
+    statementMDLR = gd.statementGrammar.parseString(mdlr)
+    hashedMDLR = gd.grammar.parseString(mdlr)
+
+
+    # create output buffers
+    finalMDL = StringIO()
+    moleculeMDL = StringIO()
+    reactionMDL = StringIO()
+    outputMDL = StringIO()
+    seedMDL = StringIO()
+
+    # output statements as is
+    for element in statementMDLR:
+        finalMDL.write('{0} = {1}\n'.format(element[0], element[1]))
+
+    finalMDL.write('\n')
+    finalMDL.write('INCLUDE_FILE = "{0}.molecules.mdl"\n'.format(outputFileName))
+    finalMDL.write('INCLUDE_FILE = "{0}.reactions.mdl"\n'.format(outputFileName))
+    finalMDL.write('INCLUDE_FILE = "{0}.seed.mdl"\n\n'.format(outputFileName))
+
+    # output sections using json information
+    sectionOrder = {'DEFINE_MOLECULES': moleculeMDL, 'DEFINE_REACTIONS': reactionMDL, 'REACTION_DATA_OUTPUT': outputMDL, 'INSTANTIATE': seedMDL}
+    for element in sectionMDLR:
+        if element[0] not in sectionOrder:
+            finalMDL.write(writeSection(element, jsonDict))
+
+    #finalMDL.write('INCLUDE_FILE = "{0}.output.mdl"\n'.format(outputFileName))
+   
+    dimensionalityDict = {}
+    bngLabel = {}
+    # molecules
+    moleculeMDL.write('DEFINE_MOLECULES\n{\n')
+    if 'DEFINE_MOLECULES' in sectionMDLR.keys():
+        for element in sectionMDLR['DEFINE_MOLECULES']:
+            writeRawSection(element, moleculeMDL, '\t')
+
+    dimensionalityDict['volume_proxy'] = '3D'
+    moleculeMDL.write('\t{0} //{1}\n\t{{ \n'.format('volume_proxy', 'proxy molecule type. the instance contains the actual information'))
+    moleculeMDL.write('\t\tDIFFUSION_CONSTANT_{0}D = {1}\n'.format(3, 1))
+    moleculeMDL.write('\t}\n')
+
+    dimensionalityDict['surface_proxy'] = '2D'
+    moleculeMDL.write('\t{0} //{1}\n\t{{ \n'.format('surface_proxy', 'proxy surface type. the instance contains the actual information'))
+    moleculeMDL.write('\t\tDIFFUSION_CONSTANT_{0}D = {1}\n'.format(2, 1))
+    moleculeMDL.write('\t}\n')
+    moleculeMDL.write('}\n')
+
+    #extract bng name
+    for molecule in jsonDict['mol_list']:
+        dimensionalityDict[molecule['name']] = molecule['type']
+        bngLabel[molecule['name']] = molecule['extendedName']
+
+
+    # reactions
+    reactionMDL.write('DEFINE_REACTIONS\n{\n')
+    if 'DEFINE_REACTIONS' in sectionMDLR.keys():
+        for element in sectionMDLR['DEFINE_REACTIONS']:
+            writeRawSection(element, reactionMDL, '\t')
+
+    reactionMDL.write('\t{0} -> {1} [{2}]\n'.format('volume_proxy', 'volume_proxy', 1))
+
+    reactionMDL.write('}\n')
+
+
+    # seed species
+    #in here it might be worth it to already have the cannonical labels
+    seedMDL.write('INSTANTIATE Scene OBJECT\n{\n')
+    if 'INSTANTIATE' in sectionMDLR.keys():
+        for element in sectionMDLR['INSTANTIATE'][-1].asList():
+            seedMDL.write('\t' + ' '.join(element[:-1]))
+            seedMDL.write(writeRawSection(element[-1], seedMDL, '') + '\n')
+            #
+    # include geometry information related to this scene
+    for entries in hashedMDLR['initialization']['entries']:
+        if entries[1] != 'RELEASE_SITE':
+            seedMDL.write('\t{0} OBJECT {1} {{}}\n'.format(entries[0], entries[1]) )
+
+
+    for seed in jsonDict['rel_list']:
+        seedMDL.write('\t{0} RELEASE_SITE\n\t{{\n'.format(seed['name']))
+
+        # add scene qualifier to geometries
+        shapeDescription = seed['object_expr']
+        shapeDescription = ['Scene.' + x.strip() for x in shapeDescription.split(' - ')]
+        shapeDescription = ' - '.join(shapeDescription)
+        seedMDL.write('\t\tSHAPE = {0}\n'.format(shapeDescription))
+        orientation = seed['orient'] if dimensionalityDict[seed['molecule']] == '2D' else ''
+        if dimensionalityDict[seed['molecule']] == '3D':
+            seedMDL.write('\t\tMOLECULE = {0}\n'.format('volume_proxy'))
+        else:
+            seedMDL.write('\t\tMOLECULE = {0}{1}\n'.format('surface_proxy', orientation))
+
+        if seed['quantity_type'] == 'DENSITY':
+            quantity_type = 'DENSITY' if dimensionalityDict[seed['molecule']] == '2D' else 'CONCENTRATION'
+        else:
+            quantity_type = seed['quantity_type']
+        seedMDL.write('\t\t{0} = {1}\n'.format(quantity_type, seed['quantity_expr']))
+        seedMDL.write('\t\tRELEASE_PROBABILITY = 1\n'.format(seed['molecule']))
+        seedMDL.write('\t\t//BNG_PATTERN = {0}\n'.format(bngLabel[seed['molecule']]))
+        seedMDL.write('\t}\n')
+    seedMDL.write('}\n')
+
+
+    # rxn_output
+    '''
+    outputMDL.write('REACTION_DATA_OUTPUT\n{\n')
+
+    if 'REACTION_DATA_OUTPUT' in sectionMDLR.keys():
+        for element in sectionMDLR['REACTION_DATA_OUTPUT']:
+            writeRawSection(element, outputMDL, '\t')
+
+    for element in hashedMDLR['observables']:
+        if type(element[0]) == str:
+            outputMDL.write('\t{0} = {1}\n'.format(element[0], element[1]))
+
+    for obs in jsonDict['obs_list']:
+        if any([x != ['0'] for x in obs['value']]):
+            outputMDL.write('\t{')
+
+            outputMDL.write(' + '.join(['COUNT[{0},WORLD]'.format(x[0]) for x in obs['value'] if x != ['0']])+ '}')
+
+            outputMDL.write(' => "./react_data/{0}.dat"\n'.format(obs['name']))
+    outputMDL.write('}\n')
+    '''
+    return {'main': finalMDL, 'molecules': moleculeMDL, 'reactions': reactionMDL, 'rxnOutput': outputMDL, 'seeding': seedMDL}
+
 
 def constructMDL(jsonPath, mdlrPath, outputFileName):
     """
@@ -61,12 +193,13 @@ def constructMDL(jsonPath, mdlrPath, outputFileName):
     mdlrPath -- An mdlr file. In this method we will be mainly extracting the non RBM sections
 
     Returns:
-    A string containing a plain MDL definition
+    A dictionary containing the different MDL sections
     """
 
     # load up data structures
     jsonDict = readBNGLJSON(jsonPath)
     mdlr = readMDLr(mdlrPath)
+    #print mdlr
     sectionMDLR = gd.nonhashedgrammar.parseString(mdlr)
     statementMDLR = gd.statementGrammar.parseString(mdlr)
 
