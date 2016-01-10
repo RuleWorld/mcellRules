@@ -23,6 +23,7 @@ def writeRawSection(originalMDL, buffer, tab):
             for element in originalMDL:
                 writeRawSection(element, buffer, tab + '\t')
         elif type(originalMDL[1]) == list:
+
             buffer.write('{1}{0}{{\n'.format(originalMDL[0], tab))
             writeRawSection(originalMDL[1], buffer, tab + '\t')
             buffer.write('{0}}}\n\n'.format(tab))
@@ -37,7 +38,7 @@ def writeRawSection(originalMDL, buffer, tab):
     return buffer.getvalue()
 
 
-def writeSection(originalMDL, augmentedMDLr):
+def writeSection(originalMDL):
     finalSection = StringIO()
     if originalMDL[0] == 'DEFINE_MOLECULES':
         pass
@@ -51,7 +52,7 @@ def readMDLr(mdlrfile):
         mdlr = f.read()
     return mdlr
 
-def constructNFSimMDL(jsonPath, mdlrPath, outputFileName):
+def constructNFSimMDL(jsonPath, mdlrPath, outputFileName, nautyDict):
     # load up data structures
     jsonDict = readBNGLJSON(jsonPath)
     mdlr = readMDLr(mdlrPath)
@@ -81,7 +82,7 @@ def constructNFSimMDL(jsonPath, mdlrPath, outputFileName):
     sectionOrder = {'DEFINE_MOLECULES': moleculeMDL, 'DEFINE_REACTIONS': reactionMDL, 'REACTION_DATA_OUTPUT': outputMDL, 'INSTANTIATE': seedMDL}
     for element in sectionMDLR:
         if element[0] not in sectionOrder:
-            finalMDL.write(writeSection(element, jsonDict))
+            finalMDL.write(writeSection(element))
 
     #finalMDL.write('INCLUDE_FILE = "{0}.output.mdl"\n'.format(outputFileName))
    
@@ -96,11 +97,13 @@ def constructNFSimMDL(jsonPath, mdlrPath, outputFileName):
     dimensionalityDict['volume_proxy'] = '3D'
     moleculeMDL.write('\t{0} //{1}\n\t{{ \n'.format('volume_proxy', 'proxy molecule type. the instance contains the actual information'))
     moleculeMDL.write('\t\tDIFFUSION_CONSTANT_{0}D = {1}\n'.format(3, 1))
+    moleculeMDL.write('\t\tEXTERN\n')
     moleculeMDL.write('\t}\n')
 
     dimensionalityDict['surface_proxy'] = '2D'
     moleculeMDL.write('\t{0} //{1}\n\t{{ \n'.format('surface_proxy', 'proxy surface type. the instance contains the actual information'))
     moleculeMDL.write('\t\tDIFFUSION_CONSTANT_{0}D = {1}\n'.format(2, 1))
+    moleculeMDL.write('\t\tEXTERN\n')
     moleculeMDL.write('\t}\n')
     moleculeMDL.write('}\n')
 
@@ -122,7 +125,6 @@ def constructNFSimMDL(jsonPath, mdlrPath, outputFileName):
 
 
     # seed species
-    #in here it might be worth it to already have the cannonical labels
     seedMDL.write('INSTANTIATE Scene OBJECT\n{\n')
     if 'INSTANTIATE' in sectionMDLR.keys():
         for element in sectionMDLR['INSTANTIATE'][-1].asList():
@@ -132,11 +134,11 @@ def constructNFSimMDL(jsonPath, mdlrPath, outputFileName):
     # include geometry information related to this scene
     for entries in hashedMDLR['initialization']['entries']:
         if entries[1] != 'RELEASE_SITE':
-            seedMDL.write('\t{0} OBJECT {1} {{}}\n'.format(entries[0], entries[1]) )
+            seedMDL.write('\t{0} OBJECT {1} {{}}\n'.format(entries[0], entries[1]))
 
 
     for seed in jsonDict['rel_list']:
-        seedMDL.write('\t{0} RELEASE_SITE\n\t{{\n'.format(seed['name']))
+        seedMDL.write('\t{0} RELEASE_SITE //bng:{1}\n\t{{\n'.format(seed['name'], bngLabel[seed['molecule']]))
 
         # add scene qualifier to geometries
         shapeDescription = seed['object_expr']
@@ -154,14 +156,14 @@ def constructNFSimMDL(jsonPath, mdlrPath, outputFileName):
         else:
             quantity_type = seed['quantity_type']
         seedMDL.write('\t\t{0} = {1}\n'.format(quantity_type, seed['quantity_expr']))
-        seedMDL.write('\t\tRELEASE_PROBABILITY = 1\n'.format(seed['molecule']))
-        seedMDL.write('\t\t//BNG_PATTERN = {0}\n'.format(bngLabel[seed['molecule']]))
+        seedMDL.write('\t\tRELEASE_PROBABILITY = 1\n')
+        seedMDL.write('\t\tGRAPH_PATTERN = "{0}"\n'.format(nautyDict[bngLabel[seed['molecule']]]))
         seedMDL.write('\t}\n')
     seedMDL.write('}\n')
 
 
     # rxn_output
-    '''
+    
     outputMDL.write('REACTION_DATA_OUTPUT\n{\n')
 
     if 'REACTION_DATA_OUTPUT' in sectionMDLR.keys():
@@ -180,7 +182,7 @@ def constructNFSimMDL(jsonPath, mdlrPath, outputFileName):
 
             outputMDL.write(' => "./react_data/{0}.dat"\n'.format(obs['name']))
     outputMDL.write('}\n')
-    '''
+    
     return {'main': finalMDL, 'molecules': moleculeMDL, 'reactions': reactionMDL, 'rxnOutput': outputMDL, 'seeding': seedMDL}
 
 
@@ -223,7 +225,7 @@ def constructMDL(jsonPath, mdlrPath, outputFileName):
     sectionOrder = {'DEFINE_MOLECULES': moleculeMDL, 'DEFINE_REACTIONS': reactionMDL, 'REACTION_DATA_OUTPUT': outputMDL, 'INSTANTIATE': seedMDL}
     for element in sectionMDLR:
         if element[0] not in sectionOrder:
-            finalMDL.write(writeSection(element, jsonDict))
+            finalMDL.write(writeSection(element))
 
     finalMDL.write('INCLUDE_FILE = "{0}.output.mdl"\n'.format(outputFileName))
 
