@@ -24,7 +24,6 @@ def tokenizeSeedElements(seed):
     seedList = [re.sub('"S[0-9]+"', "S1", x) for x in seedList]
     seedList = [re.sub('concentration="[0-9a-zA-Z_]+"','concentration="1"',x) for x in seedList] 
 
-    print seedList
     seedList = ['<Model><ListOfSpecies>{0}</ListOfSpecies></Model>'.format(x) for x in seedList]
 
     #seedDict = {x:y for x,y in zip(seedKeys,seedList)}
@@ -73,12 +72,13 @@ def xml2HNautySpeciesDefinitions(inputMDLRFile):
     nautyDict = {}
     for seed in seedDict:
         #initialize nfsim with each species definition and get back a dirty list where one of the entries is the one we want
+        #XXX: i think i've solved it on the nfsim side, double check
         tmpList = getNautyString(nfsim, seedDict[seed])
         #and now filter it out...
-
         #get species names from species definition string
         speciesNames = getNamesFromDefinitionString(seed)
         nautyDict[seed] = [x for x in tmpList if all(y in x for y in speciesNames)][0]
+
     return nautyDict
 
 def getNautyString(nfsim, xmlSpeciesDefinition):
@@ -94,7 +94,7 @@ if __name__ == "__main__":
     finalName = namespace.output if namespace.output else namespace.input
 
     # mdl to bngl
-    bnglStr = readMDL.constructBNGFromMDLR(namespace.input)
+    bnglStr = readMDL.constructBNGFromMDLR(namespace.input, namespace.nfsim)
     # create bngl file
     readMDL.outputBNGL(bnglStr, bnglPath)
 

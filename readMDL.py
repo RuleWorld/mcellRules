@@ -46,12 +46,14 @@ def createSpeciesFromPattern(speciesPattern):
 
 def processMolecules(molecules):
     mstr = StringIO()
+    moleculeList = []
     mstr.write('begin molecule types\n')
     for idx, molecule in enumerate(molecules):
         tmpMolecule = createMoleculeFromPattern(molecule[0], idx)
+        moleculeList.append((tmpMolecule.name,str(tmpMolecule)))
         mstr.write('\t{0}\n'.format(tmpMolecule.str2()))
     mstr.write('end molecule types\n')
-    return mstr.getvalue()
+    return mstr.getvalue(), moleculeList
 
 
 def processInitCompartments(initializations):
@@ -112,6 +114,19 @@ def processObservables(observables):
     ostr.write('end observables\n')
     return ostr.getvalue()
 
+def processMTObservables(moleculeTypes):
+    '''
+    creates a list of observables from just molecule types
+    '''
+    ostr = StringIO()
+    ostr.write('begin observables\n')
+    for moleculeType in moleculeTypes:
+        ostr.write('\t Species {0} {1}\n'.format(moleculeType[0], moleculeType[1]))
+    ostr.write('end observables\n')
+
+
+    return ostr.getvalue()
+
 
 def processReactionRules(rules):
     rStr = StringIO()
@@ -130,7 +145,7 @@ def processReactionRules(rules):
     return rStr.getvalue()
 
 
-def constructBNGFromMDLR(mdlrPath):
+def constructBNGFromMDLR(mdlrPath,nfsimFlag=False):
 
     with open(mdlrPath, 'r') as f:
         mldr = f.read()
@@ -141,16 +156,21 @@ def constructBNGFromMDLR(mdlrPath):
     finalBNGLStr = StringIO()
     finalBNGLStr.write('begin model\n')
     parameterStr = processParameters(statements)
-    moleculeStr = processMolecules(sections['molecules'])
+    
+    moleculeStr,moleculeList = processMolecules(sections['molecules'])
     seedspecies, compartments = processInitCompartments(sections['initialization']['entries'])
-    observables = processObservables(sections['observables'])
+    if not nfsimFlag:
+        observables = processObservables(sections['observables'])
+    else:
+        observables = processMTObservables(moleculeList)
     reactions = processReactionRules(sections['reactions'])
 
     finalBNGLStr.write(parameterStr)
     finalBNGLStr.write(moleculeStr)
     finalBNGLStr.write(compartments)
     finalBNGLStr.write(seedspecies)
-    finalBNGLStr.write(observables)
+    #finalBNGLStr.write(observables)
+    finalBNGLStr.write('begin observables\nend observables\n')
     finalBNGLStr.write(reactions)
     finalBNGLStr.write('end model\n')
 

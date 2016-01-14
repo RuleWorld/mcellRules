@@ -13,6 +13,7 @@ DEFINE_SURFACE_CLASSES
  
 MODIFY_SURFACE_REGIONS
 {
+
    CP[ALL]
    {
       SURFACE_CLASS = reflect
@@ -93,6 +94,14 @@ MODIFY_SURFACE_REGIONS
    {
     SHAPE = Scene.CP[ALL]
     MOLECULE = Rec(a)@PM 
+    NUMBER_TO_RELEASE = Rec_tot
+    RELEASE_PROBABILITY = 1
+
+   }
+   complex_rel RELEASE_SITE
+   {
+    SHAPE = Scene.CP[ALL]
+    MOLECULE = Lig(l!1,l).Rec(a!1)@PM 
     NUMBER_TO_RELEASE = Rec_tot
     RELEASE_PROBABILITY = 1
 

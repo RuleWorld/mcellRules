@@ -58,7 +58,25 @@ class NFSim:
 if __name__ == "__main__":
     nfsim = NFSim('./lib/libnfsim_c.so')
 
-    nfsim.initNFsim("example.mdlr.xml_total.xml", 0)
+    nfsim.initNFsim("example.mdlr_total.xml", 0)
     nfsim.resetSystem()
-    nfsim.initSystemNauty({"c:a~NO_STATE!4!2,c:l~NO_STATE!3,c:l~NO_STATE!3!0,m:Lig!2!1,m:Rec!0":1})
-    print nfsim.querySystemStatus("complex")
+    #nfsim.initSystemNauty({"c:a~NO_STATE!4!2,c:l~NO_STATE!3,c:l~NO_STATE!3!0,m:Lig!2!1,m:Rec!0":1})
+    nfsim.initSystemXML('''<ListOfSpecies><Species id="S1"  concentration="Rec_tot" name="@PM::Lig(l!1,l).Rec(a!1)" compartment="PM">
+        <ListOfMolecules>
+          <Molecule id="S1_M1" name="Lig" compartment="PM">
+            <ListOfComponents>
+              <Component id="S1_M1_C1" name="l" numberOfBonds="1"/>
+              <Component id="S1_M1_C2" name="l" numberOfBonds="0"/>
+            </ListOfComponents>
+          </Molecule>
+          <Molecule id="S1_M2" name="Rec" compartment="PM">
+            <ListOfComponents>
+              <Component id="S1_M2_C1" name="a" numberOfBonds="1"/>
+            </ListOfComponents>
+          </Molecule>
+        </ListOfMolecules>
+        <ListOfBonds>
+          <Bond id="S1_B1" site1="S1_M1_C1" site2="S1_M2_C1"/>
+        </ListOfBonds>
+      </Species></ListOfSpecies>''')
+    print '---', nfsim.querySystemStatus("complex")
