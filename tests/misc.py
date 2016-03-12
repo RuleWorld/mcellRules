@@ -14,7 +14,7 @@ def MDLTrajectoryGeneration(params):
     repetitions = params['repetitions']
     trajectorydataset = pandas.DataFrame()
     progress = progressbar.ProgressBar()
-    print 'Generating MDL data..'
+    print('Generating MDL data..')
     for idx in progress(range(repetitions)):
 
         trajectorydata = defaultdict(list)
@@ -22,10 +22,11 @@ def MDLTrajectoryGeneration(params):
 
 
         with open(os.devnull, "w") as fnull:
-            subprocess.check_call([mcellbinary, os.path.join(testname, 'reference', 'vol_example.main.mdl'), '-seed',str(random.randint(1,100000))], stdout=fnull)
+            subprocess.check_call([mcellbinary, os.path.join(testname, 'reference', 'vol_example.main.mdl'),
+                                   '-seed', str(random.randint(1, 100000))], stdout=fnull)
 
         with open('counts.txt', 'rb') as f:
-            data = csv.DictReader(f, delimiter = ' ')
+            data = csv.DictReader(f, delimiter=' ')
 
             for row in data:
                 for key in row:
@@ -44,16 +45,17 @@ def MDLRTrajectoryGeneration(params):
     repetitions = params['repetitions']
     trajectorydataset = pandas.DataFrame()
     progress = progressbar.ProgressBar()
-    print 'Generating MDLr data..'
+    print('Generating MDLr data..')
     for idx in progress(range(repetitions)):
 
         trajectorydata = defaultdict(list)
         trajectorydata['iteration'] = idx
 
         with open(os.devnull, "w") as fnull:
-            subprocess.check_call([mcellbinary, os.path.join(testname, 'mdlr', 'vol_example.main.mdl'),
-                                   '-n', os.path.join(testname, 'mdlr', 'vol_example.mdlr_total.xml'),'-seed',str(random.randint(1,100000))], stdout=fnull, stderr=fnull)
-        with open(os.path.join(testname, 'mdlr', 'vol_example.mdlr_total.xml.gdat'), 'rb') as f:
+            subprocess.check_call([mcellbinary, os.path.join(testname, 'mdlr', 'simple.main.mdl'),
+                                   '-n', os.path.join(testname, 'mdlr', 'example.mdlr_total.xml'),
+                                   '-seed', str(random.randint(1, 100000))], stdout=fnull, stderr=fnull)
+        with open(os.path.join(testname, 'mdlr', 'example.mdlr_total.xml.gdat'), 'rb') as f:
             data = csv.DictReader(f, delimiter =',')
 
             for row in data:
@@ -70,23 +72,30 @@ def MDLRTrajectoryGeneration(params):
 
 
 def compareTimeSeries(mdldataset, mdlrdataset):
+    '''
+    performs a kolmogorov-smirnoff comparison
+    '''
     keys =  list(mdldataset)
     keys = [x for x in keys if x  not in ['Seconds','iteration']]
 
     timepoints = sorted(list(set(mdldataset['Seconds'])))
-    for timesampleIdx in range(len(timepoints)/5, len(timepoints), len(timepoints)/5):
+    for timesampleIdx in range(len(timepoints)/params['segments'], len(timepoints), len(timepoints)/params['segments']):
+        print timepoints[timesampleIdx]
         mdlslice = mdldataset.query('(Seconds == {0})'.format(timepoints[timesampleIdx]))
         mdlrslice = mdlrdataset.query('(Seconds == {0})'.format(timepoints[timesampleIdx]))
         for observable in keys:
-            print observable
+            print(observable)
             mdlobs = mdlslice[observable]
             mdlrobs= mdlrslice[observable]
-            #control = [np.random.normal(np.mean(list(mdlobs)),np.std(list(mdlobs))) for x in range(len(mdlobs))]
-            print '\t', 'k-smirnoff test:', stats.ks_2samp(list(mdlobs), list(mdlrobs))
-            print '\t', 'stats', np.mean(list(mdlobs)), np.mean(list(mdlrobs)),np.std(list(mdlobs)),np.std(list(mdlrobs))
-            #print '\t', 'k-smirnoff test:', stats.ks_2samp(list(mdlobs), list(control))
+            _, pvalue = stats.ks_2samp(list(mdlobs), list(mdlrobs))
+
+            print('\t', 'k-smirnoff test:', stats.ks_2samp(list(mdlobs), list(mdlrobs)))
+            print('\t', 'stats', np.mean(list(mdlobs)), np.mean(list(mdlrobs)),np.std(list(mdlobs)),np.std(list(mdlrobs)))
+            #if pvalue < 0.1:
+            #    raise Exception
 
 def generateData(params):
+
     dataset = MDLTrajectoryGeneration(params)
     dataset.to_hdf('{0}DB.h5'.format('timeseries'), '{0}_mdl'.format(params['testname']))
 
@@ -98,8 +107,9 @@ def generateData(params):
 if __name__ == "__main__":
     params = {}
     params['mcell'] = 'mcell'
-    params['testname'] = 'vol_surf'
-    params['repetitions'] = 10
+    params['testname'] = 'vol_vol'
+    params['repetitions'] = 20
+    params['segments'] = 5
 
     generateData(params)
 

@@ -2,19 +2,21 @@ INSTANTIATE Scene OBJECT
 {
 	EC OBJECT EC {}
 	CP OBJECT CP {}
-	Release_Site_s1 RELEASE_SITE //bng:@EC::Lig(l,l)
+	Release_Site_s1 RELEASE_SITE //bng:@EC::Lig(l)
 	{
-        SHAPE = Scene.EC[ALL] - Scene.CP[ALL]
+        SHAPE = Scene.CP[ALL]
 		MOLECULE = ligand
-        CONCENTRATION = ((6000.0)/Nav)/2000
+        NUMBER_TO_RELEASE = 50
 		RELEASE_PROBABILITY = 1
+
 	}
-    Release_Site_s2 RELEASE_SITE //bng:@EC::Lig(l,l)
+    Release_Site_s2 RELEASE_SITE //bng:@EC::Rec(a)
     {
-        SHAPE = Scene.EC[ALL] - Scene.CP[ALL]
+        SHAPE = Scene.CP[ALL]
         MOLECULE = receptor
-        CONCENTRATION = ((6000.0)/Nav)/1000
+        NUMBER_TO_RELEASE = 50
         RELEASE_PROBABILITY = 1
+        
     }
 
 }

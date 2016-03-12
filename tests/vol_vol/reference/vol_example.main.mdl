@@ -1,4 +1,4 @@
-ITERATIONS =  5000
+ITERATIONS =  3000
 TIME_STEP =  1e-06
 VACANCY_SEARCH_DISTANCE =  100
 INCLUDE_FILE = "icogeometry.mdl"
@@ -13,8 +13,6 @@ Lig_tot =  6.0e3
 Rec_tot =  4.0e2
 kp1 =  1
 km1 =  0.01
-kp2 =  1
-km2 =  0.01
 T =  298.15      /* Temperature, K */
 h =  rxn_layer_t      /* Thickness of 2D compartment, um */
 Rs =  0.002564      /* Radius of a (spherical) molecule in 3D compartment, um */
@@ -31,17 +29,17 @@ INCLUDE_FILE = "vol_example.reactions.mdl"
 INCLUDE_FILE = "vol_example.seed.mdl"
 
 DEFINE_SURFACE_CLASSES{
-	reflect{
-		REFLECTIVE = ALL_MOLECULES
-	}
+  reflect{
+    REFLECTIVE = ALL_MOLECULES
+  }
 
 }
 
 
 MODIFY_SURFACE_REGIONS{
-	CP[ALL]{
-		SURFACE_CLASS = reflect
-	}
+  CP[ALL]{
+    SURFACE_CLASS = reflect
+  }
 
 }
 
@@ -53,9 +51,8 @@ REACTION_DATA_OUTPUT
   STEP = 1e-6
   HEADER = ""
   {
-    COUNT[dimer,WORLD]                                     : "Dimers",
     COUNT[ligand, WORLD]                                  : "LigFree",
-    COUNT[complex, WORLD] + COUNT[dimer,WORLD]            : "RecBound",
+    COUNT[complex, WORLD]                                 : "RecBound",
     COUNT[receptor, WORLD]                                : "RecFree"
   } => "counts.txt"
 }

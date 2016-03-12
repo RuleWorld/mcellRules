@@ -9,7 +9,8 @@ import pandas
 import csv
 from collections import defaultdict
 import progressbar
-
+import random
+from scipy import stats
 bngPath = os.path.join('.', 'BioNetGen-2.2.6-stable', 'BNG2.pl')
 #bngPath = '/home/proto/workspace/bionetgen/bng2/BNG2.pl'  # <<< SET YOUR BIONETGEN PATH HERE <<<
 nfsimPath = os.path.join('..', 'build', 'NFsim')
@@ -72,15 +73,15 @@ class TestScenario(ParametrizedTestCase):
         for idx in progress(range(repetitions)):
 
             trajectorydata = defaultdict(list)
-            #trajectorydata['origin'] = 'mdl'
             trajectorydata['iteration'] = idx
 
 
             with open(os.devnull, "w") as fnull:
-                subprocess.check_call([mcellbinary, os.path.join(testname, 'reference', 'vol_example.main.mdl')], stdout=fnull)
+                subprocess.check_call([mcellbinary, os.path.join(testname, 'reference', 'vol_example.main.mdl'), 
+                                       '-seed', str(random.randint(1, 100000))], stdout=fnull)
 
             with open('counts.txt', 'rb') as f:
-                data = csv.DictReader(f, delimiter = ' ')
+                data = csv.DictReader(f, delimiter=' ')
 
                 for row in data:
                     for key in row:
@@ -108,13 +109,13 @@ class TestScenario(ParametrizedTestCase):
 
             with open(os.devnull, "w") as fnull:
                 subprocess.check_call([mcellbinary, os.path.join(testname, 'mdlr', 'vol_example.main.mdl'),
-                                       '-n', os.path.join(testname, 'mdlr', 'vol_example.mdlr_total.xml')], stdout=fnull, stderr=fnull)
+                                       '-n', os.path.join(testname, 'mdlr', 'vol_example.mdlr_total.xml'),
+                                       '-seed', str(random.randint(1, 100000))], stdout=fnull, stderr=fnull)
             with open(os.path.join(testname, 'mdlr', 'vol_example.mdlr_total.xml.gdat'), 'rb') as f:
                 data = csv.DictReader(f, delimiter =',')
 
                 for row in data:
                     for key in row:
-
                         if key == 'time':
                             trajectorydata['Seconds'].append(float(row[key].strip()))
                         elif key not in [' ']:
@@ -127,34 +128,36 @@ class TestScenario(ParametrizedTestCase):
 
     def compareTimeSeries(self, mdldataset, mdlrdataset):
         '''
-        performs a kolmogorov-smirnoff comparison
+        performs a kolmogorov-smirnoff comparison over several segments of the simulation
         '''
         keys =  list(mdldataset)
         keys = [x for x in keys if x  not in ['Seconds','iteration']]
 
         timepoints = sorted(list(set(mdldataset['Seconds'])))
-        for timesampleIdx in range(len(timepoints)/5, len(timepoints), len(timepoints)/5):
+        for timesampleIdx in range(len(timepoints)/self.param['segments'], len(timepoints), len(timepoints)/self.param['segments']):
             mdlslice = mdldataset.query('(Seconds == {0})'.format(timepoints[timesampleIdx]))
             mdlrslice = mdlrdataset.query('(Seconds == {0})'.format(timepoints[timesampleIdx]))
             for observable in keys:
                 mdlobs = mdlslice[observable]
                 mdlrobs= mdlrslice[observable]
                 alpha, pvalue = stats.ks_2samp(list(mdlobs), list(mdlrobs))
-                self.assertTrue(pvalue > 0.1)
+                #print alpha, pvalue, observable, mea
+                self.assertTrue(pvalue > 0.2)
                 
 
     def test_scenario(self):
+        print 'Executing test for {0}'.format(self.param['testname'])
         if self.param['generate_mdl']:
             mdl = self.MDLTrajectoryGeneration()
-            mdl.to_hdf('{0}DB.h5'.format('testname'), '{0}_mdl'.format(self.param['testname']))
+            mdl.to_hdf('{0}DB.h5'.format('mdlr'), '{0}_mdl'.format(self.param['testname']))
 
         if self.param['generate_mdlr']:
             mdlr = self.MDLRTrajectoryGeneration()
-            mdlr.to_hdf('{0}DB.h5'.format('testname'), '{0}_mdlr'.format(self.param['testname']))
+            mdlr.to_hdf('{0}DB.h5'.format('mdlr'), '{0}_mdlr'.format(self.param['testname']))
         
         
-        mdldataset = pandas.read_hdf('{0}DB.h5'.format('testname'), '{0}_mdl'.format(self.param['testname']))
-        mdlrdataset = pandas.read_hdf('{0}DB.h5'.format('testname'), '{0}_mdlr'.format(self.param['testname']))
+        mdldataset = pandas.read_hdf('{0}DB.h5'.format('mdlr'), '{0}_mdl'.format(self.param['testname']))
+        mdlrdataset = pandas.read_hdf('{0}DB.h5'.format('mdlr'), '{0}_mdlr'.format(self.param['testname']))
 
         self.compareTimeSeries(mdldataset,mdlrdataset)
         
@@ -176,9 +179,12 @@ if __name__ == "__main__":
     suite = unittest.TestSuite()
 
     tests = next(os.walk('.'))[1]
+    suite.addTest(ParametrizedTestCase.parametrize(TestScenario, param={'mcell': 'mcell', 'testname': 'vol_surf', 
+                'repetitions': 50, 'generate_mdl':False,'generate_mdlr':False, 'segments':7}))
+
     #for test in tests:
-    suite.addTest(ParametrizedTestCase.parametrize(TestScenario, param={'mcell': 'mcell', 'testname': 'vol_vol', 
-                    'repetitions': 50, 'generate_mdl':False,'generate_mdlr':False}))
+    #    suite.addTest(ParametrizedTestCase.parametrize(TestScenario, param={'mcell': 'mcell', 'testname': test, 
+    #                'repetitions': 50, 'generate_mdl':True,'generate_mdlr':True, 'segments':7}))
     result = unittest.TextTestRunner(verbosity=2).run(suite)
     #print '++++', result, result.failures, result.errors, list(result.errors) == []
     ret = (list(result.failures) == [] and list(result.errors) == [])
