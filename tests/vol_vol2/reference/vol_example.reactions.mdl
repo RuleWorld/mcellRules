@@ -1,0 +1,5 @@
+DEFINE_REACTIONS
+{
+    ligand + receptor -> complex [5e10]
+    complex -> ligand + receptor [10]
+}

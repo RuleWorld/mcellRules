@@ -1,0 +1,5 @@
+DEFINE_REACTIONS
+{
+    complex + receptor -> dimer [5e10]
+    dimer -> complex + receptor [20]
+}

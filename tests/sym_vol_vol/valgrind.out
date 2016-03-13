@@ -1,0 +1,78 @@
+reading xml file (vol_example.mdlr_total.xml)  
+	[MCell initializing simulation...
+MCell[0]: random sequence 1
+MCell 3.3 (commit: 2007c97  date: Wed, 10 Feb 2016 14:59:59 -0500)
+  Running on AuroraDragon at Mon Feb 22 23:22:12 2016
+
+  Copyright (C) 2006 - 2015 by
+    The National Center for Multiscale Modeling of Biological Systems,
+    The Salk Institute for Biological Studies, and
+    Pittsburgh Supercomputing Center, Carnegie Mellon University,
+
+
+**********************************************************************
+MCell development is supported by the NIGMS-funded (P41GM103712)
+National Center for Multiscale Modeling of Biological Systems (MMBioS).
+Please acknowledge MCell in your publications.
+**********************************************************************
+
+Defining molecules with the following theoretical average diffusion distances:
+  l_r_bar=22.5675833 um for volume_proxy
+  l_r_bar=17.7245385 um for surface_proxy
+
+
+Reaction probabilities generated for the following reactions:
+	Probability 3.6790e-13 set for volume_proxy{0} + volume_proxy{0} -> volume_proxy{0} volume_proxy{0} 
+
+Reaction probabilities generated for the following reactions:
+	Probability 1.0000e-06 set for volume_proxy{0} -> volume_proxy{0} 
+
+Surfaces with surface class "reflect{1}" are REFLECTIVE for volume molecules  volume_proxy{0}.
+Borders of regions with surface class "reflect{1}" are REFLECTIVE for surface molecules  surface_proxy{0}.
+
+Creating geometry (this may take some time)
+MCell: world bounding box in microns =
+         [ -1.5 -1.5 -1.5 ] [ 1.5 1.5 1.5 ]
+Creating 125 subvolumes (5,5,5 per axis).
+Creating 1 memory partitions (1,1,1 per axis).
+Instantiating objects...
+Creating walls...
+Creating edges...
+Running simulation.
+Released 90 volume_proxy from "Scene.Release_Site_s1" at iteration 0.
+Released 102 volume_proxy from "Scene.Release_Site_s2" at iteration 0.
+Iterations: 0 of 10 
+
+Reaction probabilities generated for the following reactions:
+	Probability 1.0415e+10 set for volume_proxy{0} + volume_proxy{0} -> volume_proxy{0} 
+
+Reaction probabilities generated for the following reactions:
+	Probability 1.0848e+18 set for volume_proxy{0} + volume_proxy{0} -> volume_proxy{0} 
+
+Reaction probabilities generated for the following reactions:
+	Probability 1.0415e+10 set for volume_proxy{0} + volume_proxy{0} -> volume_proxy{0} 
+
+Reaction probabilities generated for the following reactions:
+	Probability 1.1360e+06 set for volume_proxy{0} volume_proxy{0} 
+
+Reaction probabilities generated for the following reactions:
+	Probability 1.0415e+10 set for volume_proxy{0} + volume_proxy{0} -> volume_proxy{0} 
+Iterations: 10 of 10  (0.721208 iter/sec)
+Exiting run loop.
+
+Warning: Some molecules had a lifetime short relative to the timestep.
+  Mean lifetime of volume_proxy was 4.13971 timesteps.
+
+Warning: During the simulation some reaction probabilities were greater than 1.You may want to rerun the simulation with the WARNINGS block enabled to get more detail.
+
+iterations = 10 ; elapsed time = 1e-05 seconds
+Average diffusion jump was 1.00 timesteps
+
+Total number of random number use: 6699
+Total number of ray-subvolume intersection tests: 74326
+Total number of ray-polygon intersection tests: 895474
+Total number of ray-polygon intersections: 65097
+Initialization CPU time = 2.616000 (user) and 0.236000 (system)
+Simulation CPU time = 14.560000 (user) and 0.064000 (system)
+Total wall clock time = 16 seconds
+Done running.

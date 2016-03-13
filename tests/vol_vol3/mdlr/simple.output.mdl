@@ -1,0 +1,6 @@
+REACTION_DATA_OUTPUT
+{
+	STEP =  1e-6
+	{COUNT[S2,WORLD]} => "./react_data/RecFree.dat"
+	{COUNT[S1,WORLD] + COUNT[S3,WORLD]} => "./react_data/RecBound.dat"
+}
