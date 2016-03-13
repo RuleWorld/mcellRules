@@ -1,0 +1,21 @@
+INSTANTIATE Scene OBJECT
+{
+	EC OBJECT EC {}
+	CP OBJECT CP {}
+	Release_Site_s2 RELEASE_SITE //bng:@PM::Rec(a)
+	{
+		SHAPE = Scene.EC[ALL] - Scene.CP[ALL]
+		MOLECULE = volume_proxy
+		NUMBER_TO_RELEASE = 100
+		RELEASE_PROBABILITY = 1
+		GRAPH_PATTERN = "c:a~NO_STATE!1,m:Rec!0,"
+	}
+	Release_Site_s1 RELEASE_SITE //bng:@EC::Lig(l,l)
+	{
+		SHAPE = Scene.CP[ALL]
+		MOLECULE = surface_proxy'
+		NUMBER_TO_RELEASE = 50
+		RELEASE_PROBABILITY = 1
+		GRAPH_PATTERN = "c:l~NO_STATE!2,c:l~NO_STATE!2,m:Lig!0!1,"
+	}
+}
