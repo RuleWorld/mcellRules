@@ -4,7 +4,7 @@ INSTANTIATE Scene OBJECT
 	CP OBJECT CP {}
 	Release_Site_s1 RELEASE_SITE //bng:@EC::Lig(l,l)
 	{
-        SHAPE = Scene.EC[ALL] - Scene.CP[ALL]
+        SHAPE = Scene.CP[ALL]
 		MOLECULE = receptor
         NUMBER_TO_RELEASE = 100
 		RELEASE_PROBABILITY = 1

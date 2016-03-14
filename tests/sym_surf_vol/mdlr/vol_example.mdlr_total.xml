@@ -15,10 +15,10 @@
       <Parameter id="NaV" type="Constant" value="6.022e+8"/>
       <Parameter id="Lig_tot" type="Constant" value="6000"/>
       <Parameter id="Rec_tot" type="Constant" value="400"/>
-      <Parameter id="kp1" type="Constant" value="1e15"/>
-      <Parameter id="km1" type="Constant" value="0.01"/>
-      <Parameter id="kp2" type="Constant" value="5e15"/>
-      <Parameter id="km2" type="Constant" value="0.01"/>
+      <Parameter id="kp1" type="Constant" value="5e10"/>
+      <Parameter id="km1" type="Constant" value="10"/>
+      <Parameter id="kp2" type="Constant" value="1.2e11"/>
+      <Parameter id="km2" type="Constant" value="10"/>
       <Parameter id="T" type="Constant" value="298.15"/>
       <Parameter id="h" type="Constant" value="0.01"/>
       <Parameter id="Rs" type="Constant" value="0.002564"/>

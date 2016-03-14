@@ -4,7 +4,7 @@ INSTANTIATE Scene OBJECT
 	CP OBJECT CP {}
 	Release_Site_s2 RELEASE_SITE //bng:@PM::Rec(a)
 	{
-		SHAPE = Scene.EC[ALL] - Scene.CP[ALL]
+		SHAPE = Scene.CP[ALL]
 		MOLECULE = volume_proxy
 		NUMBER_TO_RELEASE = 100
 		RELEASE_PROBABILITY = 1
