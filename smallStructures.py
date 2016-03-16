@@ -654,7 +654,6 @@ class Component:
             self.states.append(state)
         if update:
             self.setActiveState(state)
-        #print 'LALALA',state
     def addStates(self,states,update=True):
         for state in states:
             if state not in self.states:
@@ -672,10 +671,10 @@ class Component:
         
     def getRuleStr(self):
         tmp = self.name
-        if len(self.bonds) > 0:
-            tmp += '!' + '!'.join([str(x) for x in self.bonds])
         if self.activeState != '':
             tmp += '~' + self.activeState
+        if len(self.bonds) > 0:
+            tmp += '!' + '!'.join([str(x) for x in self.bonds])
         return tmp
         
     def getTotalStr(self):
@@ -689,6 +688,7 @@ class Component:
         
     def str2(self):
         tmp = self.name
+
         if len(self.bonds) > 0:
             tmp += '!' + '!'.join([str(x) for x in self.bonds])
         if len(self.states) > 0:

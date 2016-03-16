@@ -94,9 +94,9 @@ if __name__ == "__main__":
     finalName = namespace.output if namespace.output else namespace.input
 
     # mdl to bngl
-    bnglStr = readMDL.constructBNGFromMDLR(namespace.input, namespace.nfsim)
+    #bnglStr = readMDL.constructBNGFromMDLR(namespace.input, namespace.nfsim)
     # create bngl file
-    readMDL.outputBNGL(bnglStr, bnglPath)
+    #readMDL.outputBNGL(bnglStr, bnglPath)
 
     #get cannonical label -bngl label dictionary
 
@@ -114,5 +114,7 @@ if __name__ == "__main__":
 
         mdlDict = writeMDL.constructNFSimMDL(namespace.input + '_sbml.xml.json', namespace.input, finalName, nautyDict)
 
+
     # create an mdl with nfsim-species and nfsim-reactions
+    print mdlDict
     writeMDL.writeMDL(mdlDict, finalName)
