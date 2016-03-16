@@ -1,0 +1,62 @@
+ITERATIONS =  5000
+TIME_STEP =  5e-06
+VACANCY_SEARCH_DISTANCE =  100
+INCLUDE_FILE = "fceri_ji.geometry.mdl"
+Nav =  6.022e8               /* Avogadro number based on a volume size of 1 cubic um */
+Lig_tot =  6.0e3
+Rec_tot =  4.0e2
+Lyn_tot =  2.8e1
+Syk_tot =  4.0e2
+kp1 =  1.32845238e-7*1000*Nav
+km1 =  0
+kp2 =  2.5e-1*1000*Nav
+km2 =  0
+kpL =  5e-2*1000*Nav
+kmL =  20
+kpLs =  5e-2*1000*Nav
+kmLs =  0.12
+kpS =  6e-2*1000*Nav
+kmS =  0.13
+kpSs =  6e-2
+kmSs =  0.13
+pLb =  30
+pLbs =  100
+pLg =  1
+pLgs =  3
+pLS =  30
+pLSs =  100
+pSS =  100
+pSSs =  200
+dm =  20
+dc =  20
+T =  298.15      /* Temperature, K */
+Rs =  0.002564      /* Radius of a (spherical) molecule in 3D compartment, um */
+gamma =  0.5722      /* Euler's constant */
+KB =  1.3806488e-19     /* Boltzmann constant, cm^2.kg/K.s^2 */
+mu =  1e-9
+
+PARTITION_X = [[-6.3 TO 6.3 STEP 3]]
+PARTITION_Y = [[-6.3 TO 6.3 STEP 3]]
+PARTITION_Z = [[-6.3 TO 6.3 STEP 3]]
+
+
+INCLUDE_FILE = "fceri.molecules.mdl"
+INCLUDE_FILE = "fceri.reactions.mdl"
+INCLUDE_FILE = "fceri.seed.mdl"
+
+DEFINE_SURFACE_CLASSES{
+	reflect{
+		REFLECTIVE = ALL_MOLECULES
+	}
+
+}
+
+
+MODIFY_SURFACE_REGIONS{
+	default_Sphere[surface]{
+		SURFACE_CLASS = reflect
+	}
+
+}
+
+
