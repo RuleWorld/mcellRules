@@ -26,8 +26,9 @@ def createMoleculeFromPattern(moleculePattern, idx):
     for idx2, component in enumerate(moleculePattern['components']):
         tmpComponent = st.Component(component['componentName'],'{0}_{1}'.format(idx,idx2))
         if 'state' in component:
-            for state in component['state'][1:]:
-                tmpComponent.addState(state)
+            for state in component['state']:
+                if state != '':
+                    tmpComponent.addState(state)
         if 'bond' in component.keys():
             for bond in component['bond']:
                 tmpComponent.addBond(bond)
@@ -102,6 +103,7 @@ def processObservables(observables):
     ostr = StringIO()
     ostr.write('begin observables\n')
     for observable in observables:
+        
         if 'patterns' in observable.keys() and 'outputfile' in observable.keys():
             tmpObservable = '\tSpecies '
             tmpObservable += '{0} '.format(observable['outputfile'].split('/')[-1].split('.')[0])
@@ -110,7 +112,6 @@ def processObservables(observables):
                 patternList.append(str(createSpeciesFromPattern(pattern['speciesPattern'])))
             tmpObservable +=  ', '.join(patternList)
             ostr.write(tmpObservable + '\n')
-
     ostr.write('end observables\n')
     return ostr.getvalue()
 
@@ -119,6 +120,9 @@ def processMTObservables(moleculeTypes):
     creates a list of observables from just molecule types
     '''
     ostr = StringIO()
+    print ".......", molecuk
+    raise Exception
+
     ostr.write('begin observables\n')
     for moleculeType in moleculeTypes:
         ostr.write('\t Species {0} {1}\n'.format(moleculeType[0], moleculeType[1]))
@@ -148,11 +152,11 @@ def processReactionRules(rules):
 def constructBNGFromMDLR(mdlrPath,nfsimFlag=False):
 
     with open(mdlrPath, 'r') as f:
-        mldr = f.read()
+        mdlr = f.read()
 
-    statements = statementGrammar.parseString(mldr)
-    sections = grammar.parseString(mldr)
+    statements = statementGrammar.parseString(mdlr)
 
+    sections = grammar.parseString(mdlr)
     finalBNGLStr = StringIO()
     finalBNGLStr.write('begin model\n')
     parameterStr = processParameters(statements)
@@ -162,15 +166,16 @@ def constructBNGFromMDLR(mdlrPath,nfsimFlag=False):
     if not nfsimFlag:
         observables = processObservables(sections['observables'])
     else:
-        observables = processMTObservables(moleculeList)
+        observables = processObservables(sections['observables'])
+        #observables = processMTObservables(moleculeList)
     reactions = processReactionRules(sections['reactions'])
 
     finalBNGLStr.write(parameterStr)
     finalBNGLStr.write(moleculeStr)
     finalBNGLStr.write(compartments)
     finalBNGLStr.write(seedspecies)
-    #finalBNGLStr.write(observables)
-    finalBNGLStr.write('begin observables\nend observables\n')
+    finalBNGLStr.write(observables)
+    #finalBNGLStr.write('begin observables\nend observables\n')
     finalBNGLStr.write(reactions)
     finalBNGLStr.write('end model\n')
 

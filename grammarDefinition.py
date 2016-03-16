@@ -74,9 +74,10 @@ species = Suppress('()') + Optional(Suppress('@' + Word(alphanums + '_-'))) + Ze
                                     + Suppress("()") + Optional(Suppress('@' + Word(alphanums + '_-'))))
 
 # bng pattern definition
-component_definition = Group(identifier.setResultsName('componentName') + Optional(Group(tilde + delimitedList(identifier|integer,delim='~')).setResultsName('state')))
-component_statement = Group(identifier.setResultsName('componentName') + Optional(Group(Suppress(bang) + (numarg | '+' | '?')).setResultsName('bond')) + \
-                      Optional(Group(Suppress(tilde)+ (identifier | integer)).setResultsName('state')))
+component_definition = Group(identifier.setResultsName('componentName') + Optional(Group(Suppress(tilde) + delimitedList(identifier|integer,delim='~')).setResultsName('state')))
+component_statement = Group(identifier.setResultsName('componentName') + Optional(Group(Suppress(tilde)+ (identifier | integer)).setResultsName('state')) + \
+  Optional(Group(Suppress(bang) + (numarg | '+' | '?')).setResultsName('bond'))
+                      )
 
 molecule_definition = Group(identifier.setResultsName('moleculeName') +
                             Optional((lparen + delimitedList(component_definition, delim=',').setResultsName('components') + rparen)) +

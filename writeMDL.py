@@ -120,6 +120,7 @@ def constructNFSimMDL(jsonPath, mdlrPath, outputFileName, nautyDict):
             writeRawSection(element, reactionMDL, '\t')
 
     reactionMDL.write('\t{0} -> {1} [{2}]\n'.format('volume_proxy', 'volume_proxy', 1))
+    reactionMDL.write('\t{0} + {0} -> {0} + {0} [{1}]\n'.format('volume_proxy', 1))
 
     reactionMDL.write('}\n')
 
