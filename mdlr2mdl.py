@@ -94,9 +94,9 @@ if __name__ == "__main__":
     finalName = namespace.output if namespace.output else namespace.input
 
     # mdl to bngl
-    #bnglStr = readMDL.constructBNGFromMDLR(namespace.input, namespace.nfsim)
+    bnglStr = readMDL.constructBNGFromMDLR(namespace.input, namespace.nfsim)
     # create bngl file
-    #readMDL.outputBNGL(bnglStr, bnglPath)
+    readMDL.outputBNGL(bnglStr, bnglPath)
 
     #get cannonical label -bngl label dictionary
 

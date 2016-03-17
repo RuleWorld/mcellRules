@@ -1,8 +1,0 @@
-DEFINE_REACTIONS
-{
-	volume_proxy -> volume_proxy [1]
-    //volume_proxy2 -> volume_proxy2 + volume_proxy [1]
-	volume_proxy + volume_proxy -> volume_proxy + volume_proxy [1]
-    //volume_proxy + volume_proxy2 -> volume_proxy + volume_proxy [1]
-
-}
