@@ -1,0 +1,35 @@
+DEFINE_MOLECULES
+{
+	complex //proxy molecule type. the instance contains the actual information
+	{ 
+		DIFFUSION_CONSTANT_3D = 0.005
+	}
+	complex_p //proxy surface type. the instance contains the actual information
+	{ 
+		DIFFUSION_CONSTANT_3D = 0.005
+	}
+
+	ligand //proxy surface type. the instance contains the actual information
+	{ 
+		DIFFUSION_CONSTANT_3D = 0.005
+	}
+	ligand_p //proxy surface type. the instance contains the actual information
+	{ 
+		DIFFUSION_CONSTANT_3D = 0.005
+	}
+
+	receptor //proxy surface type. the instance contains the actual information
+	{ 
+		DIFFUSION_CONSTANT_3D = 0.005
+	}
+
+	dimer //proxy surface type. the instance contains the actual information
+	{ 
+		DIFFUSION_CONSTANT_3D = 0.005
+	}
+
+	dimer_p //proxy surface type. the instance contains the actual information
+	{ 
+		DIFFUSION_CONSTANT_3D = 0.005
+	}
+}

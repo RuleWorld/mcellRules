@@ -1,0 +1,9 @@
+REACTION_DATA_OUTPUT
+{
+	STEP =  1e-6
+	{COUNT[S2,WORLD]} => "./react_data/RecFree.dat"
+	{COUNT[S1,WORLD]} => "./react_data/LigFree.dat"
+	{COUNT[S4,WORLD]} => "./react_data/Phosphofreelig.dat"
+	{COUNT[S6,WORLD] + COUNT[S7,WORLD]} => "./react_data/Phosphoboundlig.dat"
+	{COUNT[S3,WORLD] + COUNT[S5,WORLD] + COUNT[S6,WORLD] + COUNT[S7,WORLD]} => "./react_data/RecBound.dat"
+}

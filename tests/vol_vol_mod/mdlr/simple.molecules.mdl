@@ -1,0 +1,13 @@
+DEFINE_MOLECULES
+{
+	volume_proxy //proxy molecule type. the instance contains the actual information
+	{ 
+		DIFFUSION_CONSTANT_3D = 0.005
+		EXTERN
+	}
+	surface_proxy //proxy surface type. the instance contains the actual information
+	{ 
+		DIFFUSION_CONSTANT_2D = 1
+		EXTERN
+	}
+}

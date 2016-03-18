@@ -1,0 +1,12 @@
+DEFINE_REACTIONS
+{
+    ligand + receptor -> complex [1e11]
+    complex -> ligand + receptor [10]
+    complex_p -> ligand_p + receptor [10]
+    receptor + complex -> dimer [5e10]
+    dimer -> receptor + complex [20]
+    dimer_p -> receptor + complex_p [20]
+    ligand -> ligand_p [20]
+    complex -> complex_p [20]
+    dimer -> dimer_p [20]
+}
