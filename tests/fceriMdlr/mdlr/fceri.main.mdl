@@ -1,4 +1,4 @@
-ITERATIONS =  3000
+ITERATIONS =  1000
 TIME_STEP =  5e-06
 VACANCY_SEARCH_DISTANCE =  100
 INCLUDE_FILE = "fceri_ji_comp.geometry.mdl"
@@ -8,7 +8,6 @@ vol_wall =  0.88/rxn_layer_t  /*Surface area*/
 vol_EC =  39
 vol_PM =  0.01/rxn_layer_t  /*Surface area*/
 vol_CP =  1
-Nav =  6.022e8
 Lig_tot =  6.0e3
 Rec_tot =  4.0e2
 Lyn_tot =  2.8e2
@@ -56,11 +55,5 @@ DEFINE_SURFACE_CLASSES{
 }
 
 
-MODIFY_SURFACE_REGIONS
-{
-	EC[wall]{
-		SURFACE_CLASS = reflect
-	}
-}
 
 

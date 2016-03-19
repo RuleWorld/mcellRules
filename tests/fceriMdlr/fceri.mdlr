@@ -39,7 +39,6 @@ MODIFY_SURFACE_REGIONS
    vol_EC = 39
    vol_PM = 0.01/rxn_layer_t  /*Surface area*/
    vol_CP = 1
-   Nav = 6.022e8
    Lig_tot = 6.0e3
    Rec_tot = 4.0e2
    Lyn_tot = 2.8e2
@@ -213,6 +212,9 @@ MODIFY_SURFACE_REGIONS
 
     {COUNT[Rec(b~pY!?), WORLD] } => "./react_data/RecPbeta.dat"
     {COUNT[Rec(a!1).Lig(l!1,l), WORLD]} => "./react_data/RecMon.dat"
+    {COUNT[Rec(a!1).Lig(l!1,l!2).Rec(a!2), WORLD]} => "./react_data/RecDim.dat"
+    {COUNT[Lig(l!1,l!2).Lyn(U!3,SH2).Rec(a!2,b!3).Rec(a!1,b), WORLD]} => "./react_data/RecRecLigLyn.dat"
+
     {COUNT[Rec(g~pY),WORLD] + COUNT[Rec(g~pY!+), WORLD] } => "./react_data/RecPgamma.dat"
     {COUNT[Rec(g~pY!1).Syk(tSH2!1), WORLD] } => "./react_data/RecSyk.dat"
     {COUNT[Rec(g~pY!1).Syk(tSH2!1,a~pY), WORLD] } => "./react_data/RecSykPS.dat"

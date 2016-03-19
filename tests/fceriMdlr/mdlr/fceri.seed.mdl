@@ -13,7 +13,7 @@ INSTANTIATE Scene OBJECT
 	Release_Site_s2 RELEASE_SITE //bng:@CP::Lyn(SH2,U)
 	{
 		SHAPE = Scene.CP[ALL]
-		MOLECULE = surface_proxy'
+		MOLECULE = surface_proxy;
 		NUMBER_TO_RELEASE = 280
 		RELEASE_PROBABILITY = 1
 		GRAPH_PATTERN = "c:SH2~NO_STATE!2,c:U~NO_STATE!2,m:Lyn!1!0,"
@@ -24,12 +24,12 @@ INSTANTIATE Scene OBJECT
 		MOLECULE = volume_proxy
 		NUMBER_TO_RELEASE = 400
 		RELEASE_PROBABILITY = 1
-		GRAPH_PATTERN = "c:a~Y!3,c:l~Y!3,c:tSH2~NO_STATE!3,m:Syk!2!0!1,"
+		GRAPH_PATTERN = "c:a~Y!3,c:l~Y!3,c:tSH2~NO_STATE!3,m:Syk!2!1!0,"
 	}
 	Release_Site_s4 RELEASE_SITE //bng:@CP::Rec(a,b~Y,g~Y)
 	{
 		SHAPE = Scene.CP[ALL]
-		MOLECULE = surface_proxy'
+		MOLECULE = surface_proxy;
 		NUMBER_TO_RELEASE = 400
 		RELEASE_PROBABILITY = 1
 		GRAPH_PATTERN = "c:a~NO_STATE!3,c:b~Y!3,c:g~Y!3,m:Rec!2!1!0,"

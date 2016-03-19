@@ -1,0 +1,116 @@
+reading xml file (fceri.mdlr_total.xml)  
+	[MCell initializing simulation...
+MCell[0]: random sequence 60000
+MCell 3.3 (commit: 8c96580  date: Tue, 15 Mar 2016 22:00:13 -0400)
+  Running on AuroraDragon at Fri Mar 18 21:05:46 2016
+
+  Copyright (C) 2006 - 2015 by
+    The National Center for Multiscale Modeling of Biological Systems,
+    The Salk Institute for Biological Studies, and
+    Pittsburgh Supercomputing Center, Carnegie Mellon University,
+
+
+**********************************************************************
+MCell development is supported by the NIGMS-funded (P41GM103712)
+National Center for Multiscale Modeling of Biological Systems (MMBioS).
+Please acknowledge MCell in your publications.
+**********************************************************************
+
+Defining molecules with the following theoretical average diffusion distances:
+  l_r_bar=0.0465714223 um for volume_proxy
+  l_r_bar=0.0304957213 um for surface_proxy
+
+
+Reaction probabilities generated for the following reactions:
+	Probability 3.5656e-09 set for surface_proxy{0} + volume_proxy{0} -> surface_proxy{0} 
+
+Reaction probabilities generated for the following reactions:
+	Probability 8.3333e-03 set for surface_proxy{0} + surface_proxy{0} -> surface_proxy{0} 
+
+Reaction probabilities generated for the following reactions:
+	Probability 5.0000e-06 set for volume_proxy{0} -> volume_proxy{0} 
+
+Reaction probabilities generated for the following reactions:
+	Probability 5.0000e-06 set for surface_proxy{0} -> surface_proxy{0} surface_proxy{0} 
+	Probability 5.0000e-06 set for surface_proxy{0} -> surface_proxy{0} volume_proxy{0} 
+For reaction between two (or three) surface molecules the upper probability limit is given. The effective reaction probability will be recalculated dynamically during simulation.
+
+Surfaces with surface class "reflect{1}" are REFLECTIVE for volume molecules  volume_proxy{0}.
+Borders of regions with surface class "reflect{1}" are REFLECTIVE for surface molecules  surface_proxy{0}.
+
+Creating geometry (this may take some time)
+MCell: world bounding box in microns =
+         [ -1 -5 -1 ] [ 1 5 1 ]
+Creating 125 subvolumes (5,5,5 per axis).
+Creating 1 memory partitions (1,1,1 per axis).
+Instantiating objects...
+Creating walls...
+Creating edges...
+Running simulation.
+Released 6000 volume_proxy from "Scene.Release_Site_s1" at iteration 0.
+Released 280 surface_proxy from "Scene.Release_Site_s2" at iteration 0.
+Released 400 volume_proxy from "Scene.Release_Site_s3" at iteration 0.
+Released 400 surface_proxy from "Scene.Release_Site_s4" at iteration 0.
+
+c:l~NO_STATE!2,c:l~NO_STATE!2,m:Lig!0!1, c:a~NO_STATE!3,c:b~Y!3,c:g~Y!3,m:Rec!2!1!0,
+!!1.0000000000e+05 3.5655745499e-04
+!!1.0000000000e+05 3.5655745499e-04
+c:SH2~NO_STATE!2,c:U~NO_STATE!2,m:Lyn!1!0, c:a~NO_STATE!3,c:b~Y!3,c:g~Y!3,m:Rec!2!1!0,
+!!1.6605780000e+00 1.3838150000e-02
+c:SH2~NO_STATE!5,c:U~NO_STATE!5!3,c:a~NO_STATE!6,c:b~Y!6!1,c:g~Y!6,m:Lyn!1!0,m:Rec!4!3!2, ----
+!!2.0000000000e+01 1.0000000000e-04
+c:l~NO_STATE!2,c:l~NO_STATE!2,m:Lig!0!1, c:SH2~NO_STATE!5,c:U~NO_STATE!5!3,c:a~NO_STATE!6,c:b~Y!6!1,c:g~Y!6,m:Lyn!1!0,m:Rec!4!3!2,
+!!1.0000000000e+05 3.5655745499e-04
+!!1.0000000000e+05 3.5655745499e-04
+
+
+
+
+
+
+
+
+
+
+
+c:SH2~NO_STATE!5,c:U~NO_STATE!5!3,c:a~NO_STATE!6,c:b~Y!6!1,c:g~Y!6,m:Lyn!1!0,m:Rec!4!3!2, c:a~NO_STATE!6!4,c:b~Y!6,c:g~Y!6,c:l~NO_STATE!5,c:l~NO_STATE!5!0,m:Lig!4!3,m:Rec!2!1!0,
+!!1.6600000000e-04 1.3833333333e-06
+c:a~NO_STATE!6!4,c:b~Y!6,c:g~Y!6,c:l~NO_STATE!5,c:l~NO_STATE!5!0,m:Lig!4!3,m:Rec!2!1!0, c:a~NO_STATE!3,c:b~Y!3,c:g~Y!3,m:Rec!2!1!0,
+!!1.6600000000e-04 1.3833333333e-06
+c:a~NO_STATE!6!4,c:b~Y!6,c:g~Y!6,c:l~NO_STATE!5,c:l~NO_STATE!5!0,m:Lig!4!3,m:Rec!2!1!0, c:SH2~NO_STATE!2,c:U~NO_STATE!2,m:Lyn!1!0,
+!!1.6605780000e+00 1.3838150000e-02
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+c:SH2~NO_STATE!8,c:U~NO_STATE!8!3,c:a~NO_STATE!9!6,c:b~Y!9!1,c:g~Y!9,c:l~NO_STATE!7,c:l~NO_STATE!7!2,m:Lig!5!6,m:Lyn!1!0,m:Rec!4!3!2, ----
+!!2.0000000000e+01 1.0000000000e-04
+c:SH2~NO_STATE!8,c:U~NO_STATE!8!3,c:a~NO_STATE!9!6,c:b~Y!9!1,c:g~Y!9,c:l~NO_STATE!7,c:l~NO_STATE!7!2,m:Lig!5!6,m:Lyn!1!0,m:Rec!4!3!2, c:SH2~NO_STATE!5,c:U~NO_STATE!5!3,c:a~NO_STATE!6,c:b~Y!6!1,c:g~Y!6,m:Lyn!1!0,m:Rec!4!3!2,
+!!1.6600000000e-04 1.3833333333e-06
+c:SH2~NO_STATE!8,c:U~NO_STATE!8!3,c:a~NO_STATE!9!6,c:b~Y!9!1,c:g~Y!9,c:l~NO_STATE!7,c:l~NO_STATE!7!2,m:Lig!5!6,m:Lyn!1!0,m:Rec!4!3!2, c:a~NO_STATE!3,c:b~Y!3,c:g~Y!3,m:Rec!2!1!0,
+!!1.6600000000e-04 1.3833333333e-06
+
+
+
+
+
+

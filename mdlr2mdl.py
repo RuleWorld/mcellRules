@@ -5,6 +5,7 @@ from subprocess import call
 import splitBNGXML
 import re
 from nfsim_python import NFSim
+import os
 
 def defineConsole():
     parser = argparse.ArgumentParser(description='SBML to BNGL translator')
@@ -102,6 +103,7 @@ if __name__ == "__main__":
 
     if not namespace.nfsim:
         # bngl 2 sbml 2 json
+
         readMDL.bngl2json(namespace.input + '.bngl')
         # json 2 plain mdl
         mdlDict = writeMDL.constructMDL(namespace.input + '_sbml.xml.json', namespace.input, finalName)
@@ -110,9 +112,10 @@ if __name__ == "__main__":
 
         nautyDict = xml2HNautySpeciesDefinitions(namespace.input)
         # bngl 2 sbml 2 json
+        # XXX: we should make it so we don;t need to do this step
         readMDL.bngl2json(namespace.input + '.bngl')
-
-        mdlDict = writeMDL.constructNFSimMDL(namespace.input + '_sbml.xml.json', namespace.input, finalName, nautyDict)
+        # write out the equivalent plain mdl stuffs
+        mdlDict = writeMDL.constructNFSimMDL(namespace.input + '_sbml.xml.json', namespace.input, finalName.split(os.sep)[-1], nautyDict)
 
 
     # create an mdl with nfsim-species and nfsim-reactions
