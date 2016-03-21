@@ -15,10 +15,10 @@
       <Parameter id="NaV" type="Constant" value="6.022e+8"/>
       <Parameter id="Lig_tot" type="Constant" value="6000"/>
       <Parameter id="Rec_tot" type="Constant" value="400"/>
-      <Parameter id="kp1" type="Constant" value="100"/>
-      <Parameter id="km1" type="Constant" value="0.01"/>
-      <Parameter id="kp2" type="Constant" value="100"/>
-      <Parameter id="km2" type="Constant" value="0.01"/>
+      <Parameter id="kp1" type="Constant" value="5e10"/>
+      <Parameter id="km1" type="Constant" value="10"/>
+      <Parameter id="kp2" type="Constant" value="250"/>
+      <Parameter id="km2" type="Constant" value="10"/>
       <Parameter id="T" type="Constant" value="298.15"/>
       <Parameter id="h" type="Constant" value="0.01"/>
       <Parameter id="Rs" type="Constant" value="0.002564"/>
@@ -49,68 +49,7 @@
       <compartment id="CP" spatialDimensions="3" size="1" outside="PM"/>
     </ListOfCompartments>
     <ListOfSpecies>
-      <Species id="S1"  concentration="Lig_tot" name="@EC::Lig(l,l)" compartment="EC">
-        <ListOfMolecules>
-          <Molecule id="S1_M1" name="Lig" compartment="EC">
-            <ListOfComponents>
-              <Component id="S1_M1_C1" name="l" numberOfBonds="0"/>
-              <Component id="S1_M1_C2" name="l" numberOfBonds="0"/>
-            </ListOfComponents>
-          </Molecule>
-        </ListOfMolecules>
-      </Species>
-      <Species id="S2"  concentration="Lig_tot" name="@PM::Rec(a)" compartment="PM">
-        <ListOfMolecules>
-          <Molecule id="S2_M1" name="Rec" compartment="PM">
-            <ListOfComponents>
-              <Component id="S2_M1_C1" name="a" numberOfBonds="0"/>
-            </ListOfComponents>
-          </Molecule>
-        </ListOfMolecules>
-      </Species>
-      <Species id="S3"  concentration="0" name="@PM::Lig(l!1,l)@EC.Rec(a!1)" compartment="PM">
-        <ListOfMolecules>
-          <Molecule id="S3_M1" name="Lig" compartment="EC">
-            <ListOfComponents>
-              <Component id="S3_M1_C1" name="l" numberOfBonds="1"/>
-              <Component id="S3_M1_C2" name="l" numberOfBonds="0"/>
-            </ListOfComponents>
-          </Molecule>
-          <Molecule id="S3_M2" name="Rec" compartment="PM">
-            <ListOfComponents>
-              <Component id="S3_M2_C1" name="a" numberOfBonds="1"/>
-            </ListOfComponents>
-          </Molecule>
-        </ListOfMolecules>
-        <ListOfBonds>
-          <Bond id="S3_B1" site1="S3_M1_C1" site2="S3_M2_C1"/>
-        </ListOfBonds>
-      </Species>
-      <Species id="S4"  concentration="0" name="@PM::Lig(l!1,l!2)@EC.Rec(a!2).Rec(a!1)" compartment="PM">
-        <ListOfMolecules>
-          <Molecule id="S4_M1" name="Lig" compartment="EC">
-            <ListOfComponents>
-              <Component id="S4_M1_C1" name="l" numberOfBonds="1"/>
-              <Component id="S4_M1_C2" name="l" numberOfBonds="1"/>
-            </ListOfComponents>
-          </Molecule>
-          <Molecule id="S4_M2" name="Rec" compartment="PM">
-            <ListOfComponents>
-              <Component id="S4_M2_C1" name="a" numberOfBonds="1"/>
-            </ListOfComponents>
-          </Molecule>
-          <Molecule id="S4_M3" name="Rec" compartment="PM">
-            <ListOfComponents>
-              <Component id="S4_M3_C1" name="a" numberOfBonds="1"/>
-            </ListOfComponents>
-          </Molecule>
-        </ListOfMolecules>
-        <ListOfBonds>
-          <Bond id="S4_B1" site1="S4_M1_C1" site2="S4_M3_C1"/>
-          <Bond id="S4_B2" site1="S4_M1_C2" site2="S4_M2_C1"/>
-        </ListOfBonds>
-      </Species>
-    </ListOfSpecies>
+</ListOfSpecies>
     <ListOfReactionRules>
       <ReactionRule id="RR1" name="_R1" symmetry_factor="1">
         <ListOfReactantPatterns>
@@ -381,16 +320,6 @@
                 <ListOfComponents>
                   <Component id="O3_P1_M1_C1" name="l" numberOfBonds="+"/>
                   <Component id="O3_P1_M1_C2" name="l" numberOfBonds="0"/>
-                </ListOfComponents>
-              </Molecule>
-            </ListOfMolecules>
-          </Pattern>
-          <Pattern id="O3_P2" compartment="PM" matchOnce="1">
-            <ListOfMolecules>
-              <Molecule id="O3_P2_M1" name="Lig" compartment="EC">
-                <ListOfComponents>
-                  <Component id="O3_P2_M1_C1" name="l" numberOfBonds="+"/>
-                  <Component id="O3_P2_M1_C2" name="l" numberOfBonds="+"/>
                 </ListOfComponents>
               </Molecule>
             </ListOfMolecules>

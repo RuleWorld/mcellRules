@@ -1,5 +1,5 @@
 import concurrent.futures
-
+import shutil
 import fnmatch
 import os
 from subprocess import call, check_call
@@ -17,6 +17,7 @@ home = expanduser("~")
 import csv
 mcellExecutable = join(home, 'workspace', 'mcell', 'build', 'mcell')
 from collections import defaultdict
+import misc
 
 def getFiles(directory, extension):
     """
@@ -35,80 +36,103 @@ def getFiles(directory, extension):
 
     return matches
 
-def callMDLTest(fileName, options={}):
+def callMDLTest(options):
     '''
     run mcell on a non nfsim file
     '''
+    seed = str(random.randint(1, 1000000))
+    
+    os.mkdir(seed)
+    #os.chdir(seed)
+
     with open(os.devnull, "w") as f:
         result = call([mcellExecutable, os.path.join(options['testpath'], 'reference', options['mdlname']),
-                       '-seed', str(random.randint(1, 100000))],stdout=f)
-    return result
+                       '-seed', seed],stdout=f,cwd=seed)
+    #os.chdir('..')        
+    return seed
 
 def callMDLrTest(options):
     '''
     run mcell on an nfsim file
     '''
+    seed = str(random.randint(1, 1000000))
+    os.mkdir(seed)
+    #os.chdir(seed)
     with open(os.devnull, "w") as f:
-        check_call([mcellExecutable, options['mdlname'],
-              '-n', options['xmlname'], '-seed', str(random.randint(1, 100000))], stdout=f)
+        check_call([mcellExecutable, os.path.join('..',options['mdlname']),
+              '-n', os.path.join('..',options['xmlname']), '-seed', seed], stdout=f, cwd=seed)
+    #os.chdir('..')
 
     
-    return result
+    return seed
 
 
-def generateMDLrData(testpath):
+def generateMDLrData(testpath, databasename, repetitions):
+
+    #repetitions = 50
     options = {}
     #options['seed'] = 
     options['testpath'] = testpath
-    options['repetitions'] = 3
+    options['repetitions'] = repetitions
 
     mdlfiles = getFiles(os.path.join(testpath, 'mdlr'), 'mdl')
     options['mdlname'] = [x for x in mdlfiles if 'main' in x][0]
     xmlfiles = getFiles(os.path.join(testpath, 'mdlr'), 'xml')
     options['xmlname'] = xmlfiles[0]
-
+    #options['workerIdx'] = '00'
+    #callMDLrTest(options)
     postOptions = {}
     #postOptions['seed'] = options['seed']
     postOptions['dataset'] = pandas.DataFrame()
 
-    #callMDLrTest(options)
-    parallelHandling(callMDLrTest, options, processMDLrRoutput, postOptions)
+    options2 = {}
+    options2['testpath'] = testpath
+    options2['repetitions'] = repetitions
+    mdlfiles = getFiles(os.path.join(testpath,'reference'), 'mdl')
+    options2['mdlname'] = [x for x in mdlfiles if 'main' in x][0]
+    print 'process MDL files...'
+    parallelHandling(callMDLTest, options2, processMDLoutput,postOptions)
+    print 'processing MDLr files...'
+    parallelHandling(callMDLrTest, options, processMDLroutput, postOptions)
 
-    postOptions['dataset'].to_hdf('{0}DB.h5'.format('test'), '{0}_mdlr'.format(testpath))
+    postOptions['dataset'].to_hdf('{0}DB.h5'.format(databasename), testpath)
 
 
 def dummy(options):
     pass
 
 
-def processMDLrRoutput(postOptions):
-    trajectorydata = defaultdict(list)
+def processMDLroutput(postOptions):
     #trajectorydata['seed'] = postOptions['seed']
-
-    with open(os.path.join('mdlr_{0}.gdat'.format(postOptions['seed'])), 'rb') as f:
-        data = csv.DictReader(f, delimiter=',')
-        for row in data:
-            for key in row:
-                if key == 'time':
-                    trajectorydata['Seconds'].append(float(row[key].strip()))
-                elif key not in [' ']:
-                    trajectorydata[key.strip()].append(int(row[key].strip()))
+    gdatFiles = getFiles(postOptions['workerIdx'],'gdat')
+    trajectorydata = misc.processMDLrData(gdatFiles[0], postOptions['workerIdx'])
 
     localTrajectory = pandas.DataFrame(trajectorydata)
     postOptions['dataset'] = pandas.concat([postOptions['dataset'], localTrajectory])
+    shutil.rmtree(postOptions['workerIdx'])
+
+def processMDLoutput(postOptions):
+    #trajectorydata['seed'] = postOptions['seed']
+    gdatFiles = getFiles(postOptions['workerIdx'],'txt')
+    trajectorydata = misc.processMDLData(gdatFiles[0], postOptions['workerIdx'])
+
+    localTrajectory = pandas.DataFrame(trajectorydata)
+    postOptions['dataset'] = pandas.concat([postOptions['dataset'], localTrajectory])
+    shutil.rmtree(postOptions['workerIdx'])
 
 
-
-def parallelHandling(function, options = [], postExecutionFunction=dummy, postOptions={}):
+def parallelHandling(function, options = {}, postExecutionFunction=dummy, postOptions={}):
     futures = []
     workers = mp.cpu_count() - 1
     progress = progressbar.ProgressBar(maxval=options['repetitions']).start()
     i = 0
     print 'running in {0} cores'.format(workers)
     with concurrent.futures.ProcessPoolExecutor(max_workers=workers) as executor:
-        for _ in range(options['repetitions']):
+        for idx in range(options['repetitions']):
+            options['workerIdx'] = str(idx)
             futures.append(executor.submit(function, options))
-        for _ in concurrent.futures.as_completed(futures, timeout=3600):
+        for future in concurrent.futures.as_completed(futures, timeout=3600):
+            postOptions['workerIdx'] = future.result()
             postExecutionFunction(postOptions)
             i += 1
             progress.update(i)
@@ -119,21 +143,13 @@ def parallelHandling(function, options = [], postExecutionFunction=dummy, postOp
 def defineConsole():
     parser = argparse.ArgumentParser(description='SBML to BNGL translator')
     parser.add_argument('-t','--test',type=str,help='Test to run')
+    parser.add_argument('-r','--repetitions',type=int, help='number of separate stochastic trajectories')
     return parser    
 
 
 
-def saveToDataframe(result,dataframe):
-    """
-    Store xml-analysis results in dataframe
-    """
-    filename = result[0].split('/')[-1]
-    filename = '.'.join(filename.split('.')[:-1]) + '_regulatory.gml'
-    dataframe = dataframe.set_value(filename,'atomization',result[1])
-    dataframe = dataframe.set_value(filename,'weight',result[2])
-    dataframe = dataframe.set_value(filename,'compression',result[3])
-
 if __name__ == "__main__":
+    databasename = 'timeseries3'
     parser = defineConsole()
     namespace = parser.parse_args()
-    generateMDLrData(namespace.test)
+    generateMDLrData(namespace.test, databasename, namespace.repetitions)

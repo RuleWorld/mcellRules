@@ -121,6 +121,9 @@ def constructNFSimMDL(jsonPath, mdlrPath, outputFileName, nautyDict):
 
     reactionMDL.write('\t{0} -> {1} [{2}]\n'.format('volume_proxy', 'volume_proxy', 1))
     reactionMDL.write('\t{0} + {0} -> {0} + {0} [{1}]\n'.format('volume_proxy', 1))
+    reactionMDL.write('\t{0}; + {1}; -> {0}; [{2}]\n'.format('volume_proxy', 'surface_proxy', 1))
+    reactionMDL.write('\t{1}; + {1}; -> {1}; [{2}]\n'.format('volume_proxy', 'surface_proxy', 1))
+    reactionMDL.write('\t{1}; -> {1}; [{2}]\n'.format('volume_proxy', 'surface_proxy', 1))
 
     reactionMDL.write('}\n')
 

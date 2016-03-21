@@ -55,57 +55,32 @@ Released 400 surface_proxy from "Scene.Release_Site_s4" at iteration 0.
 c:l~NO_STATE!2,c:l~NO_STATE!2,m:Lig!0!1, c:a~NO_STATE!3,c:b~Y!3,c:g~Y!3,m:Rec!2!1!0,
 !!1.0000000000e+05 3.5655745499e-04
 !!1.0000000000e+05 3.5655745499e-04
+
 c:SH2~NO_STATE!2,c:U~NO_STATE!2,m:Lyn!1!0, c:a~NO_STATE!3,c:b~Y!3,c:g~Y!3,m:Rec!2!1!0,
 !!1.6605780000e+00 1.3838150000e-02
+
 c:SH2~NO_STATE!5,c:U~NO_STATE!5!3,c:a~NO_STATE!6,c:b~Y!6!1,c:g~Y!6,m:Lyn!1!0,m:Rec!4!3!2, ----
 !!2.0000000000e+01 1.0000000000e-04
+
 c:l~NO_STATE!2,c:l~NO_STATE!2,m:Lig!0!1, c:SH2~NO_STATE!5,c:U~NO_STATE!5!3,c:a~NO_STATE!6,c:b~Y!6!1,c:g~Y!6,m:Lyn!1!0,m:Rec!4!3!2,
 !!1.0000000000e+05 3.5655745499e-04
 !!1.0000000000e+05 3.5655745499e-04
 
-
-
-
-
-
-
-
-
-
-
 c:SH2~NO_STATE!5,c:U~NO_STATE!5!3,c:a~NO_STATE!6,c:b~Y!6!1,c:g~Y!6,m:Lyn!1!0,m:Rec!4!3!2, c:a~NO_STATE!6!4,c:b~Y!6,c:g~Y!6,c:l~NO_STATE!5,c:l~NO_STATE!5!0,m:Lig!4!3,m:Rec!2!1!0,
 !!1.6600000000e-04 1.3833333333e-06
+
 c:a~NO_STATE!6!4,c:b~Y!6,c:g~Y!6,c:l~NO_STATE!5,c:l~NO_STATE!5!0,m:Lig!4!3,m:Rec!2!1!0, c:a~NO_STATE!3,c:b~Y!3,c:g~Y!3,m:Rec!2!1!0,
 !!1.6600000000e-04 1.3833333333e-06
+
 c:a~NO_STATE!6!4,c:b~Y!6,c:g~Y!6,c:l~NO_STATE!5,c:l~NO_STATE!5!0,m:Lig!4!3,m:Rec!2!1!0, c:SH2~NO_STATE!2,c:U~NO_STATE!2,m:Lyn!1!0,
 !!1.6605780000e+00 1.3838150000e-02
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 c:SH2~NO_STATE!8,c:U~NO_STATE!8!3,c:a~NO_STATE!9!6,c:b~Y!9!1,c:g~Y!9,c:l~NO_STATE!7,c:l~NO_STATE!7!2,m:Lig!5!6,m:Lyn!1!0,m:Rec!4!3!2, ----
 !!2.0000000000e+01 1.0000000000e-04
+
 c:SH2~NO_STATE!8,c:U~NO_STATE!8!3,c:a~NO_STATE!9!6,c:b~Y!9!1,c:g~Y!9,c:l~NO_STATE!7,c:l~NO_STATE!7!2,m:Lig!5!6,m:Lyn!1!0,m:Rec!4!3!2, c:SH2~NO_STATE!5,c:U~NO_STATE!5!3,c:a~NO_STATE!6,c:b~Y!6!1,c:g~Y!6,m:Lyn!1!0,m:Rec!4!3!2,
 !!1.6600000000e-04 1.3833333333e-06
+
 c:SH2~NO_STATE!8,c:U~NO_STATE!8!3,c:a~NO_STATE!9!6,c:b~Y!9!1,c:g~Y!9,c:l~NO_STATE!7,c:l~NO_STATE!7!2,m:Lig!5!6,m:Lyn!1!0,m:Rec!4!3!2, c:a~NO_STATE!3,c:b~Y!3,c:g~Y!3,m:Rec!2!1!0,
 !!1.6600000000e-04 1.3833333333e-06
 

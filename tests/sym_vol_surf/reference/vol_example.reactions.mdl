@@ -1,0 +1,7 @@
+DEFINE_REACTIONS
+{
+    ligand; + receptor; -> complex; [1e11]
+    complex; -> ligand; + receptor; [10] 
+    receptor; + complex; -> dimer; [250]
+    dimer; -> receptor; + complex; [20] 
+}

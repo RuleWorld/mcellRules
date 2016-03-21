@@ -50,7 +50,7 @@ MODIFY_SURFACE_REGIONS{
 
 REACTION_DATA_OUTPUT
 {
-  STEP = 1e-6
+  STEP = 1e-4
   HEADER = ""
   {
     COUNT[dimer,WORLD]                                     : "Dimers",

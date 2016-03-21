@@ -1,4 +1,4 @@
-ITERATIONS = 100000
+ITERATIONS = 3000
 TIME_STEP = 5e-06
 VACANCY_SEARCH_DISTANCE = 100
  
@@ -29,12 +29,10 @@ MODIFY_SURFACE_REGIONS
    vol_PM = 4.836624601  /*Surface area*/
    vol_CP = 1
    NaV = 602200000
-   Lig_tot = 6.0e3
-   Rec_tot = 4.0e2
-   kp1 = 0.000166057788110262*Nav
-   km1 = 0.01
-   kp2 = 1.66057788110262e-06/rxn_layer_t
-   km2 = 0.01
+   Lig_tot = 50
+   Rec_tot = 50
+   kp1 = 5e10
+   km1 = 10
  
 /* Diffusion bloc */
    T = 298.15      /* Temperature, K */
@@ -59,7 +57,7 @@ MODIFY_SURFACE_REGIONS
  
   }
   Rec(a){
-      DIFFUSION_CONSTANT_2D = Saffman_Delbruk(T, mu_PM, h, Rec_radius, mu_EC, mu_CP)
+      DIFFUSION_CONSTANT_3D = Einstein_Stokes(T, mu_EC, Lig_radius)
   }
 }
 
@@ -69,9 +67,7 @@ MODIFY_SURFACE_REGIONS
 #DEFINE_REACTIONS
 {
     /* Ligand-receptor binding      */
-   Rec(a) + Lig(l,l) <-> Rec(a!1).Lig(l!1,l)  [kp1, km1]
-    /* Receptor-aggregation */
-   Rec(a) + Lig(l,l!+) <-> Rec(a!2).Lig(l!2,l!+)  [kp2, km2]
+   Rec(a) + Lig(l,l!+) <-> Rec(a!1).Lig(l!1,l!+)  [kp1, km1]
 }
  
  
@@ -86,23 +82,15 @@ MODIFY_SURFACE_REGIONS
    ligand_rel RELEASE_SITE
    {
     SHAPE = Scene.EC[ALL] - Scene.CP[ALL]
-    MOLECULE = Lig(l,l)@EC
+    MOLECULE = @EC::Lig(l!1,l).Rec(a!1)
     NUMBER_TO_RELEASE = Lig_tot
     RELEASE_PROBABILITY = 1
    }
       receptor_rel RELEASE_SITE
    {
-    SHAPE = Scene.CP[ALL]
-    MOLECULE = Rec(a)@PM 
-    NUMBER_TO_RELEASE = Rec_tot
-    RELEASE_PROBABILITY = 1
-
-   }
-   complex_rel RELEASE_SITE
-   {
-    SHAPE = Scene.CP[ALL]
-    MOLECULE = Lig(l!1,l).Rec(a!1)@PM 
-    NUMBER_TO_RELEASE = Rec_tot
+    SHAPE = Scene.EC[ALL] - Scene.CP[ALL]
+    MOLECULE = Rec(a)@EC
+    NUMBER_TO_RELEASE = Lig_tot
     RELEASE_PROBABILITY = 1
 
    }
@@ -116,24 +104,14 @@ MODIFY_SURFACE_REGIONS
    STEP = 1e-6
  
    /*RecFree*/
-   { COUNT[Rec(a)@PM, WORLD] }=> "./react_data/RecFree.dat"
+   { COUNT[Rec(a), WORLD] }=> "./react_data/RecFree.dat"
+
+   /*Ligfree*/
+   { COUNT[Lig(l,l), WORLD] }=> "./react_data/LigFree.dat"
  
    /*RecBound*/
-   { COUNT[Lig(l!+,l)@EC, WORLD] + COUNT[@PM::Lig(l!+,l!+)@EC,WORLD] }=> "./react_data/RecBound.dat"
- 
-   /*Dimers*/
-   { COUNT[Lig(l!+,l!+)@EC,WORLD] }=> "./react_data/Dimers.dat"
+   { COUNT[Lig(l!+), WORLD]}=> "./react_data/RecBound.dat"
  
 }
 
 
-VIZ_OUTPUT {
-   MODE = CELLBLENDER
-   FILENAME = "./viz_data/rec_dim"
-   MOLECULES
-   {
-      NAME_LIST {ALL_MOLECULES}
-      ITERATION_NUMBERS {ALL_DATA @ [1, 100, [200 TO 100000 STEP 100]]
-      }
-   }
-}
