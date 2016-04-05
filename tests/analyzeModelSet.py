@@ -43,7 +43,7 @@ def callMDLTest(options):
     seed = str(random.randint(1, 1000000))
     
     outputdir = os.path.join('testdata', str(seed))
-    os.mkdirs(outputdir)
+    os.makedirs(outputdir)
     #os.chdir(seed)
 
     with open(os.devnull, "w") as f:
@@ -56,9 +56,9 @@ def callMDLrTest(options):
     '''
     run mcell on an nfsim file
     '''
-    outputdir = os.path.join('testdata', str(seed))
     seed = str(random.randint(1, 1000000))
-    os.mkdirs(outputdir)
+    outputdir = os.path.join('testdata', str(seed))
+    os.makedirs(outputdir)
     #os.chdir(seed)
     with open(os.devnull, "w") as f:
         check_call([mcellExecutable, os.path.join('..',options['mdlname']),
@@ -97,7 +97,7 @@ def generateMDLrData(testpath, databasename, repetitions):
     print 'processing MDLr files...'
     parallelHandling(callMDLrTest, options, processMDLroutput, postOptions)
 
-    postOptions['dataset'].to_hdf('{0}DB.h5'.format(databasename), testpath)
+    postOptions['dataset'].to_hdf('{0}DB.h5'.format(testpath), testpath,format='table',append=True)
 
 
 def dummy(options):
@@ -151,7 +151,7 @@ def defineConsole():
 
 
 if __name__ == "__main__":
-    databasename = 'timeseries3'
+    databasename = 'timeseries4'
     parser = defineConsole()
     namespace = parser.parse_args()
     generateMDLrData(namespace.test, databasename, namespace.repetitions)
