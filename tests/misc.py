@@ -42,7 +42,7 @@ def MDLTrajectoryGeneration(params):
 
 def processMDLData(fileName, iteration):
     trajectorydata = defaultdict(list)
-    trajectorydata['iteration'] = iteration
+    trajectorydata['iteration'] = iteration.split('/')[-1]
     with open(fileName, 'rb') as f:
         data = csv.DictReader(f, delimiter=' ')
 
@@ -95,7 +95,7 @@ def MDLRTrajectoryGeneration(params, trajectorydataset):
 
 def processMDLrData(fileName, iteration):
     trajectorydata = defaultdict(list)
-    trajectorydata['iteration'] = iteration
+    trajectorydata['iteration'] = iteration.split('/')[-1]
 
     with open(fileName, 'rb') as f:
         data = csv.DictReader(f, delimiter =',')
@@ -126,8 +126,13 @@ def compareTimeSeries(mdldataset):
         mdlrslice = mdldataset.query('(Origin == "R-MCell")').query('(Seconds == {0})'.format(timepoints[timesampleIdx]))
 
         for observable in keys:
+            if observable not in ['LynFree']:
+                continue
+
             mdlobs = mdlslice.query('(Observable == "{0}")'.format(observable))['Value']
             mdlrobs= mdlrslice.query('(Observable == "{0}")'.format(observable))['Value']
+            if len(mdlobs) == 0 or len(mdlrobs) == 0:
+                continue
             kmetric, pvalue = stats.ks_2samp(list(mdlobs), list(mdlrobs))
             sd = 1.22 * ((len(mdlobs)+ len(mdlrobs))*1.0/ (len(mdlobs)*len(mdlrobs))) ** 0.5
             if pvalue < 0.1:

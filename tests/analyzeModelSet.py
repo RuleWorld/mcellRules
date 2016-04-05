@@ -42,7 +42,7 @@ def callMDLTest(options):
     '''
     seed = str(random.randint(1, 1000000))
     
-    outputdir = os.path.join('testdata', str(seed))
+    outputdir = os.path.join(options['workdir'], 'testdata', str(seed))
     os.makedirs(outputdir)
     #os.chdir(seed)
 
@@ -57,7 +57,7 @@ def callMDLrTest(options):
     run mcell on an nfsim file
     '''
     seed = str(random.randint(1, 1000000))
-    outputdir = os.path.join('testdata', str(seed))
+    outputdir = os.path.join(options['workdir'], 'testdata', str(seed))
     os.makedirs(outputdir)
     #os.chdir(seed)
     with open(os.devnull, "w") as f:
@@ -69,7 +69,7 @@ def callMDLrTest(options):
     return outputdir
 
 
-def generateMDLrData(testpath, databasename, repetitions):
+def generateMDLrData(testpath, databasename, repetitions, outputdir):
 
     #repetitions = 50
     options = {}
@@ -81,15 +81,17 @@ def generateMDLrData(testpath, databasename, repetitions):
     options['mdlname'] = [x for x in mdlfiles if 'main' in x][0]
     xmlfiles = getFiles(os.path.join(testpath, 'mdlr'), 'xml')
     options['xmlname'] = xmlfiles[0]
+    options['workdir'] = outputdir
     #options['workerIdx'] = '00'
     #callMDLrTest(options)
     postOptions = {}
     #postOptions['seed'] = options['seed']
     postOptions['dataset'] = pandas.DataFrame()
-
+    postOptions['workdir'] = options['workdir']
     options2 = {}
     options2['testpath'] = testpath
     options2['repetitions'] = repetitions
+    options2['workdir'] = outputdir
     mdlfiles = getFiles(os.path.join(testpath,'reference'), 'mdl')
     options2['mdlname'] = [x for x in mdlfiles if 'main' in x][0]
     print 'process MDL files...'
@@ -106,21 +108,23 @@ def dummy(options):
 
 def processMDLroutput(postOptions):
     #trajectorydata['seed'] = postOptions['seed']
-    gdatFiles = getFiles(postOptions['workerIdx'],'gdat')
+    inputdir = os.path.join(postOptions['workdir'], postOptions['workerIdx'])
+    gdatFiles = getFiles(inputdir,'gdat')
     trajectorydata = misc.processMDLrData(gdatFiles[0], postOptions['workerIdx'])
 
     localTrajectory = pandas.DataFrame(trajectorydata)
     postOptions['dataset'] = pandas.concat([postOptions['dataset'], localTrajectory])
-    shutil.rmtree(postOptions['workerIdx'])
+    #shutil.rmtree(inputdir)
 
 def processMDLoutput(postOptions):
     #trajectorydata['seed'] = postOptions['seed']
-    gdatFiles = getFiles(postOptions['workerIdx'],'txt')
+    inputdir = os.path.join(postOptions['workdir'], postOptions['workerIdx'])
+    gdatFiles = getFiles(inputdir, 'txt')
     trajectorydata = misc.processMDLData(gdatFiles[0], postOptions['workerIdx'])
 
     localTrajectory = pandas.DataFrame(trajectorydata)
     postOptions['dataset'] = pandas.concat([postOptions['dataset'], localTrajectory])
-    shutil.rmtree(postOptions['workerIdx'])
+    #shutil.rmtree(inputdir)
 
 
 def parallelHandling(function, options = {}, postExecutionFunction=dummy, postOptions={}):
@@ -146,6 +150,7 @@ def defineConsole():
     parser = argparse.ArgumentParser(description='SBML to BNGL translator')
     parser.add_argument('-t','--test',type=str,help='Test to run')
     parser.add_argument('-r','--repetitions',type=int, help='number of separate stochastic trajectories')
+    parser.add_argument('-w','--workDirectory',type=str, help='the folder where the output files will be placed', default=os.getcwd())
     return parser    
 
 
@@ -154,4 +159,4 @@ if __name__ == "__main__":
     databasename = 'timeseries4'
     parser = defineConsole()
     namespace = parser.parse_args()
-    generateMDLrData(namespace.test, databasename, namespace.repetitions)
+    generateMDLrData(namespace.test, databasename, namespace.repetitions, outputdir=namespace.workDirectory)
