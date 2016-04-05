@@ -1,0 +1,14 @@
+#!/bin/csh
+#SBATCH -N 1
+#SBATCH -p RM
+#SBATCH -t 48:00:00
+#SBATCH --array=1-50
+#SBATCH --job-name=mcnf-volsurf
+
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=jjtapia@gmail.com
+
+set echo
+
+cd /pylon2/bi4s88p/tapiava/workspace/mcellRules/tests
+python analyzeModelSet.py -t sym_vol_surf -r 26 -w /pylon1/bi4s88p/tapiava
