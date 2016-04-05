@@ -12,3 +12,4 @@ set echo
 
 cd /pylon2/bi4s88p/tapiava/workspace/mcellRules/tests
 python analyzeModelSet.py -t sym_vol_surf -r 26 -w /pylon1/bi4s88p/tapiava
+python mergeDataFrame.py -w /pylon1/bi4s88p/tapiava/sym_vol_surf/partial -o sym_vol_surf.h5

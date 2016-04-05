@@ -42,7 +42,7 @@ def MDLTrajectoryGeneration(params):
 
 def processMDLData(fileName, iteration):
     trajectorydata = defaultdict(list)
-    trajectorydata['iteration'] = iteration.split('/')[-1]
+    trajectorydata['iteration'] = iteration
     with open(fileName, 'rb') as f:
         data = csv.DictReader(f, delimiter=' ')
 
@@ -95,7 +95,7 @@ def MDLRTrajectoryGeneration(params, trajectorydataset):
 
 def processMDLrData(fileName, iteration):
     trajectorydata = defaultdict(list)
-    trajectorydata['iteration'] = iteration.split('/')[-1]
+    trajectorydata['iteration'] = iteration
 
     with open(fileName, 'rb') as f:
         data = csv.DictReader(f, delimiter =',')

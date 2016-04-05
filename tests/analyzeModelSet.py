@@ -42,23 +42,29 @@ def callMDLTest(options):
     '''
     seed = str(random.randint(1, 1000000))
     
-    outputdir = os.path.join(options['workdir'], 'testdata', str(seed))
-    os.makedirs(outputdir)
+    outputdir = os.path.join(options['workdir'], str(seed))
+    try:
+        os.makedirs(outputdir)
+    except OSError:
+        pass
     #os.chdir(seed)
 
     with open(os.devnull, "w") as f:
         result = call([mcellExecutable, os.path.join(options['testpath'], 'reference', options['mdlname']),
                        '-seed', seed], stdout=f, cwd=outputdir)
     #os.chdir('..')        
-    return outputdir
+    return seed
 
 def callMDLrTest(options):
     '''
     run mcell on an nfsim file
     '''
     seed = str(random.randint(1, 1000000))
-    outputdir = os.path.join(options['workdir'], 'testdata', str(seed))
-    os.makedirs(outputdir)
+    outputdir = os.path.join(options['workdir'], str(seed))
+    try:
+        os.makedirs(outputdir)
+    except OSError:
+        pass
     #os.chdir(seed)
     with open(os.devnull, "w") as f:
         check_call([mcellExecutable, os.path.join('..',options['mdlname']),
@@ -66,7 +72,7 @@ def callMDLrTest(options):
     #os.chdir('..')
 
     
-    return outputdir
+    return seed
 
 
 def generateMDLrData(testpath, databasename, repetitions, outputdir):
@@ -81,17 +87,17 @@ def generateMDLrData(testpath, databasename, repetitions, outputdir):
     options['mdlname'] = [x for x in mdlfiles if 'main' in x][0]
     xmlfiles = getFiles(os.path.join(testpath, 'mdlr'), 'xml')
     options['xmlname'] = xmlfiles[0]
-    options['workdir'] = outputdir
+    options['workdir'] = os.path.join(outputdir, testpath)
     #options['workerIdx'] = '00'
     #callMDLrTest(options)
     postOptions = {}
     #postOptions['seed'] = options['seed']
     postOptions['dataset'] = pandas.DataFrame()
-    postOptions['workdir'] = options['workdir']
+    postOptions['workdir'] = os.path.join(outputdir, testpath)
     options2 = {}
     options2['testpath'] = testpath
     options2['repetitions'] = repetitions
-    options2['workdir'] = outputdir
+    options2['workdir'] = os.path.join(outputdir, testpath)
     mdlfiles = getFiles(os.path.join(testpath,'reference'), 'mdl')
     options2['mdlname'] = [x for x in mdlfiles if 'main' in x][0]
     print 'process MDL files...'
@@ -99,7 +105,12 @@ def generateMDLrData(testpath, databasename, repetitions, outputdir):
     print 'processing MDLr files...'
     parallelHandling(callMDLrTest, options, processMDLroutput, postOptions)
 
-    postOptions['dataset'].to_hdf('{0}DB.h5'.format(testpath), testpath,format='table',append=True)
+    partialresultdir = os.path.join(outputdir, testpath, 'partial')
+    try:
+        os.makedirs(partialresultdir)
+    except OSError:
+        pass
+    postOptions['dataset'].to_hdf('{0}/{1}DB_.h5'.format(partialresultdir, random.randint(1,99999999)), testpath,format='table',append=True)
 
 
 def dummy(options):
@@ -120,6 +131,7 @@ def processMDLoutput(postOptions):
     #trajectorydata['seed'] = postOptions['seed']
     inputdir = os.path.join(postOptions['workdir'], postOptions['workerIdx'])
     gdatFiles = getFiles(inputdir, 'txt')
+
     trajectorydata = misc.processMDLData(gdatFiles[0], postOptions['workerIdx'])
 
     localTrajectory = pandas.DataFrame(trajectorydata)
