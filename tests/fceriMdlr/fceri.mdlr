@@ -170,14 +170,14 @@ MODIFY_SURFACE_REGIONS
    ligand_rel RELEASE_SITE
    {
     SHAPE = Scene.EC[obj_wall] - Scene.CP[obj_wall]
-    MOLECULE = @CP::Lig(l,l)
+    MOLECULE = @EC::Lig(l,l)
     NUMBER_TO_RELEASE = Lig_tot
     RELEASE_PROBABILITY = 1
    }
    lyn_rel RELEASE_SITE
    {
     SHAPE = Scene.CP[PM]
-    MOLECULE = @CP::Lyn(U,SH2)
+    MOLECULE = @PM::Lyn(U,SH2)
     NUMBER_TO_RELEASE = Lyn_tot
     RELEASE_PROBABILITY = 1
    }
@@ -191,7 +191,7 @@ MODIFY_SURFACE_REGIONS
    receptor_rel RELEASE_SITE
    {
     SHAPE = Scene.CP[PM]
-    MOLECULE = @CP::Rec(a,b~Y,g~Y)
+    MOLECULE = @PM::Rec(a,b~Y,g~Y)
     NUMBER_TO_RELEASE = Rec_tot
     RELEASE_PROBABILITY = 1
    }
