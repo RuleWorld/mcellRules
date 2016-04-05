@@ -8,7 +8,7 @@ INSTANTIATE Scene OBJECT
 		MOLECULE = volume_proxy
 		NUMBER_TO_RELEASE = 50
 		RELEASE_PROBABILITY = 1
-		GRAPH_PATTERN = "c:l~NO_STATE!2,c:l~NO_STATE!2,m:Lig!0!1,"
+		GRAPH_PATTERN = "c:l~NO_STATE!2,c:l~NO_STATE!2,m:Lig@EC!0!1,"
 	}
 	Release_Site_s2 RELEASE_SITE //bng:@PM::Rec(a)
 	{
@@ -16,6 +16,6 @@ INSTANTIATE Scene OBJECT
 		MOLECULE = volume_proxy
 		NUMBER_TO_RELEASE = 50
 		RELEASE_PROBABILITY = 1
-		GRAPH_PATTERN = "c:a~NO_STATE!1,m:Rec!0,"
+		GRAPH_PATTERN = "c:a~NO_STATE!1,m:Rec@EC!0,"
 	}
 }
