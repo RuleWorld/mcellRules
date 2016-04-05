@@ -24,7 +24,7 @@ def getFiles(directory, extension):
 def defineConsole():
     parser = argparse.ArgumentParser(description='SBML to BNGL translator')
     parser.add_argument('-w','--workDirectory',type=str, help='the folder where the output files will be placed', default=os.getcwd())
-    parser.add_argument('-o','--outputfile')        
+    parser.add_argument('-o','--outputfile', type=str)
     return parser    
 
 
