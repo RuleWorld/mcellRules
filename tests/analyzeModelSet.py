@@ -42,29 +42,31 @@ def callMDLTest(options):
     '''
     seed = str(random.randint(1, 1000000))
     
-    os.mkdir(seed)
+    outputdir = os.path.join('testdata', str(seed))
+    os.mkdirs(outputdir)
     #os.chdir(seed)
 
     with open(os.devnull, "w") as f:
         result = call([mcellExecutable, os.path.join(options['testpath'], 'reference', options['mdlname']),
-                       '-seed', seed],stdout=f,cwd=seed)
+                       '-seed', seed], stdout=f, cwd=outputdir)
     #os.chdir('..')        
-    return seed
+    return outputdir
 
 def callMDLrTest(options):
     '''
     run mcell on an nfsim file
     '''
+    outputdir = os.path.join('testdata', str(seed))
     seed = str(random.randint(1, 1000000))
-    os.mkdir(seed)
+    os.mkdirs(outputdir)
     #os.chdir(seed)
     with open(os.devnull, "w") as f:
         check_call([mcellExecutable, os.path.join('..',options['mdlname']),
-              '-n', os.path.join('..',options['xmlname']), '-seed', seed], stdout=f, cwd=seed)
+              '-n', os.path.join('..',options['xmlname']), '-seed', seed], stdout=f, cwd=outputdir)
     #os.chdir('..')
 
     
-    return seed
+    return outputdir
 
 
 def generateMDLrData(testpath, databasename, repetitions):
