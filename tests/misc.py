@@ -5,7 +5,6 @@ import csv
 import subprocess
 import progressbar
 import random
-from scipy import stats
 import numpy as np
 import argparse
 
@@ -116,6 +115,9 @@ def compareTimeSeries(mdldataset):
     '''
     performs a kolmogorov-smirnoff comparison
     '''
+
+    from scipy import stats
+
     keys =  list(set(mdldataset['Observable']))
 
     keys = [x for x in keys if x  not in ['Seconds','iteration']]
