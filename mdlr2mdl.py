@@ -6,12 +6,14 @@ import splitBNGXML
 import re
 from nfsim_python import NFSim
 import os
+import readBNGXML
 
 def defineConsole():
     parser = argparse.ArgumentParser(description='SBML to BNGL translator')
     parser.add_argument('-i', '--input', type=str, help='input MDLr file', required=True)
     parser.add_argument('-n', '--nfsim',  action='store_true', help='mcell-nfsim mode')
     parser.add_argument('-o', '--output', type=str, help='output MDL file')
+    parser.add_argument('-b', '--bng-executable', type=str, help='file path pointing to the BNG2.pl file')
     return parser
     
 def tokenizeSeedElements(seed):
@@ -51,7 +53,7 @@ def xml2HNautySpeciesDefinitions(inputMDLRFile):
     """
 
     #get a bng-xml file
-    call(['bngdev', '-xml', inputMDLRFile + '.bngl'])
+    call(['bngdev', '-xml', '-check', inputMDLRFile + '.bngl'])
 
     #extract seed species defition
     seed, rest = splitBNGXML.extractSeedBNG(inputMDLRFile + '.xml')
@@ -113,11 +115,15 @@ if __name__ == "__main__":
         nautyDict = xml2HNautySpeciesDefinitions(namespace.input)
         # bngl 2 sbml 2 json
         # XXX: we should make it so we don;t need to do this step
-        readMDL.bngl2json(namespace.input + '.bngl')
+        #readMDL.bngl2json(namespace.input + '.bngl')
+        #create bng-xml file
+        #call([namespace.bng_executable, '-xml', '-check', namespace.input + '.bngl'])
+        xmlspec = readBNGXML.parseFullXML(namespace.input + '.xml')
         # write out the equivalent plain mdl stuffs
-        mdlDict = writeMDL.constructNFSimMDL(namespace.input + '_sbml.xml.json', namespace.input, finalName.split(os.sep)[-1], nautyDict)
+        #mdlDict = writeMDL.constructNFSimMDL(namespace.input + '_sbml.xml.json', namespace.input, finalName.split(os.sep)[-1], nautyDict)
+        mdlDict = writeMDL.constructNFSimMDL2(xmlspec, namespace.input, finalName.split(os.sep)[-1], nautyDict)
+        #mdlDict = w
 
 
     # create an mdl with nfsim-species and nfsim-reactions
-    print mdlDict
     writeMDL.writeMDL(mdlDict, finalName)

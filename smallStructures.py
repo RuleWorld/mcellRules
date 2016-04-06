@@ -265,10 +265,15 @@ class Species:
     def __str__(self):
         self.sort()
         name = ''
+
+        moleculeStrings = [x.toString() for x in self.molecules]
         if self.compartment != '':
             name += '@{0}::'.format(self.compartment)
+            name += '.'.join([x.strip('@{0}'.format(self.compartment)) for x in moleculeStrings])
+        else:
+            name += '.'.join(moleculeStrings)
+        
 
-        name+= '.'.join([x.toString() for x in self.molecules])
         '''
         name = name.replace('~','')
 
