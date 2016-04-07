@@ -189,7 +189,7 @@ def constructNFSimMDL(jsonPath, mdlrPath, outputFileName, nautyDict):
     return {'main': finalMDL, 'molecules': moleculeMDL, 'reactions': reactionMDL, 'rxnOutput': outputMDL, 'seeding': seedMDL}
 
 
-def constructNFSimMDL2(xmlStructs, mdlrPath, outputFileName, nautyDict):
+def constructMCell(xmlStructs, mdlrPath, outputFileName, nautyDict):
     '''
     uses information from the bngxml and the original mdl to create a plain mdl file. this is mainly important
     to assign the right surface/volume compartment to the seed species.
@@ -304,16 +304,22 @@ def constructNFSimMDL2(xmlStructs, mdlrPath, outputFileName, nautyDict):
 
         seedMDL.write('\t{0} {1} //{2}\n'.format(mdlrseed[0], mdlrseed[1], str(bngseed['structure'])))
         seedMDL.write('\t{\n')
+
+        #print the shape option first
+        for element in mdlrseed[2]:
+            if element[0] == 'SHAPE':
+                seedMDL.write('\t\t{0} = {1}\n'.format(element[0].strip(), element[1].strip()))
         if compartmentDict[bngseed['structure'].compartment]['dimensions'] in  ['3',3]:
             seedMDL.write('\t\tMOLECULE = {0}\n'.format('volume_proxy'))
         else:
             seedMDL.write('\t\tMOLECULE = {0}{1}\n'.format('surface_proxy', "'"))
 
         for element in mdlrseed[2]:
-            if element[0] != 'MOLECULE':
+            if element[0] not in ['SHAPE', 'MOLECULE']:
                 seedMDL.write('\t\t{0} = {1}\n'.format(element[0].strip(), element[1].strip()))
             else:
-                graphpattern = element[1].strip()
+                pass
+                #graphpattern = element[1].strip()
         seedMDL.write('\t\tGRAPH_PATTERN = "{0}"\n'.format(nautyDict[str(bngseed['structure'])]))
 
         seedMDL.write('\t}\n')

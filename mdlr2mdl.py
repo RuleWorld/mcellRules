@@ -7,6 +7,7 @@ import re
 from nfsim_python import NFSim
 import os
 import readBNGXML
+import writeBNGXMLe as writeBXe
 
 def defineConsole():
     parser = argparse.ArgumentParser(description='SBML to BNGL translator')
@@ -38,6 +39,7 @@ def tokenizeSeedElements(seed):
 def getNamesFromDefinitionString(defStr):
     speciesNames = re.findall('[0-9a-zA-Z_]+\(',defStr)
     return [x[:-1] for x in speciesNames]
+
 
 def xml2HNautySpeciesDefinitions(inputMDLRFile):
     """
@@ -97,9 +99,13 @@ if __name__ == "__main__":
     finalName = namespace.output if namespace.output else namespace.input
 
     # mdl to bngl
-    bnglStr = readMDL.constructBNGFromMDLR(namespace.input, namespace.nfsim)
+    resultDict = readMDL.constructBNGFromMDLR(namespace.input, namespace.nfsim)
     # create bngl file
-    readMDL.outputBNGL(bnglStr, bnglPath)
+    readMDL.outputBNGL(resultDict['bnglstr'], bnglPath)
+
+    # temporaryly store bng-xml information in a separate file for display purposes
+    with open(namespace.input + '_extended.xml', 'w') as f:
+        f.write(resultDict['bngxmlestr'])
 
     #get cannonical label -bngl label dictionary
 
@@ -113,6 +119,12 @@ if __name__ == "__main__":
     else:
 
         nautyDict = xml2HNautySpeciesDefinitions(namespace.input)
+
+        #append extended bng-xml to the bng-xml definition (the one that doesn't include seed information)
+        bngxmlestr = writeBXe.mergeBXBXe(namespace.input + '_total.xml', namespace.input + '_extended.xml')
+        with open(namespace.input + '_total.xml', 'w') as f:
+            f.write(bngxmlestr)
+
         # bngl 2 sbml 2 json
         # XXX: we should make it so we don;t need to do this step
         #readMDL.bngl2json(namespace.input + '.bngl')
@@ -121,7 +133,7 @@ if __name__ == "__main__":
         xmlspec = readBNGXML.parseFullXML(namespace.input + '.xml')
         # write out the equivalent plain mdl stuffs
         #mdlDict = writeMDL.constructNFSimMDL(namespace.input + '_sbml.xml.json', namespace.input, finalName.split(os.sep)[-1], nautyDict)
-        mdlDict = writeMDL.constructNFSimMDL2(xmlspec, namespace.input, finalName.split(os.sep)[-1], nautyDict)
+        mdlDict = writeMDL.constructMCell(xmlspec, namespace.input, finalName.split(os.sep)[-1], nautyDict)
         #mdlDict = w
 
 
