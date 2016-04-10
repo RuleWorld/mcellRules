@@ -11,9 +11,11 @@ def qqplot(x, y, **kwargs):
 
 
 def testPlotSeriesArray(mdldataset, testname):
+    subplotdict = {1:[1,1],2:[2,1],3:[2,2],4:[2,2],5:[3,2],6:[3,2],7:[3,3],8:[3,3],9:[3,3]}
+    columns = len(set(mdldataset['Observable']))
     sns.set_context("paper", font_scale=2.5)
     sns.set_style("white")
-    grid = sns.FacetGrid(mdldataset, col="Observable", col_wrap=3, size=1.5, sharey=False)
+    grid = sns.FacetGrid(mdldataset, col="Observable", col_wrap=subplotdict[columns][1], size=1.5, sharey=False, margin_titles=True)
     #grid.fig.xticks(rotation=40)
     grid.fig.set_size_inches(18.5, 10.5)
     grid.map_dataframe(sns.tsplot, time="Seconds", unit="iteration",
@@ -26,8 +28,32 @@ def testPlotSeriesArray(mdldataset, testname):
     #    for labels in ax.get.xticklabels():
     #        label.set_rotation(40)
 
-    grid.fig.savefig('{0}.pdf'.format(testname), bbox_inches="tight")
+    grid.fig.savefig('{0}TS.pdf'.format(testname), bbox_inches="tight")
     #plt.show()
+
+
+def testPlotPDEArray(mdldataset, testname, timepoints=6):
+    sns.set_context("paper", font_scale=2)
+    sns.set_style("white")
+
+    columns = len(set(mdldataset['Observable']))
+    timerows = list(set(mdldataset['Seconds']))
+    timerows = sorted(timerows)
+    timerows = timerows[len(timerows)/timepoints:len(timerows):len(timerows)/timepoints]
+    # select a subset of the data
+    mdlslice = mdldataset[mdldataset.Seconds.isin(timerows)]
+    grid = sns.FacetGrid(mdlslice, col="Observable", row='Seconds', hue='Origin', margin_titles=True,legend_out=False)
+    grid.set(xticks=np.arange(0,35,10), yticks=np.arange(0,0.3,0.1))
+    grid.map(sns.kdeplot, "Value")
+    grid.add_legend()
+
+    grid.fig.savefig('{0}PDE.pdf'.format(testname), bbox_inches="tight")
+
+    #sns.set_context("paper", font_scale=2.5)
+    #sns.set_style("white")
+
+
+
 
 
 def testPlotSeries(mdldataset, mdlrdataset, testname):
@@ -56,6 +82,7 @@ def testPlotSeries(mdldataset, mdlrdataset, testname):
 def defineConsole():
     parser = argparse.ArgumentParser(description='SBML to BNGL translator')
     parser.add_argument('-t','--test',type=str,help='Test to run')
+
     return parser    
 
 
@@ -72,6 +99,7 @@ if __name__ == "__main__":
     mdldataset = totaldataset
     mdlrdataset = None
     #testPlotSeries(mdldataset,mdlrdataset, test)
-    testPlotSeriesArray(mdldataset,test)
+    #testPlotSeriesArray(mdldataset,test)
+    testPlotPDEArray(mdldataset,test,3)
 
 
