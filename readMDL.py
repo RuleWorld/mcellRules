@@ -13,6 +13,7 @@ def processParameters(statements):
     for parameter in statements:
         if parameter[1][0] != '"':
             tempStr = '\t{0} {1}\n'.format(parameter[0],parameter[1]).replace('/*', '#')
+            tempStr.replace('//', '#')
         else:
             continue
         pstr.write(tempStr)
@@ -151,7 +152,7 @@ def processReactionRules(rules):
     return rStr.getvalue()
 
 
-def processDiffussionElements(parameters, molecules, seedspecies):
+def processDiffussionElements(parameters, extendedData):
     '''
     extract the list of properties associated to molecule types and compartment objects. right now this information
     will be encoded into the bng-exml spec. It also extracts some predetermined model properties. 
@@ -160,17 +161,27 @@ def processDiffussionElements(parameters, molecules, seedspecies):
     moleculeProperties = defaultdict(list)
     compartmentProperties = defaultdict(list)
 
-    for parameter in parameters:
-        if parameter[0] in ['TEMPERATURE']:
-            modelProperties[parameter[0]] = parameter[1]
+    #for parameter in parameters:
+    #    if parameter[0] in ['TEMPERATURE']:
+    #        modelProperties[parameter[0]] = parameter[1]
+
+    for parameter in extendedData['system']:
+        modelProperties[parameter[0].strip()] = parameter[1].strip()
+
+
 
     
-    for molecule in molecules:
-        for propertyValue in molecule[1]:
-            moleculeProperties[molecule[0][0]].append((propertyValue[0], propertyValue[1].strip().strip('"')))
+    for molecule in extendedData['molecules']:
+        if 'moleculeParameters' in molecule[1]:
+            for propertyValue in molecule[1]['moleculeParameters']:
+                data = {'name':propertyValue[1].strip(), 'parameters': []}
+                moleculeProperties[molecule[0][0]].append((propertyValue[0], data))
+        if 'diffusionFunction' in molecule[1]:
+                data = {'name': molecule[1]['diffusionFunction'][1]['functionName'], 
+                'parameters':molecule[1]['diffusionFunction'][1]['parameters']}
+                moleculeProperties[molecule[0][0]].append((molecule[1]['diffusionFunction'][0], data))
 
-
-    for seed in seedspecies:
+    for seed in extendedData['initialization']:
         if 'compartmentName' in seed.keys():
             membrane = ''
             membrane_properties = []
@@ -205,6 +216,7 @@ def constructBNGFromMDLR(mdlrPath,nfsimFlag=False, separateSpatial=True):
     finalBNGLStr = StringIO()
     finalBNGLStr.write('begin model\n')
     parameterStr = processParameters(statements)
+
     moleculeStr,moleculeList = processMolecules(sections['molecules'])
     seedspecies, compartments = processInitCompartments(sections['initialization']['entries'])
     if not nfsimFlag:
@@ -231,7 +243,15 @@ def constructBNGFromMDLR(mdlrPath,nfsimFlag=False, separateSpatial=True):
     eventually this stuff should be integrated into bionetgen proper
     '''
     if separateSpatial:
-        propertiesDict = processDiffussionElements(statements, sections['molecules'], sections['initialization']['entries'])
+
+        extendedData = {}
+        if 'systemConstants' in sections.keys():
+            extendedData['system'] = sections['systemConstants']
+        else:
+            extendedData['system'] = []
+        extendedData['molecules'] = sections['molecules']
+        extendedData['initialization'] = sections['initialization']['entries']
+        propertiesDict = processDiffussionElements(statements, extendedData)
         bngxmle = writeBNGXMLe.write2BNGXMLe(propertiesDict, mdlrPath.split(os.sep)[-1])
 
     return {'bnglstr':finalBNGLStr.getvalue(), 'bngxmlestr':bngxmle}
