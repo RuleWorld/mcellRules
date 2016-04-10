@@ -22,11 +22,14 @@ dbquotes = '"'
 uni_arrow = Literal("->")
 bi_arrow = Literal("<->")
 
+#system keywords
+system_constants_ = Keyword("SYSTEM_CONSTANTS")
+
 # molecule keywords
 define_molecules_ = Keyword("DEFINE_MOLECULES")
 diffusion_constant_3d_ = Keyword("DIFFUSION_CONSTANT_3D")
 diffusion_constant_2d_ = Keyword("DIFFUSION_CONSTANT_2D")
-
+diffusion_function_ = Keyword("DIFFUSION_FUNCTION")
 #reaction keywords
 define_reactions_ = Keyword("DEFINE_REACTIONS")
 
@@ -68,6 +71,8 @@ nestedBrackets = nestedExpr('[', ']', content=section_enclosure_)
 nestedCurlies = nestedExpr('{', '}', content=section_enclosure_) 
 section_enclosure_ << (statement | Group(identifier + ZeroOrMore(identifier) + nestedCurlies) |  Group(identifier + '@' + restOfLine) | Word(alphas, alphanums + "_[]") | identifier | Suppress(',') | '@' | real)
 
+function_entry_ = Group(identifier.setResultsName('functionName') + Suppress(lparen) + 
+                 delimitedList(identifier, delim=',').setResultsName('parameters') + Suppress(rparen))
 
 name = Word(alphanums + '_') 
 species = Suppress('()') + Optional(Suppress('@' + Word(alphanums + '_-'))) + ZeroOrMore(Suppress('+') + Word(alphanums + "_" + ":#-")
@@ -94,8 +99,13 @@ reaction_definition = Group(Group(delimitedList(species_definition, delim='+')).
 # generic hash section grammar
 hashed_section = (hashsymbol + Group(OneOrMore(name) + section_enclosure2_))
 
+#hash system_constants
+#system_constants = Group()
+hashed_system_constants = Group(hashsymbol + Suppress(system_constants_) + lbrace + OneOrMore(statement) + rbrace)
+
 # hash molecule_entry
-molecule_entry = Group(molecule_definition + Optional(Group(lbrace + ZeroOrMore(statement) + rbrace)))
+diffusion_entry_ = Group(diffusion_function_ + Suppress(equal) + function_entry_)
+molecule_entry = Group(molecule_definition + Optional(Group(lbrace + Optional(diffusion_entry_.setResultsName('diffusionFunction')) + (ZeroOrMore(diffusion_entry_ | statement)).setResultsName('moleculeParameters') + rbrace)))
 hashed_molecule_section = Group(hashsymbol + Suppress(define_molecules_) + lbrace + OneOrMore(molecule_entry) + rbrace)
 
 # hash reaction entry
@@ -116,8 +126,10 @@ hashed_initialization_section = Group(hashsymbol + Suppress(instantiate_) + iden
 
 other_sections = section_enclosure_
 #statement = Group(identifier + equal + (quotedString | OneOrMore(mathElements)))  + Suppress(LineEnd() | StringEnd())
-grammar = ZeroOrMore(Suppress(other_sections) | Suppress(statement) | hashed_molecule_section.setResultsName('molecules') | hashed_reaction_section.setResultsName('reactions') | 
-                     hashed_observable_section.setResultsName('observables') | hashed_initialization_section.setResultsName('initialization') | Suppress(hashed_section))
+grammar = ZeroOrMore(Suppress(other_sections) | Suppress(statement) | hashed_system_constants.setResultsName('systemConstants') 
+                     | hashed_molecule_section.setResultsName('molecules') | hashed_reaction_section.setResultsName('reactions') 
+                     | hashed_observable_section.setResultsName('observables') 
+                     | hashed_initialization_section.setResultsName('initialization') | Suppress(hashed_section))
 
 nonhashedgrammar = ZeroOrMore(Suppress(statement) | Suppress(hashed_section) | Dict(other_sections))
 

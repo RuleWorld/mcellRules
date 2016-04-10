@@ -3,7 +3,9 @@ from StringIO import StringIO
 import smallStructures as st
 import pprint
 from subprocess import call
-
+from collections import defaultdict
+import writeBNGXMLe
+import os
 
 def processParameters(statements):
     pstr = StringIO()
@@ -11,6 +13,7 @@ def processParameters(statements):
     for parameter in statements:
         if parameter[1][0] != '"':
             tempStr = '\t{0} {1}\n'.format(parameter[0],parameter[1]).replace('/*', '#')
+            tempStr.replace('//', '#')
         else:
             continue
         pstr.write(tempStr)
@@ -149,8 +152,61 @@ def processReactionRules(rules):
     return rStr.getvalue()
 
 
-def constructBNGFromMDLR(mdlrPath,nfsimFlag=False):
+def processDiffussionElements(parameters, extendedData):
+    '''
+    extract the list of properties associated to molecule types and compartment objects. right now this information
+    will be encoded into the bng-exml spec. It also extracts some predetermined model properties. 
+    '''
+    modelProperties = {}
+    moleculeProperties = defaultdict(list)
+    compartmentProperties = defaultdict(list)
 
+    #for parameter in parameters:
+    #    if parameter[0] in ['TEMPERATURE']:
+    #        modelProperties[parameter[0]] = parameter[1]
+
+    for parameter in extendedData['system']:
+        modelProperties[parameter[0].strip()] = parameter[1].strip()
+
+
+
+    
+    for molecule in extendedData['molecules']:
+        if 'moleculeParameters' in molecule[1]:
+            for propertyValue in molecule[1]['moleculeParameters']:
+                data = {'name':propertyValue[1].strip(), 'parameters': []}
+                moleculeProperties[molecule[0][0]].append((propertyValue[0], data))
+        if 'diffusionFunction' in molecule[1]:
+                data = {'name': molecule[1]['diffusionFunction'][1]['functionName'], 
+                'parameters':molecule[1]['diffusionFunction'][1]['parameters']}
+                moleculeProperties[molecule[0][0]].append((molecule[1]['diffusionFunction'][0], data))
+
+    for seed in extendedData['initialization']:
+        if 'compartmentName' in seed.keys():
+            membrane = ''
+            membrane_properties = []
+            for element in seed['compartmentOptions'][0]:
+                # skip stuff already covered by normal cbng
+                if element[0] in ['PARENT']:
+                    continue
+                if element[0] == 'MEMBRANE':
+                    membrane = element[1].strip().split(' ')[0]
+                elif element[0].startswith('MEMBRANE'):
+                    membrane_properties.append((element[0].split('_')[1], element[1].strip()))
+
+                else:
+                    compartmentProperties[seed['compartmentName']].append((element[0], element[1]))
+            if membrane != '' and len(membrane_properties) > 0:
+                compartmentProperties[membrane] = membrane_properties
+        #if seed[1] not in ['RELEASE_SITE']:
+
+    return {'modelProperties':modelProperties, 'moleculeProperties': moleculeProperties, 
+            'compartmentProperties': compartmentProperties}
+
+def constructBNGFromMDLR(mdlrPath,nfsimFlag=False, separateSpatial=True):
+    '''
+    initializes a bngl file and an extended-bng-xml file with a MDLr file description
+    '''
     with open(mdlrPath, 'r') as f:
         mdlr = f.read()
 
@@ -160,7 +216,7 @@ def constructBNGFromMDLR(mdlrPath,nfsimFlag=False):
     finalBNGLStr = StringIO()
     finalBNGLStr.write('begin model\n')
     parameterStr = processParameters(statements)
-    
+
     moleculeStr,moleculeList = processMolecules(sections['molecules'])
     seedspecies, compartments = processInitCompartments(sections['initialization']['entries'])
     if not nfsimFlag:
@@ -183,7 +239,22 @@ def constructBNGFromMDLR(mdlrPath,nfsimFlag=False):
     finalBNGLStr.write('generate_network({overwrite=>1})\n')
     finalBNGLStr.write('writeSBML()\n')
 
-    return finalBNGLStr.getvalue()
+    '''
+    eventually this stuff should be integrated into bionetgen proper
+    '''
+    if separateSpatial:
+
+        extendedData = {}
+        if 'systemConstants' in sections.keys():
+            extendedData['system'] = sections['systemConstants']
+        else:
+            extendedData['system'] = []
+        extendedData['molecules'] = sections['molecules']
+        extendedData['initialization'] = sections['initialization']['entries']
+        propertiesDict = processDiffussionElements(statements, extendedData)
+        bngxmle = writeBNGXMLe.write2BNGXMLe(propertiesDict, mdlrPath.split(os.sep)[-1])
+
+    return {'bnglstr':finalBNGLStr.getvalue(), 'bngxmlestr':bngxmle}
 
 
 def bngl2json(bnglFile):

@@ -38,9 +38,6 @@ python mergeDataFrame.py -w /pylon1/bi4s88p/tapiava/{1}/partial -o {1}.h5
     subprocess.call(['sbatch','pybatch.sub'])
 
 
-    # Send job_string to qsub
-    input.write(job_string)
-    input.close()
 
     # Print your job and the system response to the screen as it's submitted
     # print(output.read())
