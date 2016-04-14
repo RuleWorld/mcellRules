@@ -1,5 +1,5 @@
-ITERATIONS = 100000
-TIME_STEP = 5e-06
+ITERATIONS = 10000
+TIME_STEP = 2e-4
 VACANCY_SEARCH_DISTANCE = 100
 
 INCLUDE_FILE = "fceri_ji_comp.geometry.mdl"
@@ -5187,7 +5187,7 @@ INSTANTIATE Scene OBJECT
 
    s1_rel RELEASE_SITE
    {
-    SHAPE = Scene.CP //Scene.EC[obj_wall] - Scene.CP[obj_wall]
+    SHAPE = Scene.EC[obj_wall] - Scene.CP[obj_wall]
     MOLECULE = s1
     NUMBER_TO_RELEASE = Lig_tot
     RELEASE_PROBABILITY = 1
