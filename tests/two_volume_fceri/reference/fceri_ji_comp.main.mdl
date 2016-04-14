@@ -1,5 +1,5 @@
-ITERATIONS = 100000
-TIME_STEP = 5e-06
+ITERATIONS = 1000
+TIME_STEP = 2e-4
 VACANCY_SEARCH_DISTANCE = 100
 
 INCLUDE_FILE = "fceri_ji_comp.geometry.mdl"
@@ -87,7 +87,7 @@ DEFINE_MOLECULES
    }
    s3 /* @CP::Syk(a~Y,l~Y,tSH2) */
    {
-      DIFFUSION_CONSTANT_3D = KB*T/(6*PI*mu_CP*Rs)
+      DIFFUSION_CONSTANT_3D = KB*T/(6*PI*mu_EC*Rs)
    }
    s4 /* @PM::Rec(a,b~Y,g~Y) */
    {
@@ -99,31 +99,31 @@ DEFINE_MOLECULES
    }
    s6 /* @PM::Lyn(SH2,U!1).Rec(a,b~Y!1,g~Y) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s7 /* @PM::Lig(l!1,l)@EC.Lyn(SH2,U!2).Rec(a!1,b~Y!2,g~Y) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s8 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~Y,g~Y).Rec(a!1,b~Y,g~Y) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s9 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~Y).Rec(a!1,b~Y,g~Y) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s10 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Lyn(SH2,U!4).Rec(a!2,b~Y!3,g~Y).Rec(a!1,b~Y!4,g~Y) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s11 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~Y).Rec(a!1,b~pY,g~Y) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s12 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~Y).Rec(a!1,b~Y,g~pY) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s13 /* @PM::Lig(l!1,l)@EC.Rec(a!1,b~pY,g~Y) */
    {
@@ -143,47 +143,47 @@ DEFINE_MOLECULES
    }
    s17 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Lyn(SH2,U!4).Rec(a!2,b~Y!3,g~Y).Rec(a!1,b~Y!4,g~pY) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s18 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~Y,g~Y).Rec(a!1,b~pY,g~Y) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s19 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~Y,g~Y).Rec(a!1,b~Y,g~pY) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s20 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~Y).Rec(a!1,b~pY,g~pY) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s21 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2,U!4).Rec(a!2,b~Y!4,g~Y).Rec(a!1,b~pY!3,g~Y) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s22 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~Y).Rec(a!1,b~Y,g~pY!4).Syk(a~Y,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s23 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~pY,g~Y).Rec(a!1,b~pY,g~Y) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s24 /* @PM::Lig(l!1,l!2)@EC.Rec(a!1,b~Y,g~pY).Rec(a!2,b~pY,g~Y) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s25 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~Y,g~pY).Rec(a!1,b~Y,g~pY) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s26 /* @PM::Lig(l!1,l)@EC.Lyn(SH2,U!2).Rec(a!1,b~Y!2,g~pY) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s27 /* @PM::Lyn(SH2,U!1).Rec(a,b~Y!1,g~pY) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s28 /* @PM::Lig(l!1,l)@EC.Rec(a!1,b~pY,g~pY) */
    {
@@ -195,11 +195,11 @@ DEFINE_MOLECULES
    }
    s30 /* @PM::Lig(l!1,l)@EC.Lyn(SH2!2,U).Rec(a!1,b~pY!2,g~Y) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s31 /* @PM::Lyn(SH2!1,U).Rec(a,b~pY!1,g~Y) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s32 /* @PM::Lig(l!1,l)@EC.Rec(a!1,b~Y,g~pY!2).Syk(a~Y,l~Y,tSH2!2)@CP */
    {
@@ -211,115 +211,115 @@ DEFINE_MOLECULES
    }
    s34 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!1,b~Y!3,g~pY).Rec(a!2,b~Y,g~Y) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s35 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Lyn(SH2,U!4).Rec(a!2,b~Y!3,g~Y).Rec(a!1,b~Y!4,g~pY!5).Syk(a~Y,l~Y,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s36 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~Y,g~Y).Rec(a!1,b~pY,g~pY) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s37 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!2,b~Y,g~Y).Rec(a!1,b~pY!3,g~Y) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s38 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~Y,g~Y).Rec(a!1,b~Y,g~pY!3).Syk(a~Y,l~Y,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s39 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~Y).Rec(a!1,b~pY,g~pY!4).Syk(a~Y,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s40 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Lyn(SH2,U!4).Rec(a!2,b~Y!3,g~pY).Rec(a!1,b~Y!4,g~pY) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s41 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2,U!4).Rec(a!2,b~Y!4,g~Y).Rec(a!1,b~pY!3,g~pY) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s42 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2,U!4).Rec(a!2,b~Y!4,g~pY).Rec(a!1,b~pY!3,g~Y) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s43 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~Y).Rec(a!1,b~Y,g~pY!4).Syk(a~Y,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s44 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!1,b~Y!3,g~pY).Rec(a!2,b~pY,g~Y) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s45 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~pY,g~Y).Rec(a!1,b~pY,g~pY) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s46 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~pY!3,g~Y).Rec(a!2,b~pY,g~Y) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s47 /* @PM::Lig(l!1,l!2)@EC.Rec(a!1,b~Y,g~pY!3).Rec(a!2,b~pY,g~Y).Syk(a~Y,l~Y,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s48 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!1,b~Y!3,g~pY).Rec(a!2,b~Y,g~pY) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s49 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~Y,g~pY).Rec(a!1,b~pY,g~pY) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s50 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!2,b~Y,g~pY).Rec(a!1,b~pY!3,g~Y) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s51 /* @PM::Lig(l!1,l!2)@EC.Rec(a!1,b~Y,g~pY!3).Rec(a!2,b~Y,g~pY).Syk(a~Y,l~Y,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s52 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~pY).Rec(a!1,b~pY,g~pY) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s53 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~pY).Rec(a!1,b~Y,g~pY!4).Syk(a~Y,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s54 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~pY,g~pY).Rec(a!1,b~pY,g~pY) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s55 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~pY!3,g~Y).Rec(a!2,b~pY,g~pY) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s56 /* @PM::Lig(l!1,l!2)@EC.Rec(a!1,b~Y,g~pY!3).Rec(a!2,b~pY,g~pY).Syk(a~Y,l~Y,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s57 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2!4,U).Rec(a!2,b~pY!3,g~Y).Rec(a!1,b~pY!4,g~Y) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s58 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~Y,g~pY!4).Rec(a!2,b~pY!3,g~Y).Syk(a~Y,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s59 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~Y,g~pY!3).Rec(a!1,b~Y,g~pY!4).Syk(a~Y,l~Y,tSH2!3)@CP.Syk(a~Y,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s60 /* @PM::Lig(l!1,l)@EC.Lyn(SH2,U!2).Rec(a!1,b~Y!2,g~pY!3).Syk(a~Y,l~Y,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s61 /* @PM::Lyn(SH2,U!1).Rec(a,b~Y!1,g~pY!2).Syk(a~Y,l~Y,tSH2!2)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s62 /* @PM::Lig(l!1,l)@EC.Rec(a!1,b~pY,g~pY!2).Syk(a~Y,l~Y,tSH2!2)@CP */
    {
@@ -331,11 +331,11 @@ DEFINE_MOLECULES
    }
    s64 /* @PM::Lig(l!1,l)@EC.Lyn(SH2!2,U).Rec(a!1,b~pY!2,g~pY) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s65 /* @PM::Lyn(SH2!1,U).Rec(a,b~pY!1,g~pY) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s66 /* @PM::Lig(l!1,l)@EC.Rec(a!1,b~Y,g~pY!2).Syk(a~Y,l~pY,tSH2!2)@CP */
    {
@@ -347,179 +347,179 @@ DEFINE_MOLECULES
    }
    s68 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!1,b~Y!3,g~pY!4).Rec(a!2,b~Y,g~Y).Syk(a~Y,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s69 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Lyn(SH2,U!4).Rec(a!2,b~Y!3,g~Y).Rec(a!1,b~Y!4,g~pY!5).Syk(a~Y,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s70 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~Y,g~Y).Rec(a!1,b~pY,g~pY!3).Syk(a~Y,l~Y,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s71 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!2,b~Y,g~Y).Rec(a!1,b~pY!3,g~pY) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s72 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~Y,g~Y).Rec(a!1,b~Y,g~pY!3).Syk(a~Y,l~pY,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s73 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~Y).Rec(a!1,b~pY,g~pY!4).Syk(a~Y,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s74 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Lyn(SH2,U!4).Rec(a!1,b~Y!4,g~pY!5).Rec(a!2,b~Y!3,g~pY).Syk(a~Y,l~Y,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s75 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2,U!4).Rec(a!2,b~Y!4,g~pY).Rec(a!1,b~pY!3,g~pY) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s76 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2,U!4).Rec(a!2,b~Y!4,g~Y).Rec(a!1,b~pY!3,g~pY!5).Syk(a~Y,l~Y,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s77 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2,U!4).Rec(a!2,b~Y!4,g~pY!5).Rec(a!1,b~pY!3,g~Y).Syk(a~Y,l~Y,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s78 /* @CP::Syk(a~Y,l~pY,tSH2) */
    {
-      DIFFUSION_CONSTANT_3D = KB*T/(6*PI*mu_CP*Rs)
+      DIFFUSION_CONSTANT_3D = KB*T/(6*PI*mu_EC*Rs)
    }
    s79 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!1,b~Y!3,g~pY!4).Rec(a!2,b~pY,g~Y).Syk(a~Y,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s80 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~pY,g~Y).Rec(a!1,b~pY,g~pY!3).Syk(a~Y,l~Y,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s81 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~pY!3,g~pY).Rec(a!2,b~pY,g~Y) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s82 /* @PM::Lig(l!1,l!2)@EC.Rec(a!1,b~Y,g~pY!3).Rec(a!2,b~pY,g~Y).Syk(a~Y,l~pY,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s83 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!1,b~Y!3,g~pY!4).Rec(a!2,b~Y,g~pY).Syk(a~Y,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s84 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~Y,g~pY).Rec(a!1,b~pY,g~pY!3).Syk(a~Y,l~Y,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s85 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!2,b~Y,g~pY).Rec(a!1,b~pY!3,g~pY) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s86 /* @PM::Lig(l!1,l!2)@EC.Rec(a!1,b~Y,g~pY!3).Rec(a!2,b~Y,g~pY).Syk(a~Y,l~pY,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s87 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~pY).Rec(a!1,b~pY,g~pY!4).Syk(a~Y,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s88 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~pY).Rec(a!1,b~Y,g~pY!4).Syk(a~Y,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s89 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!1,b~Y!3,g~pY!4).Rec(a!2,b~pY,g~pY).Syk(a~Y,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s90 /* @PM::Lig(l!1,l!2)@EC.Rec(a!1,b~pY,g~pY!3).Rec(a!2,b~pY,g~pY).Syk(a~Y,l~Y,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s91 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~pY!3,g~pY).Rec(a!2,b~pY,g~pY) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s92 /* @PM::Lig(l!1,l!2)@EC.Rec(a!1,b~Y,g~pY!3).Rec(a!2,b~pY,g~pY).Syk(a~Y,l~pY,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s93 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!2,b~pY!3,g~Y).Rec(a!1,b~pY,g~pY!4).Syk(a~Y,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s94 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2!4,U).Rec(a!2,b~pY!3,g~Y).Rec(a!1,b~pY!4,g~pY) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s95 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~Y,g~pY!4).Rec(a!2,b~pY!3,g~Y).Syk(a~Y,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s96 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!1,b~Y!3,g~pY!4).Rec(a!2,b~Y,g~pY!5).Syk(a~Y,l~Y,tSH2!5)@CP.Syk(a~Y,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s97 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~Y,g~pY!3).Rec(a!1,b~pY,g~pY!4).Syk(a~Y,l~Y,tSH2!3)@CP.Syk(a~Y,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s98 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!2,b~Y,g~pY!4).Rec(a!1,b~pY!3,g~pY).Syk(a~Y,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s99 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~Y,g~pY!3).Rec(a!1,b~Y,g~pY!4).Syk(a~Y,l~Y,tSH2!3)@CP.Syk(a~Y,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s100 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Lyn(SH2,U!4).Rec(a!2,b~Y!3,g~pY!5).Rec(a!1,b~Y!4,g~pY!6).Syk(a~Y,l~Y,tSH2!5)@CP.Syk(a~Y,l~Y,tSH2!6)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s101 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~pY!4).Rec(a!1,b~pY,g~pY!5).Syk(a~Y,l~Y,tSH2!4)@CP.Syk(a~Y,l~Y,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s102 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2,U!4).Rec(a!2,b~Y!4,g~pY!5).Rec(a!1,b~pY!3,g~pY).Syk(a~Y,l~Y,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s103 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~pY!4).Rec(a!1,b~Y,g~pY!5).Syk(a~Y,l~Y,tSH2!4)@CP.Syk(a~Y,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s104 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~pY,g~pY!3).Rec(a!1,b~pY,g~pY!4).Syk(a~Y,l~Y,tSH2!3)@CP.Syk(a~Y,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s105 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~pY!3,g~pY).Rec(a!2,b~pY,g~pY!4).Syk(a~Y,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s106 /* @PM::Lig(l!1,l!2)@EC.Rec(a!1,b~Y,g~pY!3).Rec(a!2,b~pY,g~pY!4).Syk(a~Y,l~Y,tSH2!4)@CP.Syk(a~Y,l~pY,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s107 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2!4,U).Rec(a!2,b~pY!3,g~pY).Rec(a!1,b~pY!4,g~pY) */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s108 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~Y,g~pY!4).Rec(a!2,b~pY!3,g~pY).Syk(a~Y,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s109 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~Y,g~pY!3).Rec(a!1,b~Y,g~pY!4).Syk(a~Y,l~pY,tSH2!3)@CP.Syk(a~Y,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s110 /* @PM::Lig(l!1,l)@EC.Lyn(SH2,U!2).Rec(a!1,b~Y!2,g~pY!3).Syk(a~Y,l~pY,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s111 /* @PM::Lyn(SH2,U!1).Rec(a,b~Y!1,g~pY!2).Syk(a~Y,l~pY,tSH2!2)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s112 /* @PM::Lig(l!1,l)@EC.Rec(a!1,b~pY,g~pY!2).Syk(a~Y,l~pY,tSH2!2)@CP */
    {
@@ -531,243 +531,243 @@ DEFINE_MOLECULES
    }
    s114 /* @PM::Lig(l!1,l)@EC.Lyn(SH2!2,U).Rec(a!1,b~pY!2,g~pY!3).Syk(a~Y,l~Y,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s115 /* @PM::Lyn(SH2!1,U).Rec(a,b~pY!1,g~pY!2).Syk(a~Y,l~Y,tSH2!2)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s116 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!1,b~Y!3,g~pY!4).Rec(a!2,b~Y,g~Y).Syk(a~Y,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s117 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~Y,g~Y).Rec(a!1,b~pY,g~pY!3).Syk(a~Y,l~pY,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s118 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!2,b~Y,g~Y).Rec(a!1,b~pY!3,g~pY!4).Syk(a~Y,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s119 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Lyn(SH2,U!4).Rec(a!1,b~Y!4,g~pY!5).Rec(a!2,b~Y!3,g~pY).Syk(a~Y,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s120 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2,U!4).Rec(a!2,b~Y!4,g~Y).Rec(a!1,b~pY!3,g~pY!5).Syk(a~Y,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s121 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2,U!4).Rec(a!2,b~Y!4,g~pY).Rec(a!1,b~pY!3,g~pY!5).Syk(a~Y,l~Y,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s122 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2,U!4).Rec(a!2,b~Y!4,g~pY!5).Rec(a!1,b~pY!3,g~Y).Syk(a~Y,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s123 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!1,b~Y!3,g~pY!4).Rec(a!2,b~pY,g~Y).Syk(a~Y,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s124 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~pY,g~Y).Rec(a!1,b~pY,g~pY!3).Syk(a~Y,l~pY,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s125 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!1,b~Y!3,g~pY!4).Rec(a!2,b~Y,g~pY).Syk(a~Y,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s126 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~Y,g~pY).Rec(a!1,b~pY,g~pY!3).Syk(a~Y,l~pY,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s127 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~pY!4).Rec(a!1,b~pY,g~pY).Syk(a~Y,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s128 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~pY).Rec(a!1,b~pY,g~pY!4).Syk(a~Y,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s129 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~pY!4).Rec(a!1,b~Y,g~pY!5).Syk(a~Y,l~Y,tSH2!5)@CP.Syk(a~Y,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s130 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~pY,g~pY!3).Rec(a!1,b~pY,g~pY).Syk(a~Y,l~pY,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s131 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~pY!3,g~Y).Rec(a!2,b~pY,g~pY!4).Syk(a~Y,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s132 /* @PM::Lig(l!1,l!2)@EC.Rec(a!1,b~Y,g~pY!3).Rec(a!2,b~pY,g~pY!4).Syk(a~Y,l~Y,tSH2!3)@CP.Syk(a~Y,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s133 /* @PM::Lig(l!1,l)@EC.Lyn(SH2!2,U).Rec(a!1,b~pY!2,g~pY!3).Syk(a~Y,l~pY,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s134 /* @PM::Lyn(SH2!1,U).Rec(a,b~pY!1,g~pY!2).Syk(a~Y,l~pY,tSH2!2)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s135 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!2,b~Y,g~Y).Rec(a!1,b~pY!3,g~pY!4).Syk(a~Y,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s136 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Lyn(SH2,U!4).Rec(a!1,b~Y!4,g~pY!5).Rec(a!2,b~Y!3,g~pY!6).Syk(a~Y,l~Y,tSH2!5)@CP.Syk(a~Y,l~pY,tSH2!6)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s137 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2,U!4).Rec(a!2,b~Y!4,g~pY!5).Rec(a!1,b~pY!3,g~pY).Syk(a~Y,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s138 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2,U!4).Rec(a!2,b~Y!4,g~pY).Rec(a!1,b~pY!3,g~pY!5).Syk(a~Y,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s139 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~Y,g~pY!3).Rec(a!1,b~Y,g~pY!4).Syk(a~Y,l~Y,tSH2!3)@CP.Syk(a~pY,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s140 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~pY!3,g~pY!4).Rec(a!2,b~pY,g~Y).Syk(a~Y,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s141 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~pY!3,g~pY!4).Rec(a!2,b~pY,g~Y).Syk(a~Y,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s142 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!2,b~Y,g~pY).Rec(a!1,b~pY!3,g~pY!4).Syk(a~Y,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s143 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!2,b~Y,g~pY).Rec(a!1,b~pY!3,g~pY!4).Syk(a~Y,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s144 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~pY!3,g~pY!4).Rec(a!2,b~pY,g~pY).Syk(a~Y,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s145 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~pY!3,g~pY!4).Rec(a!2,b~pY,g~pY).Syk(a~Y,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s146 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2!4,U).Rec(a!2,b~pY!3,g~Y).Rec(a!1,b~pY!4,g~pY!5).Syk(a~Y,l~Y,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s147 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2!4,U).Rec(a!2,b~pY!3,g~Y).Rec(a!1,b~pY!4,g~pY!5).Syk(a~Y,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s148 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!2,b~Y,g~pY!4).Rec(a!1,b~pY!3,g~pY!5).Syk(a~Y,l~Y,tSH2!4)@CP.Syk(a~Y,l~Y,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s149 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!2,b~Y,g~pY!4).Rec(a!1,b~pY!3,g~pY!5).Syk(a~Y,l~Y,tSH2!4)@CP.Syk(a~Y,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s150 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~pY!4).Rec(a!1,b~pY,g~pY!5).Syk(a~Y,l~Y,tSH2!4)@CP.Syk(a~Y,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s151 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2,U!4).Rec(a!2,b~Y!4,g~pY!5).Rec(a!1,b~pY!3,g~pY!6).Syk(a~Y,l~Y,tSH2!5)@CP.Syk(a~Y,l~Y,tSH2!6)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s152 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2,U!4).Rec(a!2,b~Y!4,g~pY!5).Rec(a!1,b~pY!3,g~pY!6).Syk(a~Y,l~Y,tSH2!5)@CP.Syk(a~Y,l~pY,tSH2!6)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s153 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!1,b~Y!3,g~pY!4).Rec(a!2,b~pY,g~pY!5).Syk(a~Y,l~Y,tSH2!5)@CP.Syk(a~Y,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s154 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~pY,g~pY!3).Rec(a!1,b~pY,g~pY!4).Syk(a~Y,l~Y,tSH2!3)@CP.Syk(a~Y,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s155 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~pY!3,g~pY!4).Rec(a!2,b~pY,g~pY!5).Syk(a~Y,l~Y,tSH2!5)@CP.Syk(a~Y,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s156 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~pY!3,g~pY!4).Rec(a!2,b~pY,g~pY!5).Syk(a~Y,l~Y,tSH2!5)@CP.Syk(a~Y,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s157 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!2,b~pY!3,g~pY).Rec(a!1,b~pY,g~pY!4).Syk(a~Y,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s158 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2!4,U).Rec(a!1,b~pY!4,g~pY!5).Rec(a!2,b~pY!3,g~pY).Syk(a~Y,l~Y,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s159 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2!4,U).Rec(a!1,b~pY!4,g~pY!5).Rec(a!2,b~pY!3,g~pY).Syk(a~Y,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s160 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!1,b~Y!3,g~pY!4).Rec(a!2,b~Y,g~pY!5).Syk(a~Y,l~pY,tSH2!5)@CP.Syk(a~Y,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s161 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~Y,g~pY!3).Rec(a!1,b~pY,g~pY!4).Syk(a~Y,l~pY,tSH2!3)@CP.Syk(a~Y,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s162 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!2,b~Y,g~pY!4).Rec(a!1,b~pY!3,g~pY!5).Syk(a~Y,l~Y,tSH2!5)@CP.Syk(a~Y,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s163 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!2,b~Y,g~pY!4).Rec(a!1,b~pY!3,g~pY!5).Syk(a~Y,l~pY,tSH2!4)@CP.Syk(a~Y,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s164 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Lyn(SH2,U!4).Rec(a!2,b~Y!3,g~pY!5).Rec(a!1,b~Y!4,g~pY!6).Syk(a~Y,l~pY,tSH2!5)@CP.Syk(a~Y,l~pY,tSH2!6)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s165 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~pY!4).Rec(a!1,b~pY,g~pY!5).Syk(a~Y,l~pY,tSH2!4)@CP.Syk(a~Y,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s166 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2,U!4).Rec(a!2,b~Y!4,g~pY!5).Rec(a!1,b~pY!3,g~pY!6).Syk(a~Y,l~Y,tSH2!6)@CP.Syk(a~Y,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s167 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2,U!4).Rec(a!2,b~Y!4,g~pY!5).Rec(a!1,b~pY!3,g~pY!6).Syk(a~Y,l~pY,tSH2!5)@CP.Syk(a~Y,l~pY,tSH2!6)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s168 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~pY,g~pY!3).Rec(a!1,b~pY,g~pY!4).Syk(a~Y,l~pY,tSH2!3)@CP.Syk(a~Y,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s169 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~pY!3,g~pY!4).Rec(a!2,b~pY,g~pY!5).Syk(a~Y,l~Y,tSH2!4)@CP.Syk(a~Y,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s170 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~pY!3,g~pY!4).Rec(a!2,b~pY,g~pY!5).Syk(a~Y,l~pY,tSH2!5)@CP.Syk(a~Y,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s171 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2!4,U).Rec(a!2,b~pY!3,g~pY!5).Rec(a!1,b~pY!4,g~pY!6).Syk(a~Y,l~Y,tSH2!5)@CP.Syk(a~Y,l~Y,tSH2!6)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s172 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2!4,U).Rec(a!2,b~pY!3,g~pY!5).Rec(a!1,b~pY!4,g~pY!6).Syk(a~Y,l~Y,tSH2!5)@CP.Syk(a~Y,l~pY,tSH2!6)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s173 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2!4,U).Rec(a!2,b~pY!3,g~pY!5).Rec(a!1,b~pY!4,g~pY!6).Syk(a~Y,l~pY,tSH2!5)@CP.Syk(a~Y,l~pY,tSH2!6)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s174 /* @PM::Lig(l!1,l)@EC.Rec(a!1,b~Y,g~pY!2).Syk(a~pY,l~Y,tSH2!2)@CP */
    {
@@ -779,143 +779,143 @@ DEFINE_MOLECULES
    }
    s176 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~pY!4).Rec(a!1,b~Y,g~pY!5).Syk(a~Y,l~Y,tSH2!4)@CP.Syk(a~pY,l~Y,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s177 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!1,b~Y!3,g~pY!4).Rec(a!2,b~Y,g~pY!5).Syk(a~Y,l~Y,tSH2!5)@CP.Syk(a~pY,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s178 /* @PM::Lig(l!1,l!2)@EC.Rec(a!1,b~Y,g~pY!3).Rec(a!2,b~Y,g~pY).Syk(a~pY,l~Y,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s179 /* @CP::Syk(a~pY,l~Y,tSH2) */
    {
-      DIFFUSION_CONSTANT_3D = KB*T/(6*PI*mu_CP*Rs)
+      DIFFUSION_CONSTANT_3D = KB*T/(6*PI*mu_EC*Rs)
    }
    s180 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~Y,g~pY!3).Rec(a!1,b~pY,g~pY!4).Syk(a~Y,l~Y,tSH2!3)@CP.Syk(a~pY,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s181 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~Y,g~pY!3).Rec(a!1,b~pY,g~pY!4).Syk(a~Y,l~Y,tSH2!4)@CP.Syk(a~pY,l~Y,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s182 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~Y,g~pY!3).Rec(a!1,b~Y,g~pY!4).Syk(a~Y,l~Y,tSH2!3)@CP.Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s183 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~Y,g~pY!3).Rec(a!1,b~Y,g~pY!4).Syk(a~Y,l~pY,tSH2!4)@CP.Syk(a~pY,l~Y,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s184 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Lyn(SH2,U!4).Rec(a!2,b~Y!3,g~pY!5).Rec(a!1,b~Y!4,g~pY!6).Syk(a~Y,l~Y,tSH2!5)@CP.Syk(a~pY,l~Y,tSH2!6)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s185 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~pY!4).Rec(a!1,b~pY,g~pY!5).Syk(a~Y,l~Y,tSH2!4)@CP.Syk(a~pY,l~Y,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s186 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~pY!4).Rec(a!1,b~pY,g~pY!5).Syk(a~Y,l~Y,tSH2!5)@CP.Syk(a~pY,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s187 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~pY!4).Rec(a!1,b~Y,g~pY!5).Syk(a~Y,l~Y,tSH2!4)@CP.Syk(a~pY,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s188 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~pY!4).Rec(a!1,b~Y,g~pY!5).Syk(a~Y,l~pY,tSH2!5)@CP.Syk(a~pY,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s189 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~pY,g~pY!3).Rec(a!1,b~pY,g~pY!4).Syk(a~Y,l~Y,tSH2!3)@CP.Syk(a~pY,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s190 /* @PM::Lig(l!1,l!2)@EC.Rec(a!1,b~Y,g~pY!3).Rec(a!2,b~pY,g~pY!4).Syk(a~Y,l~Y,tSH2!4)@CP.Syk(a~pY,l~pY,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s191 /* @PM::Lig(l!1,l!2)@EC.Rec(a!1,b~Y,g~pY!3).Rec(a!2,b~pY,g~pY!4).Syk(a~Y,l~pY,tSH2!3)@CP.Syk(a~pY,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s192 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~Y,g~pY!3).Rec(a!1,b~Y,g~pY!4).Syk(a~Y,l~pY,tSH2!3)@CP.Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s193 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~pY!4).Rec(a!1,b~Y,g~pY!5).Syk(a~Y,l~pY,tSH2!4)@CP.Syk(a~pY,l~Y,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s194 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~pY!4).Rec(a!1,b~Y,g~pY!5).Syk(a~Y,l~Y,tSH2!5)@CP.Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s195 /* @PM::Lig(l!1,l!2)@EC.Rec(a!1,b~Y,g~pY!3).Rec(a!2,b~pY,g~pY!4).Syk(a~Y,l~pY,tSH2!4)@CP.Syk(a~pY,l~Y,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s196 /* @PM::Lig(l!1,l!2)@EC.Rec(a!1,b~Y,g~pY!3).Rec(a!2,b~pY,g~pY!4).Syk(a~Y,l~Y,tSH2!3)@CP.Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s197 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Lyn(SH2,U!4).Rec(a!1,b~Y!4,g~pY!5).Rec(a!2,b~Y!3,g~pY!6).Syk(a~Y,l~pY,tSH2!6)@CP.Syk(a~pY,l~Y,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s198 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Lyn(SH2,U!4).Rec(a!1,b~Y!4,g~pY!5).Rec(a!2,b~Y!3,g~pY!6).Syk(a~Y,l~Y,tSH2!5)@CP.Syk(a~pY,l~pY,tSH2!6)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s199 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~Y,g~pY!3).Rec(a!1,b~Y,g~pY!4).Syk(a~pY,l~Y,tSH2!3)@CP.Syk(a~pY,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s200 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~Y,g~Y).Rec(a!1,b~Y,g~pY!3).Syk(a~pY,l~Y,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s201 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~Y).Rec(a!1,b~Y,g~pY!4).Syk(a~pY,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s202 /* @PM::Lig(l!1,l!2)@EC.Rec(a!1,b~Y,g~pY!3).Rec(a!2,b~pY,g~Y).Syk(a~pY,l~Y,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s203 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~pY).Rec(a!1,b~Y,g~pY!4).Syk(a~pY,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s204 /* @PM::Lig(l!1,l!2)@EC.Rec(a!1,b~Y,g~pY!3).Rec(a!2,b~pY,g~pY).Syk(a~pY,l~Y,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s205 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~Y,g~pY!4).Rec(a!2,b~pY!3,g~Y).Syk(a~pY,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s206 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~Y,g~pY!4).Rec(a!2,b~pY!3,g~pY).Syk(a~pY,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s207 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~Y,g~pY!4).Rec(a!2,b~pY!3,g~pY!5).Syk(a~Y,l~Y,tSH2!5)@CP.Syk(a~pY,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s208 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~Y,g~pY!4).Rec(a!2,b~pY!3,g~pY!5).Syk(a~Y,l~pY,tSH2!5)@CP.Syk(a~pY,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s209 /* @PM::Lyn(SH2,U!1).Rec(a,b~Y!1,g~pY!2).Syk(a~pY,l~Y,tSH2!2)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s210 /* @PM::Lig(l!1,l)@EC.Lyn(SH2,U!2).Rec(a!1,b~Y!2,g~pY!3).Syk(a~pY,l~Y,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s211 /* @PM::Lig(l!1,l)@EC.Rec(a!1,b~pY,g~pY!2).Syk(a~pY,l~Y,tSH2!2)@CP */
    {
@@ -935,11 +935,11 @@ DEFINE_MOLECULES
    }
    s215 /* @PM::Lyn(SH2,U!1).Rec(a,b~Y!1,g~pY!2).Syk(a~pY,l~pY,tSH2!2)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s216 /* @PM::Lig(l!1,l)@EC.Lyn(SH2,U!2).Rec(a!1,b~Y!2,g~pY!3).Syk(a~pY,l~pY,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s217 /* @PM::Lig(l!1,l)@EC.Rec(a!1,b~pY,g~pY!2).Syk(a~pY,l~pY,tSH2!2)@CP */
    {
@@ -951,547 +951,547 @@ DEFINE_MOLECULES
    }
    s219 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!1,b~Y!3,g~pY!4).Rec(a!2,b~Y,g~pY).Syk(a~pY,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s220 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!1,b~Y!3,g~pY!4).Rec(a!2,b~pY,g~pY!5).Syk(a~Y,l~Y,tSH2!5)@CP.Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s221 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!1,b~Y!3,g~pY!4).Rec(a!2,b~pY,g~pY!5).Syk(a~Y,l~pY,tSH2!4)@CP.Syk(a~pY,l~Y,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s222 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~pY!4).Rec(a!1,b~Y,g~pY!5).Syk(a~Y,l~pY,tSH2!4)@CP.Syk(a~pY,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s223 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!1,b~Y!3,g~pY!4).Rec(a!2,b~Y,g~pY!5).Syk(a~Y,l~pY,tSH2!5)@CP.Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s224 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!1,b~Y!3,g~pY!4).Rec(a!2,b~pY,g~pY!5).Syk(a~Y,l~pY,tSH2!5)@CP.Syk(a~pY,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s225 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!1,b~Y!3,g~pY!4).Rec(a!2,b~pY,g~pY!5).Syk(a~Y,l~Y,tSH2!4)@CP.Syk(a~pY,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s226 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~pY!4).Rec(a!1,b~Y,g~pY!5).Syk(a~pY,l~Y,tSH2!4)@CP.Syk(a~pY,l~Y,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s227 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!2,b~Y,g~pY!4).Rec(a!1,b~pY!3,g~pY!5).Syk(a~Y,l~Y,tSH2!4)@CP.Syk(a~pY,l~Y,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s228 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2,U!4).Rec(a!2,b~Y!4,g~pY!5).Rec(a!1,b~pY!3,g~pY!6).Syk(a~Y,l~Y,tSH2!5)@CP.Syk(a~pY,l~Y,tSH2!6)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s229 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2,U!4).Rec(a!2,b~Y!4,g~pY!5).Rec(a!1,b~pY!3,g~pY!6).Syk(a~Y,l~Y,tSH2!6)@CP.Syk(a~pY,l~Y,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s230 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!2,b~pY!3,g~pY!4).Rec(a!1,b~pY,g~pY!5).Syk(a~Y,l~Y,tSH2!4)@CP.Syk(a~pY,l~Y,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s231 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~pY!3,g~pY!4).Rec(a!2,b~pY,g~pY!5).Syk(a~Y,l~Y,tSH2!5)@CP.Syk(a~pY,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s232 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~Y,g~pY!4).Rec(a!2,b~pY!3,g~pY!5).Syk(a~Y,l~Y,tSH2!5)@CP.Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s233 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~Y,g~pY!4).Rec(a!2,b~pY!3,g~pY!5).Syk(a~Y,l~pY,tSH2!4)@CP.Syk(a~pY,l~Y,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s234 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~Y,g~pY!4).Rec(a!2,b~pY!3,g~pY!5).Syk(a~Y,l~Y,tSH2!4)@CP.Syk(a~pY,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s235 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Lyn(SH2,U!4).Rec(a!2,b~Y!3,g~Y).Rec(a!1,b~Y!4,g~pY!5).Syk(a~pY,l~Y,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s236 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~Y).Rec(a!1,b~pY,g~pY!4).Syk(a~pY,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s237 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!1,b~Y!3,g~pY!4).Rec(a!2,b~Y,g~Y).Syk(a~pY,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s238 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~Y,g~Y).Rec(a!1,b~pY,g~pY!3).Syk(a~pY,l~Y,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s239 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Lyn(SH2,U!4).Rec(a!2,b~Y!3,g~pY!5).Rec(a!1,b~Y!4,g~pY).Syk(a~pY,l~Y,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s240 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2,U!4).Rec(a!2,b~Y!4,g~Y).Rec(a!1,b~pY!3,g~pY!5).Syk(a~pY,l~Y,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s241 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2,U!4).Rec(a!2,b~Y!4,g~pY!5).Rec(a!1,b~pY!3,g~Y).Syk(a~pY,l~Y,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s242 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!1,b~Y!3,g~pY!4).Rec(a!2,b~pY,g~Y).Syk(a~pY,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s243 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~pY,g~Y).Rec(a!1,b~pY,g~pY!3).Syk(a~pY,l~Y,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s244 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~Y,g~pY).Rec(a!1,b~pY,g~pY!3).Syk(a~pY,l~Y,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s245 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~pY!4).Rec(a!1,b~pY,g~pY).Syk(a~pY,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s246 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~pY).Rec(a!1,b~pY,g~pY!4).Syk(a~pY,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s247 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~pY,g~pY!3).Rec(a!1,b~pY,g~pY).Syk(a~pY,l~Y,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s248 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~pY!3,g~Y).Rec(a!2,b~pY,g~pY!4).Syk(a~pY,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s249 /* @PM::Lig(l!1,l)@EC.Lyn(SH2!2,U).Rec(a!1,b~pY!2,g~pY!3).Syk(a~pY,l~Y,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s250 /* @PM::Lyn(SH2!1,U).Rec(a,b~pY!1,g~pY!2).Syk(a~pY,l~Y,tSH2!2)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s251 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!2,b~Y,g~Y).Rec(a!1,b~pY!3,g~pY!4).Syk(a~pY,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s252 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2,U!4).Rec(a!2,b~Y!4,g~pY!5).Rec(a!1,b~pY!3,g~pY).Syk(a~pY,l~Y,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s253 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2,U!4).Rec(a!2,b~Y!4,g~pY).Rec(a!1,b~pY!3,g~pY!5).Syk(a~pY,l~Y,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s254 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~pY!3,g~pY!4).Rec(a!2,b~pY,g~Y).Syk(a~pY,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s255 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!2,b~Y,g~pY).Rec(a!1,b~pY!3,g~pY!4).Syk(a~pY,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s256 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~pY!3,g~pY!4).Rec(a!2,b~pY,g~pY).Syk(a~pY,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s257 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~pY!3,g~pY).Rec(a!2,b~pY,g~pY!4).Syk(a~pY,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s258 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2!4,U).Rec(a!2,b~pY!3,g~Y).Rec(a!1,b~pY!4,g~pY!5).Syk(a~pY,l~Y,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s259 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2!4,U).Rec(a!2,b~pY!3,g~pY!5).Rec(a!1,b~pY!4,g~pY).Syk(a~pY,l~Y,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s260 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~pY,g~pY!3).Rec(a!1,b~pY,g~pY!4).Syk(a~Y,l~pY,tSH2!3)@CP.Syk(a~pY,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s261 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2,U!4).Rec(a!2,b~Y!4,g~pY!5).Rec(a!1,b~pY!3,g~pY!6).Syk(a~Y,l~pY,tSH2!5)@CP.Syk(a~pY,l~Y,tSH2!6)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s262 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2,U!4).Rec(a!2,b~Y!4,g~pY!5).Rec(a!1,b~pY!3,g~pY!6).Syk(a~Y,l~pY,tSH2!6)@CP.Syk(a~pY,l~Y,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s263 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~pY!3,g~pY!4).Rec(a!2,b~pY,g~pY!5).Syk(a~Y,l~pY,tSH2!4)@CP.Syk(a~pY,l~Y,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s264 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!2,b~pY!3,g~pY!4).Rec(a!1,b~pY,g~pY!5).Syk(a~Y,l~pY,tSH2!5)@CP.Syk(a~pY,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s265 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2!4,U).Rec(a!1,b~pY!4,g~pY!5).Rec(a!2,b~pY!3,g~pY!6).Syk(a~Y,l~Y,tSH2!5)@CP.Syk(a~pY,l~Y,tSH2!6)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s266 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2!4,U).Rec(a!1,b~pY!4,g~pY!5).Rec(a!2,b~pY!3,g~pY!6).Syk(a~Y,l~pY,tSH2!5)@CP.Syk(a~pY,l~Y,tSH2!6)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s267 /* @PM::Lig(l!1,l!2)@EC.Rec(a!1,b~Y,g~pY!3).Rec(a!2,b~Y,g~pY).Syk(a~pY,l~pY,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s268 /* @CP::Syk(a~pY,l~pY,tSH2) */
    {
-      DIFFUSION_CONSTANT_3D = KB*T/(6*PI*mu_CP*Rs)
+      DIFFUSION_CONSTANT_3D = KB*T/(6*PI*mu_EC*Rs)
    }
    s269 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~pY).Rec(a!1,b~Y,g~pY!4).Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s270 /* @PM::Lig(l!1,l!2)@EC.Rec(a!1,b~Y,g~pY!3).Rec(a!2,b~pY,g~pY).Syk(a~pY,l~pY,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s271 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~pY!4).Rec(a!1,b~Y,g~pY).Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s272 /* @PM::Lig(l!1,l!2)@EC.Rec(a!1,b~Y,g~pY).Rec(a!2,b~pY,g~pY!3).Syk(a~pY,l~pY,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s273 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Lyn(SH2,U!4).Rec(a!2,b~Y!3,g~pY!5).Rec(a!1,b~Y!4,g~pY).Syk(a~pY,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s274 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Lyn(SH2,U!4).Rec(a!1,b~Y!4,g~pY!5).Rec(a!2,b~Y!3,g~pY!6).Syk(a~Y,l~pY,tSH2!6)@CP.Syk(a~pY,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s275 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2,U!4).Rec(a!2,b~Y!4,g~pY!5).Rec(a!1,b~pY!3,g~pY!6).Syk(a~Y,l~Y,tSH2!5)@CP.Syk(a~pY,l~pY,tSH2!6)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s276 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~pY,g~pY!3).Rec(a!1,b~pY,g~pY!4).Syk(a~Y,l~Y,tSH2!3)@CP.Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s277 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~pY!3,g~pY!4).Rec(a!2,b~pY,g~pY!5).Syk(a~Y,l~Y,tSH2!5)@CP.Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s278 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~Y,g~pY!3).Rec(a!1,b~pY,g~pY!4).Syk(a~Y,l~pY,tSH2!3)@CP.Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s279 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~Y,g~pY!3).Rec(a!1,b~pY,g~pY!4).Syk(a~Y,l~pY,tSH2!4)@CP.Syk(a~pY,l~pY,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s280 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!2,b~Y,g~pY!4).Rec(a!1,b~pY!3,g~pY!5).Syk(a~Y,l~pY,tSH2!4)@CP.Syk(a~pY,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s281 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!2,b~Y,g~pY!4).Rec(a!1,b~pY!3,g~pY!5).Syk(a~Y,l~pY,tSH2!5)@CP.Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s282 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~pY!4).Rec(a!1,b~pY,g~pY!5).Syk(a~Y,l~pY,tSH2!4)@CP.Syk(a~pY,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s283 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~pY!4).Rec(a!1,b~pY,g~pY!5).Syk(a~Y,l~pY,tSH2!5)@CP.Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s284 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2,U!4).Rec(a!2,b~Y!4,g~pY!5).Rec(a!1,b~pY!3,g~pY!6).Syk(a~Y,l~Y,tSH2!6)@CP.Syk(a~pY,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s285 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2,U!4).Rec(a!2,b~Y!4,g~pY!5).Rec(a!1,b~pY!3,g~pY!6).Syk(a~Y,l~pY,tSH2!5)@CP.Syk(a~pY,l~pY,tSH2!6)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s286 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2,U!4).Rec(a!2,b~Y!4,g~pY!5).Rec(a!1,b~pY!3,g~pY!6).Syk(a~Y,l~pY,tSH2!6)@CP.Syk(a~pY,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s287 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~pY,g~pY!3).Rec(a!1,b~pY,g~pY!4).Syk(a~Y,l~pY,tSH2!3)@CP.Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s288 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~pY!3,g~pY!4).Rec(a!2,b~pY,g~pY!5).Syk(a~Y,l~Y,tSH2!4)@CP.Syk(a~pY,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s289 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~pY!3,g~pY!4).Rec(a!2,b~pY,g~pY!5).Syk(a~Y,l~pY,tSH2!5)@CP.Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s290 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~pY!3,g~pY!4).Rec(a!2,b~pY,g~pY!5).Syk(a~Y,l~pY,tSH2!4)@CP.Syk(a~pY,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s291 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2!4,U).Rec(a!2,b~pY!3,g~pY!5).Rec(a!1,b~pY!4,g~pY!6).Syk(a~Y,l~Y,tSH2!5)@CP.Syk(a~pY,l~pY,tSH2!6)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s292 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2!4,U).Rec(a!2,b~pY!3,g~pY!5).Rec(a!1,b~pY!4,g~pY!6).Syk(a~Y,l~pY,tSH2!5)@CP.Syk(a~pY,l~pY,tSH2!6)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s293 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~Y,g~pY!3).Rec(a!1,b~pY,g~pY!4).Syk(a~pY,l~Y,tSH2!3)@CP.Syk(a~pY,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s294 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~Y,g~pY!3).Rec(a!1,b~Y,g~pY!4).Syk(a~pY,l~Y,tSH2!3)@CP.Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s295 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Lyn(SH2,U!4).Rec(a!2,b~Y!3,g~pY!5).Rec(a!1,b~Y!4,g~pY!6).Syk(a~pY,l~Y,tSH2!5)@CP.Syk(a~pY,l~Y,tSH2!6)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s296 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~pY!4).Rec(a!1,b~pY,g~pY!5).Syk(a~pY,l~Y,tSH2!4)@CP.Syk(a~pY,l~Y,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s297 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~pY!4).Rec(a!1,b~Y,g~pY!5).Syk(a~pY,l~Y,tSH2!4)@CP.Syk(a~pY,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s298 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~pY,g~pY!3).Rec(a!1,b~pY,g~pY!4).Syk(a~pY,l~Y,tSH2!3)@CP.Syk(a~pY,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s299 /* @PM::Lig(l!1,l!2)@EC.Rec(a!1,b~Y,g~pY!3).Rec(a!2,b~pY,g~pY!4).Syk(a~pY,l~Y,tSH2!4)@CP.Syk(a~pY,l~pY,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s300 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~Y,g~pY!3).Rec(a!1,b~Y,g~pY!4).Syk(a~pY,l~pY,tSH2!3)@CP.Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s301 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~pY!4).Rec(a!1,b~Y,g~pY!5).Syk(a~pY,l~Y,tSH2!5)@CP.Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s302 /* @PM::Lig(l!1,l!2)@EC.Rec(a!1,b~Y,g~pY!3).Rec(a!2,b~pY,g~pY!4).Syk(a~pY,l~Y,tSH2!3)@CP.Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s303 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Lyn(SH2,U!4).Rec(a!1,b~Y!4,g~pY!5).Rec(a!2,b~Y!3,g~pY!6).Syk(a~pY,l~Y,tSH2!5)@CP.Syk(a~pY,l~pY,tSH2!6)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s304 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~Y,g~Y).Rec(a!1,b~Y,g~pY!3).Syk(a~pY,l~pY,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s305 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!1,b~Y!3,g~pY!4).Rec(a!2,b~Y,g~Y).Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s306 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~Y,g~Y).Rec(a!1,b~pY,g~pY!3).Syk(a~pY,l~pY,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s307 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~Y).Rec(a!1,b~Y,g~pY!4).Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s308 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Lyn(SH2,U!4).Rec(a!2,b~Y!3,g~Y).Rec(a!1,b~Y!4,g~pY!5).Syk(a~pY,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s309 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~Y).Rec(a!1,b~pY,g~pY!4).Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s310 /* @PM::Lig(l!1,l!2)@EC.Rec(a!1,b~Y,g~pY!3).Rec(a!2,b~pY,g~Y).Syk(a~pY,l~pY,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s311 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!1,b~Y!3,g~pY!4).Rec(a!2,b~pY,g~Y).Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s312 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~pY,g~Y).Rec(a!1,b~pY,g~pY!3).Syk(a~pY,l~pY,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s313 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~pY).Rec(a!1,b~pY,g~pY!4).Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s314 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!1,b~Y!3,g~pY!4).Rec(a!2,b~pY,g~pY).Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s315 /* @PM::Lig(l!1,l!2)@EC.Rec(a!1,b~pY,g~pY!3).Rec(a!2,b~pY,g~pY).Syk(a~pY,l~pY,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s316 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~Y,g~pY!4).Rec(a!2,b~pY!3,g~Y).Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s317 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2,U!4).Rec(a!1,b~Y!4,g~pY!5).Rec(a!2,b~pY!3,g~Y).Syk(a~pY,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s318 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!2,b~pY!3,g~Y).Rec(a!1,b~pY,g~pY!4).Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s319 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~Y,g~pY!4).Rec(a!2,b~pY!3,g~pY).Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s320 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2,U!4).Rec(a!1,b~Y!4,g~pY!5).Rec(a!2,b~pY!3,g~pY).Syk(a~pY,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s321 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!2,b~pY!3,g~pY).Rec(a!1,b~pY,g~pY!4).Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s322 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!2,b~Y,g~pY!4).Rec(a!1,b~pY!3,g~pY!5).Syk(a~pY,l~Y,tSH2!4)@CP.Syk(a~pY,l~Y,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s323 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~pY!4).Rec(a!1,b~pY,g~pY!5).Syk(a~pY,l~Y,tSH2!4)@CP.Syk(a~pY,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s324 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2,U!4).Rec(a!2,b~Y!4,g~pY!5).Rec(a!1,b~pY!3,g~pY!6).Syk(a~pY,l~Y,tSH2!5)@CP.Syk(a~pY,l~Y,tSH2!6)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s325 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!1,b~Y!3,g~pY!4).Rec(a!2,b~pY,g~pY!5).Syk(a~pY,l~Y,tSH2!5)@CP.Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s326 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~pY,g~pY!3).Rec(a!1,b~pY,g~pY!4).Syk(a~pY,l~Y,tSH2!3)@CP.Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s327 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~pY!3,g~pY!4).Rec(a!2,b~pY,g~pY!5).Syk(a~pY,l~Y,tSH2!5)@CP.Syk(a~pY,l~Y,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s328 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!1,b~Y!3,g~pY!4).Rec(a!2,b~Y,g~pY!5).Syk(a~pY,l~pY,tSH2!5)@CP.Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s329 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~Y,g~pY!3).Rec(a!1,b~pY,g~pY!4).Syk(a~pY,l~pY,tSH2!3)@CP.Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s330 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!2,b~Y,g~pY!4).Rec(a!1,b~pY!3,g~pY!5).Syk(a~pY,l~Y,tSH2!5)@CP.Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s331 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Lyn(SH2,U!4).Rec(a!2,b~Y!3,g~pY!5).Rec(a!1,b~Y!4,g~pY!6).Syk(a~pY,l~pY,tSH2!5)@CP.Syk(a~pY,l~pY,tSH2!6)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s332 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2,U!3).Rec(a!2,b~Y!3,g~pY!4).Rec(a!1,b~pY,g~pY!5).Syk(a~pY,l~pY,tSH2!4)@CP.Syk(a~pY,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s333 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2,U!4).Rec(a!2,b~Y!4,g~pY!5).Rec(a!1,b~pY!3,g~pY!6).Syk(a~pY,l~Y,tSH2!6)@CP.Syk(a~pY,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s334 /* @PM::Lig(l!1,l!2)@EC.Rec(a!2,b~pY,g~pY!3).Rec(a!1,b~pY,g~pY!4).Syk(a~pY,l~pY,tSH2!3)@CP.Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s335 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~pY!3,g~pY!4).Rec(a!2,b~pY,g~pY!5).Syk(a~pY,l~Y,tSH2!4)@CP.Syk(a~pY,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s336 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2!4,U).Rec(a!2,b~pY!3,g~pY!5).Rec(a!1,b~pY!4,g~pY!6).Syk(a~pY,l~Y,tSH2!5)@CP.Syk(a~pY,l~Y,tSH2!6)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s337 /* @PM::Lig(l!1,l)@EC.Lyn(SH2!2,U).Rec(a!1,b~pY!2,g~pY!3).Syk(a~pY,l~pY,tSH2!3)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s338 /* @PM::Lyn(SH2!1,U).Rec(a,b~pY!1,g~pY!2).Syk(a~pY,l~pY,tSH2!2)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(2)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s339 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~Y,g~pY).Rec(a!2,b~pY!3,g~pY!4).Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s340 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~Y,g~pY!4).Rec(a!2,b~pY!3,g~pY!5).Syk(a~pY,l~Y,tSH2!4)@CP.Syk(a~pY,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s341 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2,U!4).Rec(a!2,b~Y!4,g~Y).Rec(a!1,b~pY!3,g~pY!5).Syk(a~pY,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s342 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!2,b~Y,g~Y).Rec(a!1,b~pY!3,g~pY!4).Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s343 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2,U!4).Rec(a!2,b~Y!4,g~pY).Rec(a!1,b~pY!3,g~pY!5).Syk(a~pY,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s344 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~pY!3,g~pY!4).Rec(a!2,b~pY,g~Y).Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s345 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~pY!3,g~pY!4).Rec(a!2,b~pY,g~pY).Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s346 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2!4,U).Rec(a!2,b~pY!3,g~Y).Rec(a!1,b~pY!4,g~pY!5).Syk(a~pY,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s347 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2!4,U).Rec(a!2,b~pY!3,g~pY!5).Rec(a!1,b~pY!4,g~pY).Syk(a~pY,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s348 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2,U!4).Rec(a!2,b~Y!4,g~pY!5).Rec(a!1,b~pY!3,g~pY!6).Syk(a~pY,l~Y,tSH2!5)@CP.Syk(a~pY,l~pY,tSH2!6)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s349 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~pY!3,g~pY!4).Rec(a!2,b~pY,g~pY!5).Syk(a~pY,l~Y,tSH2!5)@CP.Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s350 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2!4,U).Rec(a!2,b~pY!3,g~pY!5).Rec(a!1,b~pY!4,g~pY!6).Syk(a~pY,l~Y,tSH2!5)@CP.Syk(a~pY,l~pY,tSH2!6)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s351 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!2,b~Y,g~pY!4).Rec(a!1,b~pY!3,g~pY!5).Syk(a~pY,l~pY,tSH2!4)@CP.Syk(a~pY,l~pY,tSH2!5)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s352 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2,U!4).Rec(a!2,b~Y!4,g~pY!5).Rec(a!1,b~pY!3,g~pY!6).Syk(a~pY,l~pY,tSH2!5)@CP.Syk(a~pY,l~pY,tSH2!6)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s353 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Rec(a!1,b~pY!3,g~pY!4).Rec(a!2,b~pY,g~pY!5).Syk(a~pY,l~pY,tSH2!5)@CP.Syk(a~pY,l~pY,tSH2!4)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(3)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
    s354 /* @PM::Lig(l!1,l!2)@EC.Lyn(SH2!3,U).Lyn(SH2!4,U).Rec(a!2,b~pY!3,g~pY!5).Rec(a!1,b~pY!4,g~pY!6).Syk(a~pY,l~pY,tSH2!5)@CP.Syk(a~pY,l~pY,tSH2!6)@CP */
    {
-      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(SQRT(4)*Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+      DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
    }
 }
 
@@ -5187,7 +5187,7 @@ INSTANTIATE Scene OBJECT
 
    s1_rel RELEASE_SITE
    {
-    SHAPE = Scene.CP //Scene.EC[obj_wall] - Scene.CP[obj_wall]
+    SHAPE = Scene.EC[obj_wall] - Scene.CP[obj_wall]
     MOLECULE = s1
     NUMBER_TO_RELEASE = Lig_tot
     RELEASE_PROBABILITY = 1
@@ -5219,31 +5219,36 @@ INSTANTIATE Scene OBJECT
 REACTION_DATA_OUTPUT
 {
    STEP = 5e-4
-   HEADER = ""
-   {
-    /*LynFree*/
-    COUNT[s2,WORLD]     :"LynFree",
+
+   /*LynFree*/
+   { COUNT[s2,WORLD] }=> "./react_data/LynFree.dat"
 
    /*RecMon*/
-    COUNT[s4,WORLD] + COUNT[s5,WORLD] + COUNT[s6,WORLD] + COUNT[s7,WORLD] + COUNT[s13,WORLD] + COUNT[s14,WORLD] + COUNT[s15,WORLD] + COUNT[s16,WORLD] + COUNT[s26,WORLD] + COUNT[s27,WORLD] + COUNT[s28,WORLD] + COUNT[s29,WORLD] + COUNT[s30,WORLD] + COUNT[s31,WORLD] + COUNT[s32,WORLD] + COUNT[s33,WORLD] + COUNT[s60,WORLD] + COUNT[s61,WORLD] + COUNT[s62,WORLD] + COUNT[s63,WORLD] + COUNT[s64,WORLD] + COUNT[s65,WORLD] + COUNT[s66,WORLD] + COUNT[s67,WORLD] + COUNT[s110,WORLD] + COUNT[s111,WORLD] + COUNT[s112,WORLD] + COUNT[s113,WORLD] + COUNT[s114,WORLD] + COUNT[s115,WORLD] + COUNT[s133,WORLD] + COUNT[s134,WORLD] + COUNT[s174,WORLD] + COUNT[s175,WORLD] + COUNT[s209,WORLD] + COUNT[s210,WORLD] + COUNT[s211,WORLD] + COUNT[s212,WORLD] + COUNT[s213,WORLD] + COUNT[s214,WORLD] + COUNT[s215,WORLD] + COUNT[s216,WORLD] + COUNT[s217,WORLD] + COUNT[s218,WORLD] + COUNT[s249,WORLD] + COUNT[s250,WORLD] + COUNT[s337,WORLD] + COUNT[s338,WORLD]      :"RecMon",
+   { COUNT[s4,WORLD] + COUNT[s5,WORLD] + COUNT[s6,WORLD] + COUNT[s7,WORLD] + COUNT[s13,WORLD] + COUNT[s14,WORLD] + COUNT[s15,WORLD] + COUNT[s16,WORLD] + COUNT[s26,WORLD] + COUNT[s27,WORLD] + COUNT[s28,WORLD] + COUNT[s29,WORLD] + COUNT[s30,WORLD] + COUNT[s31,WORLD] + COUNT[s32,WORLD] + COUNT[s33,WORLD] + COUNT[s60,WORLD] + COUNT[s61,WORLD] + COUNT[s62,WORLD] + COUNT[s63,WORLD] + COUNT[s64,WORLD] + COUNT[s65,WORLD] + COUNT[s66,WORLD] + COUNT[s67,WORLD] + COUNT[s110,WORLD] + COUNT[s111,WORLD] + COUNT[s112,WORLD] + COUNT[s113,WORLD] + COUNT[s114,WORLD] + COUNT[s115,WORLD] + COUNT[s133,WORLD] + COUNT[s134,WORLD] + COUNT[s174,WORLD] + COUNT[s175,WORLD] + COUNT[s209,WORLD] + COUNT[s210,WORLD] + COUNT[s211,WORLD] + COUNT[s212,WORLD] + COUNT[s213,WORLD] + COUNT[s214,WORLD] + COUNT[s215,WORLD] + COUNT[s216,WORLD] + COUNT[s217,WORLD] + COUNT[s218,WORLD] + COUNT[s249,WORLD] + COUNT[s250,WORLD] + COUNT[s337,WORLD] + COUNT[s338,WORLD] }=> "./react_data/RecMon.dat"
 
    /*RecDim*/
-    2*COUNT[s8,WORLD] + 2*COUNT[s9,WORLD] + 2*COUNT[s10,WORLD] + 2*COUNT[s11,WORLD] + 2*COUNT[s12,WORLD] + 2*COUNT[s17,WORLD] + 2*COUNT[s18,WORLD] + 2*COUNT[s19,WORLD] + 2*COUNT[s20,WORLD] + 2*COUNT[s21,WORLD] + 2*COUNT[s22,WORLD] + 2*COUNT[s23,WORLD] + 2*COUNT[s24,WORLD] + 2*COUNT[s25,WORLD] + 2*COUNT[s34,WORLD] + 2*COUNT[s35,WORLD] + 2*COUNT[s36,WORLD] + 2*COUNT[s37,WORLD] + 2*COUNT[s38,WORLD] + 2*COUNT[s39,WORLD] + 2*COUNT[s40,WORLD] + 2*COUNT[s41,WORLD] + 2*COUNT[s42,WORLD] + 2*COUNT[s43,WORLD] + 2*COUNT[s44,WORLD] + 2*COUNT[s45,WORLD] + 2*COUNT[s46,WORLD] + 2*COUNT[s47,WORLD] + 2*COUNT[s48,WORLD] + 2*COUNT[s49,WORLD] + 2*COUNT[s50,WORLD] + 2*COUNT[s51,WORLD] + 2*COUNT[s52,WORLD] + 2*COUNT[s53,WORLD] + 2*COUNT[s54,WORLD] + 2*COUNT[s55,WORLD] + 2*COUNT[s56,WORLD] + 2*COUNT[s57,WORLD] + 2*COUNT[s58,WORLD] + 2*COUNT[s59,WORLD] + 2*COUNT[s68,WORLD] + 2*COUNT[s69,WORLD] + 2*COUNT[s70,WORLD] + 2*COUNT[s71,WORLD] + 2*COUNT[s72,WORLD] + 2*COUNT[s73,WORLD] + 2*COUNT[s74,WORLD] + 2*COUNT[s75,WORLD] + 2*COUNT[s76,WORLD] + 2*COUNT[s77,WORLD] + 2*COUNT[s79,WORLD] + 2*COUNT[s80,WORLD] + 2*COUNT[s81,WORLD] + 2*COUNT[s82,WORLD] + 2*COUNT[s83,WORLD] + 2*COUNT[s84,WORLD] + 2*COUNT[s85,WORLD] + 2*COUNT[s86,WORLD] + 2*COUNT[s87,WORLD] + 2*COUNT[s88,WORLD] + 2*COUNT[s89,WORLD] + 2*COUNT[s90,WORLD] + 2*COUNT[s91,WORLD] + 2*COUNT[s92,WORLD] + 2*COUNT[s93,WORLD] + 2*COUNT[s94,WORLD] + 2*COUNT[s95,WORLD] + 2*COUNT[s96,WORLD] + 2*COUNT[s97,WORLD] + 2*COUNT[s98,WORLD] + 2*COUNT[s99,WORLD] + 2*COUNT[s100,WORLD] + 2*COUNT[s101,WORLD] + 2*COUNT[s102,WORLD] + 2*COUNT[s103,WORLD] + 2*COUNT[s104,WORLD] + 2*COUNT[s105,WORLD] + 2*COUNT[s106,WORLD] + 2*COUNT[s107,WORLD] + 2*COUNT[s108,WORLD] + 2*COUNT[s109,WORLD] + 2*COUNT[s116,WORLD] + 2*COUNT[s117,WORLD] + 2*COUNT[s118,WORLD] + 2*COUNT[s119,WORLD] + 2*COUNT[s120,WORLD] + 2*COUNT[s121,WORLD] + 2*COUNT[s122,WORLD] + 2*COUNT[s123,WORLD] + 2*COUNT[s124,WORLD] + 2*COUNT[s125,WORLD] + 2*COUNT[s126,WORLD] + 2*COUNT[s127,WORLD] + 2*COUNT[s128,WORLD] + 2*COUNT[s129,WORLD] + 2*COUNT[s130,WORLD] + 2*COUNT[s131,WORLD] + 2*COUNT[s132,WORLD] + 2*COUNT[s135,WORLD] + 2*COUNT[s136,WORLD] + 2*COUNT[s137,WORLD] + 2*COUNT[s138,WORLD] + 2*COUNT[s139,WORLD] + 2*COUNT[s140,WORLD] + 2*COUNT[s141,WORLD] + 2*COUNT[s142,WORLD] + 2*COUNT[s143,WORLD] + 2*COUNT[s144,WORLD] + 2*COUNT[s145,WORLD] + 2*COUNT[s146,WORLD] + 2*COUNT[s147,WORLD] + 2*COUNT[s148,WORLD] + 2*COUNT[s149,WORLD] + 2*COUNT[s150,WORLD] + 2*COUNT[s151,WORLD] + 2*COUNT[s152,WORLD] + 2*COUNT[s153,WORLD] + 2*COUNT[s154,WORLD] + 2*COUNT[s155,WORLD] + 2*COUNT[s156,WORLD] + 2*COUNT[s157,WORLD] + 2*COUNT[s158,WORLD] + 2*COUNT[s159,WORLD] + 2*COUNT[s160,WORLD] + 2*COUNT[s161,WORLD] + 2*COUNT[s162,WORLD] + 2*COUNT[s163,WORLD] + 2*COUNT[s164,WORLD] + 2*COUNT[s165,WORLD] + 2*COUNT[s166,WORLD] + 2*COUNT[s167,WORLD] + 2*COUNT[s168,WORLD] + 2*COUNT[s169,WORLD] + 2*COUNT[s170,WORLD] + 2*COUNT[s171,WORLD] + 2*COUNT[s172,WORLD] + 2*COUNT[s173,WORLD] + 2*COUNT[s176,WORLD] + 2*COUNT[s177,WORLD] + 2*COUNT[s178,WORLD] + 2*COUNT[s180,WORLD] + 2*COUNT[s181,WORLD] + 2*COUNT[s182,WORLD] + 2*COUNT[s183,WORLD] + 2*COUNT[s184,WORLD] + 2*COUNT[s185,WORLD] + 2*COUNT[s186,WORLD] + 2*COUNT[s187,WORLD] + 2*COUNT[s188,WORLD] + 2*COUNT[s189,WORLD] + 2*COUNT[s190,WORLD] + 2*COUNT[s191,WORLD] + 2*COUNT[s192,WORLD] + 2*COUNT[s193,WORLD] + 2*COUNT[s194,WORLD] + 2*COUNT[s195,WORLD] + 2*COUNT[s196,WORLD] + 2*COUNT[s197,WORLD] + 2*COUNT[s198,WORLD] + 2*COUNT[s199,WORLD] + 2*COUNT[s200,WORLD] + 2*COUNT[s201,WORLD] + 2*COUNT[s202,WORLD] + 2*COUNT[s203,WORLD] + 2*COUNT[s204,WORLD] + 2*COUNT[s205,WORLD] + 2*COUNT[s206,WORLD] + 2*COUNT[s207,WORLD] + 2*COUNT[s208,WORLD] + 2*COUNT[s219,WORLD] + 2*COUNT[s220,WORLD] + 2*COUNT[s221,WORLD] + 2*COUNT[s222,WORLD] + 2*COUNT[s223,WORLD] + 2*COUNT[s224,WORLD] + 2*COUNT[s225,WORLD] + 2*COUNT[s226,WORLD] + 2*COUNT[s227,WORLD] + 2*COUNT[s228,WORLD] + 2*COUNT[s229,WORLD] + 2*COUNT[s230,WORLD] + 2*COUNT[s231,WORLD] + 2*COUNT[s232,WORLD] + 2*COUNT[s233,WORLD] + 2*COUNT[s234,WORLD] + 2*COUNT[s235,WORLD] + 2*COUNT[s236,WORLD] + 2*COUNT[s237,WORLD] + 2*COUNT[s238,WORLD] + 2*COUNT[s239,WORLD] + 2*COUNT[s240,WORLD] + 2*COUNT[s241,WORLD] + 2*COUNT[s242,WORLD] + 2*COUNT[s243,WORLD] + 2*COUNT[s244,WORLD] + 2*COUNT[s245,WORLD] + 2*COUNT[s246,WORLD] + 2*COUNT[s247,WORLD] + 2*COUNT[s248,WORLD] + 2*COUNT[s251,WORLD] + 2*COUNT[s252,WORLD] + 2*COUNT[s253,WORLD] + 2*COUNT[s254,WORLD] + 2*COUNT[s255,WORLD] + 2*COUNT[s256,WORLD] + 2*COUNT[s257,WORLD] + 2*COUNT[s258,WORLD] + 2*COUNT[s259,WORLD] + 2*COUNT[s260,WORLD] + 2*COUNT[s261,WORLD] + 2*COUNT[s262,WORLD] + 2*COUNT[s263,WORLD] + 2*COUNT[s264,WORLD] + 2*COUNT[s265,WORLD] + 2*COUNT[s266,WORLD] + 2*COUNT[s267,WORLD] + 2*COUNT[s269,WORLD] + 2*COUNT[s270,WORLD] + 2*COUNT[s271,WORLD] + 2*COUNT[s272,WORLD] + 2*COUNT[s273,WORLD] + 2*COUNT[s274,WORLD] + 2*COUNT[s275,WORLD] + 2*COUNT[s276,WORLD] + 2*COUNT[s277,WORLD] + 2*COUNT[s278,WORLD] + 2*COUNT[s279,WORLD] + 2*COUNT[s280,WORLD] + 2*COUNT[s281,WORLD] + 2*COUNT[s282,WORLD] + 2*COUNT[s283,WORLD] + 2*COUNT[s284,WORLD] + 2*COUNT[s285,WORLD] + 2*COUNT[s286,WORLD] + 2*COUNT[s287,WORLD] + 2*COUNT[s288,WORLD] + 2*COUNT[s289,WORLD] + 2*COUNT[s290,WORLD] + 2*COUNT[s291,WORLD] + 2*COUNT[s292,WORLD] + 2*COUNT[s293,WORLD] + 2*COUNT[s294,WORLD] + 2*COUNT[s295,WORLD] + 2*COUNT[s296,WORLD] + 2*COUNT[s297,WORLD] + 2*COUNT[s298,WORLD] + 2*COUNT[s299,WORLD] + 2*COUNT[s300,WORLD] + 2*COUNT[s301,WORLD] + 2*COUNT[s302,WORLD] + 2*COUNT[s303,WORLD] + 2*COUNT[s304,WORLD] + 2*COUNT[s305,WORLD] + 2*COUNT[s306,WORLD] + 2*COUNT[s307,WORLD] + 2*COUNT[s308,WORLD] + 2*COUNT[s309,WORLD] + 2*COUNT[s310,WORLD] + 2*COUNT[s311,WORLD] + 2*COUNT[s312,WORLD] + 2*COUNT[s313,WORLD] + 2*COUNT[s314,WORLD] + 2*COUNT[s315,WORLD] + 2*COUNT[s316,WORLD] + 2*COUNT[s317,WORLD] + 2*COUNT[s318,WORLD] + 2*COUNT[s319,WORLD] + 2*COUNT[s320,WORLD] + 2*COUNT[s321,WORLD] + 2*COUNT[s322,WORLD] + 2*COUNT[s323,WORLD] + 2*COUNT[s324,WORLD] + 2*COUNT[s325,WORLD] + 2*COUNT[s326,WORLD] + 2*COUNT[s327,WORLD] + 2*COUNT[s328,WORLD] + 2*COUNT[s329,WORLD] + 2*COUNT[s330,WORLD] + 2*COUNT[s331,WORLD] + 2*COUNT[s332,WORLD] + 2*COUNT[s333,WORLD] + 2*COUNT[s334,WORLD] + 2*COUNT[s335,WORLD] + 2*COUNT[s336,WORLD] + 2*COUNT[s339,WORLD] + 2*COUNT[s340,WORLD] + 2*COUNT[s341,WORLD] + 2*COUNT[s342,WORLD] + 2*COUNT[s343,WORLD] + 2*COUNT[s344,WORLD] + 2*COUNT[s345,WORLD] + 2*COUNT[s346,WORLD] + 2*COUNT[s347,WORLD] + 2*COUNT[s348,WORLD] + 2*COUNT[s349,WORLD] + 2*COUNT[s350,WORLD] + 2*COUNT[s351,WORLD] + 2*COUNT[s352,WORLD] + 2*COUNT[s353,WORLD] + 2*COUNT[s354,WORLD]      :"RecDim",
+   { 2*COUNT[s8,WORLD] + 2*COUNT[s9,WORLD] + 2*COUNT[s10,WORLD] + 2*COUNT[s11,WORLD] + 2*COUNT[s12,WORLD] + 2*COUNT[s17,WORLD] + 2*COUNT[s18,WORLD] + 2*COUNT[s19,WORLD] + 2*COUNT[s20,WORLD] + 2*COUNT[s21,WORLD] + 2*COUNT[s22,WORLD] + 2*COUNT[s23,WORLD] + 2*COUNT[s24,WORLD] + 2*COUNT[s25,WORLD] + 2*COUNT[s34,WORLD] + 2*COUNT[s35,WORLD] + 2*COUNT[s36,WORLD] + 2*COUNT[s37,WORLD] + 2*COUNT[s38,WORLD] + 2*COUNT[s39,WORLD] + 2*COUNT[s40,WORLD] + 2*COUNT[s41,WORLD] + 2*COUNT[s42,WORLD] + 2*COUNT[s43,WORLD] + 2*COUNT[s44,WORLD] + 2*COUNT[s45,WORLD] + 2*COUNT[s46,WORLD] + 2*COUNT[s47,WORLD] + 2*COUNT[s48,WORLD] + 2*COUNT[s49,WORLD] + 2*COUNT[s50,WORLD] + 2*COUNT[s51,WORLD] + 2*COUNT[s52,WORLD] + 2*COUNT[s53,WORLD] + 2*COUNT[s54,WORLD] + 2*COUNT[s55,WORLD] + 2*COUNT[s56,WORLD] + 2*COUNT[s57,WORLD] + 2*COUNT[s58,WORLD] + 2*COUNT[s59,WORLD] + 2*COUNT[s68,WORLD] + 2*COUNT[s69,WORLD] + 2*COUNT[s70,WORLD] + 2*COUNT[s71,WORLD] + 2*COUNT[s72,WORLD] + 2*COUNT[s73,WORLD] + 2*COUNT[s74,WORLD] + 2*COUNT[s75,WORLD] + 2*COUNT[s76,WORLD] + 2*COUNT[s77,WORLD] + 2*COUNT[s79,WORLD] + 2*COUNT[s80,WORLD] + 2*COUNT[s81,WORLD] + 2*COUNT[s82,WORLD] + 2*COUNT[s83,WORLD] + 2*COUNT[s84,WORLD] + 2*COUNT[s85,WORLD] + 2*COUNT[s86,WORLD] + 2*COUNT[s87,WORLD] + 2*COUNT[s88,WORLD] + 2*COUNT[s89,WORLD] + 2*COUNT[s90,WORLD] + 2*COUNT[s91,WORLD] + 2*COUNT[s92,WORLD] + 2*COUNT[s93,WORLD] + 2*COUNT[s94,WORLD] + 2*COUNT[s95,WORLD] + 2*COUNT[s96,WORLD] + 2*COUNT[s97,WORLD] + 2*COUNT[s98,WORLD] + 2*COUNT[s99,WORLD] + 2*COUNT[s100,WORLD] + 2*COUNT[s101,WORLD] + 2*COUNT[s102,WORLD] + 2*COUNT[s103,WORLD] + 2*COUNT[s104,WORLD] + 2*COUNT[s105,WORLD] + 2*COUNT[s106,WORLD] + 2*COUNT[s107,WORLD] + 2*COUNT[s108,WORLD] + 2*COUNT[s109,WORLD] + 2*COUNT[s116,WORLD] + 2*COUNT[s117,WORLD] + 2*COUNT[s118,WORLD] + 2*COUNT[s119,WORLD] + 2*COUNT[s120,WORLD] + 2*COUNT[s121,WORLD] + 2*COUNT[s122,WORLD] + 2*COUNT[s123,WORLD] + 2*COUNT[s124,WORLD] + 2*COUNT[s125,WORLD] + 2*COUNT[s126,WORLD] + 2*COUNT[s127,WORLD] + 2*COUNT[s128,WORLD] + 2*COUNT[s129,WORLD] + 2*COUNT[s130,WORLD] + 2*COUNT[s131,WORLD] + 2*COUNT[s132,WORLD] + 2*COUNT[s135,WORLD] + 2*COUNT[s136,WORLD] + 2*COUNT[s137,WORLD] + 2*COUNT[s138,WORLD] + 2*COUNT[s139,WORLD] + 2*COUNT[s140,WORLD] + 2*COUNT[s141,WORLD] + 2*COUNT[s142,WORLD] + 2*COUNT[s143,WORLD] + 2*COUNT[s144,WORLD] + 2*COUNT[s145,WORLD] + 2*COUNT[s146,WORLD] + 2*COUNT[s147,WORLD] + 2*COUNT[s148,WORLD] + 2*COUNT[s149,WORLD] + 2*COUNT[s150,WORLD] + 2*COUNT[s151,WORLD] + 2*COUNT[s152,WORLD] + 2*COUNT[s153,WORLD] + 2*COUNT[s154,WORLD] + 2*COUNT[s155,WORLD] + 2*COUNT[s156,WORLD] + 2*COUNT[s157,WORLD] + 2*COUNT[s158,WORLD] + 2*COUNT[s159,WORLD] + 2*COUNT[s160,WORLD] + 2*COUNT[s161,WORLD] + 2*COUNT[s162,WORLD] + 2*COUNT[s163,WORLD] + 2*COUNT[s164,WORLD] + 2*COUNT[s165,WORLD] + 2*COUNT[s166,WORLD] + 2*COUNT[s167,WORLD] + 2*COUNT[s168,WORLD] + 2*COUNT[s169,WORLD] + 2*COUNT[s170,WORLD] + 2*COUNT[s171,WORLD] + 2*COUNT[s172,WORLD] + 2*COUNT[s173,WORLD] + 2*COUNT[s176,WORLD] + 2*COUNT[s177,WORLD] + 2*COUNT[s178,WORLD] + 2*COUNT[s180,WORLD] + 2*COUNT[s181,WORLD] + 2*COUNT[s182,WORLD] + 2*COUNT[s183,WORLD] + 2*COUNT[s184,WORLD] + 2*COUNT[s185,WORLD] + 2*COUNT[s186,WORLD] + 2*COUNT[s187,WORLD] + 2*COUNT[s188,WORLD] + 2*COUNT[s189,WORLD] + 2*COUNT[s190,WORLD] + 2*COUNT[s191,WORLD] + 2*COUNT[s192,WORLD] + 2*COUNT[s193,WORLD] + 2*COUNT[s194,WORLD] + 2*COUNT[s195,WORLD] + 2*COUNT[s196,WORLD] + 2*COUNT[s197,WORLD] + 2*COUNT[s198,WORLD] + 2*COUNT[s199,WORLD] + 2*COUNT[s200,WORLD] + 2*COUNT[s201,WORLD] + 2*COUNT[s202,WORLD] + 2*COUNT[s203,WORLD] + 2*COUNT[s204,WORLD] + 2*COUNT[s205,WORLD] + 2*COUNT[s206,WORLD] + 2*COUNT[s207,WORLD] + 2*COUNT[s208,WORLD] + 2*COUNT[s219,WORLD] + 2*COUNT[s220,WORLD] + 2*COUNT[s221,WORLD] + 2*COUNT[s222,WORLD] + 2*COUNT[s223,WORLD] + 2*COUNT[s224,WORLD] + 2*COUNT[s225,WORLD] + 2*COUNT[s226,WORLD] + 2*COUNT[s227,WORLD] + 2*COUNT[s228,WORLD] + 2*COUNT[s229,WORLD] + 2*COUNT[s230,WORLD] + 2*COUNT[s231,WORLD] + 2*COUNT[s232,WORLD] + 2*COUNT[s233,WORLD] + 2*COUNT[s234,WORLD] + 2*COUNT[s235,WORLD] + 2*COUNT[s236,WORLD] + 2*COUNT[s237,WORLD] + 2*COUNT[s238,WORLD] + 2*COUNT[s239,WORLD] + 2*COUNT[s240,WORLD] + 2*COUNT[s241,WORLD] + 2*COUNT[s242,WORLD] + 2*COUNT[s243,WORLD] + 2*COUNT[s244,WORLD] + 2*COUNT[s245,WORLD] + 2*COUNT[s246,WORLD] + 2*COUNT[s247,WORLD] + 2*COUNT[s248,WORLD] + 2*COUNT[s251,WORLD] + 2*COUNT[s252,WORLD] + 2*COUNT[s253,WORLD] + 2*COUNT[s254,WORLD] + 2*COUNT[s255,WORLD] + 2*COUNT[s256,WORLD] + 2*COUNT[s257,WORLD] + 2*COUNT[s258,WORLD] + 2*COUNT[s259,WORLD] + 2*COUNT[s260,WORLD] + 2*COUNT[s261,WORLD] + 2*COUNT[s262,WORLD] + 2*COUNT[s263,WORLD] + 2*COUNT[s264,WORLD] + 2*COUNT[s265,WORLD] + 2*COUNT[s266,WORLD] + 2*COUNT[s267,WORLD] + 2*COUNT[s269,WORLD] + 2*COUNT[s270,WORLD] + 2*COUNT[s271,WORLD] + 2*COUNT[s272,WORLD] + 2*COUNT[s273,WORLD] + 2*COUNT[s274,WORLD] + 2*COUNT[s275,WORLD] + 2*COUNT[s276,WORLD] + 2*COUNT[s277,WORLD] + 2*COUNT[s278,WORLD] + 2*COUNT[s279,WORLD] + 2*COUNT[s280,WORLD] + 2*COUNT[s281,WORLD] + 2*COUNT[s282,WORLD] + 2*COUNT[s283,WORLD] + 2*COUNT[s284,WORLD] + 2*COUNT[s285,WORLD] + 2*COUNT[s286,WORLD] + 2*COUNT[s287,WORLD] + 2*COUNT[s288,WORLD] + 2*COUNT[s289,WORLD] + 2*COUNT[s290,WORLD] + 2*COUNT[s291,WORLD] + 2*COUNT[s292,WORLD] + 2*COUNT[s293,WORLD] + 2*COUNT[s294,WORLD] + 2*COUNT[s295,WORLD] + 2*COUNT[s296,WORLD] + 2*COUNT[s297,WORLD] + 2*COUNT[s298,WORLD] + 2*COUNT[s299,WORLD] + 2*COUNT[s300,WORLD] + 2*COUNT[s301,WORLD] + 2*COUNT[s302,WORLD] + 2*COUNT[s303,WORLD] + 2*COUNT[s304,WORLD] + 2*COUNT[s305,WORLD] + 2*COUNT[s306,WORLD] + 2*COUNT[s307,WORLD] + 2*COUNT[s308,WORLD] + 2*COUNT[s309,WORLD] + 2*COUNT[s310,WORLD] + 2*COUNT[s311,WORLD] + 2*COUNT[s312,WORLD] + 2*COUNT[s313,WORLD] + 2*COUNT[s314,WORLD] + 2*COUNT[s315,WORLD] + 2*COUNT[s316,WORLD] + 2*COUNT[s317,WORLD] + 2*COUNT[s318,WORLD] + 2*COUNT[s319,WORLD] + 2*COUNT[s320,WORLD] + 2*COUNT[s321,WORLD] + 2*COUNT[s322,WORLD] + 2*COUNT[s323,WORLD] + 2*COUNT[s324,WORLD] + 2*COUNT[s325,WORLD] + 2*COUNT[s326,WORLD] + 2*COUNT[s327,WORLD] + 2*COUNT[s328,WORLD] + 2*COUNT[s329,WORLD] + 2*COUNT[s330,WORLD] + 2*COUNT[s331,WORLD] + 2*COUNT[s332,WORLD] + 2*COUNT[s333,WORLD] + 2*COUNT[s334,WORLD] + 2*COUNT[s335,WORLD] + 2*COUNT[s336,WORLD] + 2*COUNT[s339,WORLD] + 2*COUNT[s340,WORLD] + 2*COUNT[s341,WORLD] + 2*COUNT[s342,WORLD] + 2*COUNT[s343,WORLD] + 2*COUNT[s344,WORLD] + 2*COUNT[s345,WORLD] + 2*COUNT[s346,WORLD] + 2*COUNT[s347,WORLD] + 2*COUNT[s348,WORLD] + 2*COUNT[s349,WORLD] + 2*COUNT[s350,WORLD] + 2*COUNT[s351,WORLD] + 2*COUNT[s352,WORLD] + 2*COUNT[s353,WORLD] + 2*COUNT[s354,WORLD] }=> "./react_data/RecDim.dat"
 
    /*RecPbeta*/
-    COUNT[s11,WORLD] + COUNT[s13,WORLD] + COUNT[s14,WORLD] + COUNT[s18,WORLD] + COUNT[s20,WORLD] + COUNT[s21,WORLD] + 2*COUNT[s23,WORLD] + COUNT[s24,WORLD] + COUNT[s28,WORLD] + COUNT[s29,WORLD] + COUNT[s30,WORLD] + COUNT[s31,WORLD] + COUNT[s36,WORLD] + COUNT[s37,WORLD] + COUNT[s39,WORLD] + COUNT[s41,WORLD] + COUNT[s42,WORLD] + COUNT[s44,WORLD] + 2*COUNT[s45,WORLD] + 2*COUNT[s46,WORLD] + COUNT[s47,WORLD] + COUNT[s49,WORLD] + COUNT[s50,WORLD] + COUNT[s52,WORLD] + 2*COUNT[s54,WORLD] + 2*COUNT[s55,WORLD] + COUNT[s56,WORLD] + 2*COUNT[s57,WORLD] + COUNT[s58,WORLD] + COUNT[s62,WORLD] + COUNT[s63,WORLD] + COUNT[s64,WORLD] + COUNT[s65,WORLD] + COUNT[s70,WORLD] + COUNT[s71,WORLD] + COUNT[s73,WORLD] + COUNT[s75,WORLD] + COUNT[s76,WORLD] + COUNT[s77,WORLD] + COUNT[s79,WORLD] + 2*COUNT[s80,WORLD] + 2*COUNT[s81,WORLD] + COUNT[s82,WORLD] + COUNT[s84,WORLD] + COUNT[s85,WORLD] + COUNT[s87,WORLD] + COUNT[s89,WORLD] + 2*COUNT[s90,WORLD] + 2*COUNT[s91,WORLD] + COUNT[s92,WORLD] + 2*COUNT[s93,WORLD] + 2*COUNT[s94,WORLD] + COUNT[s95,WORLD] + COUNT[s97,WORLD] + COUNT[s98,WORLD] + COUNT[s101,WORLD] + COUNT[s102,WORLD] + 2*COUNT[s104,WORLD] + 2*COUNT[s105,WORLD] + COUNT[s106,WORLD] + 2*COUNT[s107,WORLD] + COUNT[s108,WORLD] + COUNT[s112,WORLD] + COUNT[s113,WORLD] + COUNT[s114,WORLD] + COUNT[s115,WORLD] + COUNT[s117,WORLD] + COUNT[s118,WORLD] + COUNT[s120,WORLD] + COUNT[s121,WORLD] + COUNT[s122,WORLD] + COUNT[s123,WORLD] + 2*COUNT[s124,WORLD] + COUNT[s126,WORLD] + COUNT[s127,WORLD] + COUNT[s128,WORLD] + 2*COUNT[s130,WORLD] + 2*COUNT[s131,WORLD] + COUNT[s132,WORLD] + COUNT[s133,WORLD] + COUNT[s134,WORLD] + COUNT[s135,WORLD] + COUNT[s137,WORLD] + COUNT[s138,WORLD] + 2*COUNT[s140,WORLD] + 2*COUNT[s141,WORLD] + COUNT[s142,WORLD] + COUNT[s143,WORLD] + 2*COUNT[s144,WORLD] + 2*COUNT[s145,WORLD] + 2*COUNT[s146,WORLD] + 2*COUNT[s147,WORLD] + COUNT[s148,WORLD] + COUNT[s149,WORLD] + COUNT[s150,WORLD] + COUNT[s151,WORLD] + COUNT[s152,WORLD] + COUNT[s153,WORLD] + 2*COUNT[s154,WORLD] + 2*COUNT[s155,WORLD] + 2*COUNT[s156,WORLD] + 2*COUNT[s157,WORLD] + 2*COUNT[s158,WORLD] + 2*COUNT[s159,WORLD] + COUNT[s161,WORLD] + COUNT[s162,WORLD] + COUNT[s163,WORLD] + COUNT[s165,WORLD] + COUNT[s166,WORLD] + COUNT[s167,WORLD] + 2*COUNT[s168,WORLD] + 2*COUNT[s169,WORLD] + 2*COUNT[s170,WORLD] + 2*COUNT[s171,WORLD] + 2*COUNT[s172,WORLD] + 2*COUNT[s173,WORLD] + COUNT[s180,WORLD] + COUNT[s181,WORLD] + COUNT[s185,WORLD] + COUNT[s186,WORLD] + 2*COUNT[s189,WORLD] + COUNT[s190,WORLD] + COUNT[s191,WORLD] + COUNT[s195,WORLD] + COUNT[s196,WORLD] + COUNT[s202,WORLD] + COUNT[s204,WORLD] + COUNT[s205,WORLD] + COUNT[s206,WORLD] + COUNT[s207,WORLD] + COUNT[s208,WORLD] + COUNT[s211,WORLD] + COUNT[s212,WORLD] + COUNT[s217,WORLD] + COUNT[s218,WORLD] + COUNT[s220,WORLD] + COUNT[s221,WORLD] + COUNT[s224,WORLD] + COUNT[s225,WORLD] + COUNT[s227,WORLD] + COUNT[s228,WORLD] + COUNT[s229,WORLD] + 2*COUNT[s230,WORLD] + 2*COUNT[s231,WORLD] + COUNT[s232,WORLD] + COUNT[s233,WORLD] + COUNT[s234,WORLD] + COUNT[s236,WORLD] + COUNT[s238,WORLD] + COUNT[s240,WORLD] + COUNT[s241,WORLD] + COUNT[s242,WORLD] + 2*COUNT[s243,WORLD] + COUNT[s244,WORLD] + COUNT[s245,WORLD] + COUNT[s246,WORLD] + 2*COUNT[s247,WORLD] + 2*COUNT[s248,WORLD] + COUNT[s249,WORLD] + COUNT[s250,WORLD] + COUNT[s251,WORLD] + COUNT[s252,WORLD] + COUNT[s253,WORLD] + 2*COUNT[s254,WORLD] + COUNT[s255,WORLD] + 2*COUNT[s256,WORLD] + 2*COUNT[s257,WORLD] + 2*COUNT[s258,WORLD] + 2*COUNT[s259,WORLD] + 2*COUNT[s260,WORLD] + COUNT[s261,WORLD] + COUNT[s262,WORLD] + 2*COUNT[s263,WORLD] + 2*COUNT[s264,WORLD] + 2*COUNT[s265,WORLD] + 2*COUNT[s266,WORLD] + COUNT[s270,WORLD] + COUNT[s272,WORLD] + COUNT[s275,WORLD] + 2*COUNT[s276,WORLD] + 2*COUNT[s277,WORLD] + COUNT[s278,WORLD] + COUNT[s279,WORLD] + COUNT[s280,WORLD] + COUNT[s281,WORLD] + COUNT[s282,WORLD] + COUNT[s283,WORLD] + COUNT[s284,WORLD] + COUNT[s285,WORLD] + COUNT[s286,WORLD] + 2*COUNT[s287,WORLD] + 2*COUNT[s288,WORLD] + 2*COUNT[s289,WORLD] + 2*COUNT[s290,WORLD] + 2*COUNT[s291,WORLD] + 2*COUNT[s292,WORLD] + COUNT[s293,WORLD] + COUNT[s296,WORLD] + 2*COUNT[s298,WORLD] + COUNT[s299,WORLD] + COUNT[s302,WORLD] + COUNT[s306,WORLD] + COUNT[s309,WORLD] + COUNT[s310,WORLD] + COUNT[s311,WORLD] + 2*COUNT[s312,WORLD] + COUNT[s313,WORLD] + COUNT[s314,WORLD] + 2*COUNT[s315,WORLD] + COUNT[s316,WORLD] + COUNT[s317,WORLD] + 2*COUNT[s318,WORLD] + COUNT[s319,WORLD] + COUNT[s320,WORLD] + 2*COUNT[s321,WORLD] + COUNT[s322,WORLD] + COUNT[s323,WORLD] + COUNT[s324,WORLD] + COUNT[s325,WORLD] + 2*COUNT[s326,WORLD] + 2*COUNT[s327,WORLD] + COUNT[s329,WORLD] + COUNT[s330,WORLD] + COUNT[s332,WORLD] + COUNT[s333,WORLD] + 2*COUNT[s334,WORLD] + 2*COUNT[s335,WORLD] + 2*COUNT[s336,WORLD] + COUNT[s337,WORLD] + COUNT[s338,WORLD] + COUNT[s339,WORLD] + COUNT[s340,WORLD] + COUNT[s341,WORLD] + COUNT[s342,WORLD] + COUNT[s343,WORLD] + 2*COUNT[s344,WORLD] + 2*COUNT[s345,WORLD] + 2*COUNT[s346,WORLD] + 2*COUNT[s347,WORLD] + COUNT[s348,WORLD] + 2*COUNT[s349,WORLD] + 2*COUNT[s350,WORLD] + COUNT[s351,WORLD] + COUNT[s352,WORLD] + 2*COUNT[s353,WORLD] + 2*COUNT[s354,WORLD]      :"RecPbeta",
+   { COUNT[s11,WORLD] + COUNT[s13,WORLD] + COUNT[s14,WORLD] + COUNT[s18,WORLD] + COUNT[s20,WORLD] + COUNT[s21,WORLD] + 2*COUNT[s23,WORLD] + COUNT[s24,WORLD] + COUNT[s28,WORLD] + COUNT[s29,WORLD] + COUNT[s30,WORLD] + COUNT[s31,WORLD] + COUNT[s36,WORLD] + COUNT[s37,WORLD] + COUNT[s39,WORLD] + COUNT[s41,WORLD] + COUNT[s42,WORLD] + COUNT[s44,WORLD] + 2*COUNT[s45,WORLD] + 2*COUNT[s46,WORLD] + COUNT[s47,WORLD] + COUNT[s49,WORLD] + COUNT[s50,WORLD] + COUNT[s52,WORLD] + 2*COUNT[s54,WORLD] + 2*COUNT[s55,WORLD] + COUNT[s56,WORLD] + 2*COUNT[s57,WORLD] + COUNT[s58,WORLD] + COUNT[s62,WORLD] + COUNT[s63,WORLD] + COUNT[s64,WORLD] + COUNT[s65,WORLD] + COUNT[s70,WORLD] + COUNT[s71,WORLD] + COUNT[s73,WORLD] + COUNT[s75,WORLD] + COUNT[s76,WORLD] + COUNT[s77,WORLD] + COUNT[s79,WORLD] + 2*COUNT[s80,WORLD] + 2*COUNT[s81,WORLD] + COUNT[s82,WORLD] + COUNT[s84,WORLD] + COUNT[s85,WORLD] + COUNT[s87,WORLD] + COUNT[s89,WORLD] + 2*COUNT[s90,WORLD] + 2*COUNT[s91,WORLD] + COUNT[s92,WORLD] + 2*COUNT[s93,WORLD] + 2*COUNT[s94,WORLD] + COUNT[s95,WORLD] + COUNT[s97,WORLD] + COUNT[s98,WORLD] + COUNT[s101,WORLD] + COUNT[s102,WORLD] + 2*COUNT[s104,WORLD] + 2*COUNT[s105,WORLD] + COUNT[s106,WORLD] + 2*COUNT[s107,WORLD] + COUNT[s108,WORLD] + COUNT[s112,WORLD] + COUNT[s113,WORLD] + COUNT[s114,WORLD] + COUNT[s115,WORLD] + COUNT[s117,WORLD] + COUNT[s118,WORLD] + COUNT[s120,WORLD] + COUNT[s121,WORLD] + COUNT[s122,WORLD] + COUNT[s123,WORLD] + 2*COUNT[s124,WORLD] + COUNT[s126,WORLD] + COUNT[s127,WORLD] + COUNT[s128,WORLD] + 2*COUNT[s130,WORLD] + 2*COUNT[s131,WORLD] + COUNT[s132,WORLD] + COUNT[s133,WORLD] + COUNT[s134,WORLD] + COUNT[s135,WORLD] + COUNT[s137,WORLD] + COUNT[s138,WORLD] + 2*COUNT[s140,WORLD] + 2*COUNT[s141,WORLD] + COUNT[s142,WORLD] + COUNT[s143,WORLD] + 2*COUNT[s144,WORLD] + 2*COUNT[s145,WORLD] + 2*COUNT[s146,WORLD] + 2*COUNT[s147,WORLD] + COUNT[s148,WORLD] + COUNT[s149,WORLD] + COUNT[s150,WORLD] + COUNT[s151,WORLD] + COUNT[s152,WORLD] + COUNT[s153,WORLD] + 2*COUNT[s154,WORLD] + 2*COUNT[s155,WORLD] + 2*COUNT[s156,WORLD] + 2*COUNT[s157,WORLD] + 2*COUNT[s158,WORLD] + 2*COUNT[s159,WORLD] + COUNT[s161,WORLD] + COUNT[s162,WORLD] + COUNT[s163,WORLD] + COUNT[s165,WORLD] + COUNT[s166,WORLD] + COUNT[s167,WORLD] + 2*COUNT[s168,WORLD] + 2*COUNT[s169,WORLD] + 2*COUNT[s170,WORLD] + 2*COUNT[s171,WORLD] + 2*COUNT[s172,WORLD] + 2*COUNT[s173,WORLD] + COUNT[s180,WORLD] + COUNT[s181,WORLD] + COUNT[s185,WORLD] + COUNT[s186,WORLD] + 2*COUNT[s189,WORLD] + COUNT[s190,WORLD] + COUNT[s191,WORLD] + COUNT[s195,WORLD] + COUNT[s196,WORLD] + COUNT[s202,WORLD] + COUNT[s204,WORLD] + COUNT[s205,WORLD] + COUNT[s206,WORLD] + COUNT[s207,WORLD] + COUNT[s208,WORLD] + COUNT[s211,WORLD] + COUNT[s212,WORLD] + COUNT[s217,WORLD] + COUNT[s218,WORLD] + COUNT[s220,WORLD] + COUNT[s221,WORLD] + COUNT[s224,WORLD] + COUNT[s225,WORLD] + COUNT[s227,WORLD] + COUNT[s228,WORLD] + COUNT[s229,WORLD] + 2*COUNT[s230,WORLD] + 2*COUNT[s231,WORLD] + COUNT[s232,WORLD] + COUNT[s233,WORLD] + COUNT[s234,WORLD] + COUNT[s236,WORLD] + COUNT[s238,WORLD] + COUNT[s240,WORLD] + COUNT[s241,WORLD] + COUNT[s242,WORLD] + 2*COUNT[s243,WORLD] + COUNT[s244,WORLD] + COUNT[s245,WORLD] + COUNT[s246,WORLD] + 2*COUNT[s247,WORLD] + 2*COUNT[s248,WORLD] + COUNT[s249,WORLD] + COUNT[s250,WORLD] + COUNT[s251,WORLD] + COUNT[s252,WORLD] + COUNT[s253,WORLD] + 2*COUNT[s254,WORLD] + COUNT[s255,WORLD] + 2*COUNT[s256,WORLD] + 2*COUNT[s257,WORLD] + 2*COUNT[s258,WORLD] + 2*COUNT[s259,WORLD] + 2*COUNT[s260,WORLD] + COUNT[s261,WORLD] + COUNT[s262,WORLD] + 2*COUNT[s263,WORLD] + 2*COUNT[s264,WORLD] + 2*COUNT[s265,WORLD] + 2*COUNT[s266,WORLD] + COUNT[s270,WORLD] + COUNT[s272,WORLD] + COUNT[s275,WORLD] + 2*COUNT[s276,WORLD] + 2*COUNT[s277,WORLD] + COUNT[s278,WORLD] + COUNT[s279,WORLD] + COUNT[s280,WORLD] + COUNT[s281,WORLD] + COUNT[s282,WORLD] + COUNT[s283,WORLD] + COUNT[s284,WORLD] + COUNT[s285,WORLD] + COUNT[s286,WORLD] + 2*COUNT[s287,WORLD] + 2*COUNT[s288,WORLD] + 2*COUNT[s289,WORLD] + 2*COUNT[s290,WORLD] + 2*COUNT[s291,WORLD] + 2*COUNT[s292,WORLD] + COUNT[s293,WORLD] + COUNT[s296,WORLD] + 2*COUNT[s298,WORLD] + COUNT[s299,WORLD] + COUNT[s302,WORLD] + COUNT[s306,WORLD] + COUNT[s309,WORLD] + COUNT[s310,WORLD] + COUNT[s311,WORLD] + 2*COUNT[s312,WORLD] + COUNT[s313,WORLD] + COUNT[s314,WORLD] + 2*COUNT[s315,WORLD] + COUNT[s316,WORLD] + COUNT[s317,WORLD] + 2*COUNT[s318,WORLD] + COUNT[s319,WORLD] + COUNT[s320,WORLD] + 2*COUNT[s321,WORLD] + COUNT[s322,WORLD] + COUNT[s323,WORLD] + COUNT[s324,WORLD] + COUNT[s325,WORLD] + 2*COUNT[s326,WORLD] + 2*COUNT[s327,WORLD] + COUNT[s329,WORLD] + COUNT[s330,WORLD] + COUNT[s332,WORLD] + COUNT[s333,WORLD] + 2*COUNT[s334,WORLD] + 2*COUNT[s335,WORLD] + 2*COUNT[s336,WORLD] + COUNT[s337,WORLD] + COUNT[s338,WORLD] + COUNT[s339,WORLD] + COUNT[s340,WORLD] + COUNT[s341,WORLD] + COUNT[s342,WORLD] + COUNT[s343,WORLD] + 2*COUNT[s344,WORLD] + 2*COUNT[s345,WORLD] + 2*COUNT[s346,WORLD] + 2*COUNT[s347,WORLD] + COUNT[s348,WORLD] + 2*COUNT[s349,WORLD] + 2*COUNT[s350,WORLD] + COUNT[s351,WORLD] + COUNT[s352,WORLD] + 2*COUNT[s353,WORLD] + 2*COUNT[s354,WORLD] }=> "./react_data/RecPbeta.dat"
 
    /*RecPgamma*/
-    COUNT[s12,WORLD] + COUNT[s15,WORLD] + COUNT[s16,WORLD] + COUNT[s17,WORLD] + COUNT[s19,WORLD] + COUNT[s20,WORLD] + COUNT[s22,WORLD] + COUNT[s24,WORLD] + 2*COUNT[s25,WORLD] + COUNT[s26,WORLD] + COUNT[s27,WORLD] + COUNT[s28,WORLD] + COUNT[s29,WORLD] + COUNT[s32,WORLD] + COUNT[s33,WORLD] + COUNT[s34,WORLD] + COUNT[s35,WORLD] + COUNT[s36,WORLD] + COUNT[s38,WORLD] + COUNT[s39,WORLD] + 2*COUNT[s40,WORLD] + COUNT[s41,WORLD] + COUNT[s42,WORLD] + COUNT[s43,WORLD] + COUNT[s44,WORLD] + COUNT[s45,WORLD] + COUNT[s47,WORLD] + 2*COUNT[s48,WORLD] + 2*COUNT[s49,WORLD] + COUNT[s50,WORLD] + 2*COUNT[s51,WORLD] + 2*COUNT[s52,WORLD] + 2*COUNT[s53,WORLD] + 2*COUNT[s54,WORLD] + COUNT[s55,WORLD] + 2*COUNT[s56,WORLD] + COUNT[s58,WORLD] + 2*COUNT[s59,WORLD] + COUNT[s60,WORLD] + COUNT[s61,WORLD] + COUNT[s62,WORLD] + COUNT[s63,WORLD] + COUNT[s64,WORLD] + COUNT[s65,WORLD] + COUNT[s66,WORLD] + COUNT[s67,WORLD] + COUNT[s68,WORLD] + COUNT[s69,WORLD] + COUNT[s70,WORLD] + COUNT[s71,WORLD] + COUNT[s72,WORLD] + COUNT[s73,WORLD] + 2*COUNT[s74,WORLD] + 2*COUNT[s75,WORLD] + COUNT[s76,WORLD] + COUNT[s77,WORLD] + COUNT[s79,WORLD] + COUNT[s80,WORLD] + COUNT[s81,WORLD] + COUNT[s82,WORLD] + 2*COUNT[s83,WORLD] + 2*COUNT[s84,WORLD] + 2*COUNT[s85,WORLD] + 2*COUNT[s86,WORLD] + 2*COUNT[s87,WORLD] + 2*COUNT[s88,WORLD] + 2*COUNT[s89,WORLD] + 2*COUNT[s90,WORLD] + 2*COUNT[s91,WORLD] + 2*COUNT[s92,WORLD] + COUNT[s93,WORLD] + COUNT[s94,WORLD] + COUNT[s95,WORLD] + 2*COUNT[s96,WORLD] + 2*COUNT[s97,WORLD] + 2*COUNT[s98,WORLD] + 2*COUNT[s99,WORLD] + 2*COUNT[s100,WORLD] + 2*COUNT[s101,WORLD] + 2*COUNT[s102,WORLD] + 2*COUNT[s103,WORLD] + 2*COUNT[s104,WORLD] + 2*COUNT[s105,WORLD] + 2*COUNT[s106,WORLD] + 2*COUNT[s107,WORLD] + 2*COUNT[s108,WORLD] + 2*COUNT[s109,WORLD] + COUNT[s110,WORLD] + COUNT[s111,WORLD] + COUNT[s112,WORLD] + COUNT[s113,WORLD] + COUNT[s114,WORLD] + COUNT[s115,WORLD] + COUNT[s116,WORLD] + COUNT[s117,WORLD] + COUNT[s118,WORLD] + 2*COUNT[s119,WORLD] + COUNT[s120,WORLD] + 2*COUNT[s121,WORLD] + COUNT[s122,WORLD] + COUNT[s123,WORLD] + COUNT[s124,WORLD] + 2*COUNT[s125,WORLD] + 2*COUNT[s126,WORLD] + 2*COUNT[s127,WORLD] + 2*COUNT[s128,WORLD] + 2*COUNT[s129,WORLD] + 2*COUNT[s130,WORLD] + COUNT[s131,WORLD] + 2*COUNT[s132,WORLD] + COUNT[s133,WORLD] + COUNT[s134,WORLD] + COUNT[s135,WORLD] + 2*COUNT[s136,WORLD] + 2*COUNT[s137,WORLD] + 2*COUNT[s138,WORLD] + 2*COUNT[s139,WORLD] + COUNT[s140,WORLD] + COUNT[s141,WORLD] + 2*COUNT[s142,WORLD] + 2*COUNT[s143,WORLD] + 2*COUNT[s144,WORLD] + 2*COUNT[s145,WORLD] + COUNT[s146,WORLD] + COUNT[s147,WORLD] + 2*COUNT[s148,WORLD] + 2*COUNT[s149,WORLD] + 2*COUNT[s150,WORLD] + 2*COUNT[s151,WORLD] + 2*COUNT[s152,WORLD] + 2*COUNT[s153,WORLD] + 2*COUNT[s154,WORLD] + 2*COUNT[s155,WORLD] + 2*COUNT[s156,WORLD] + 2*COUNT[s157,WORLD] + 2*COUNT[s158,WORLD] + 2*COUNT[s159,WORLD] + 2*COUNT[s160,WORLD] + 2*COUNT[s161,WORLD] + 2*COUNT[s162,WORLD] + 2*COUNT[s163,WORLD] + 2*COUNT[s164,WORLD] + 2*COUNT[s165,WORLD] + 2*COUNT[s166,WORLD] + 2*COUNT[s167,WORLD] + 2*COUNT[s168,WORLD] + 2*COUNT[s169,WORLD] + 2*COUNT[s170,WORLD] + 2*COUNT[s171,WORLD] + 2*COUNT[s172,WORLD] + 2*COUNT[s173,WORLD] + COUNT[s174,WORLD] + COUNT[s175,WORLD] + 2*COUNT[s176,WORLD] + 2*COUNT[s177,WORLD] + 2*COUNT[s178,WORLD] + 2*COUNT[s180,WORLD] + 2*COUNT[s181,WORLD] + 2*COUNT[s182,WORLD] + 2*COUNT[s183,WORLD] + 2*COUNT[s184,WORLD] + 2*COUNT[s185,WORLD] + 2*COUNT[s186,WORLD] + 2*COUNT[s187,WORLD] + 2*COUNT[s188,WORLD] + 2*COUNT[s189,WORLD] + 2*COUNT[s190,WORLD] + 2*COUNT[s191,WORLD] + 2*COUNT[s192,WORLD] + 2*COUNT[s193,WORLD] + 2*COUNT[s194,WORLD] + 2*COUNT[s195,WORLD] + 2*COUNT[s196,WORLD] + 2*COUNT[s197,WORLD] + 2*COUNT[s198,WORLD] + 2*COUNT[s199,WORLD] + COUNT[s200,WORLD] + COUNT[s201,WORLD] + COUNT[s202,WORLD] + 2*COUNT[s203,WORLD] + 2*COUNT[s204,WORLD] + COUNT[s205,WORLD] + 2*COUNT[s206,WORLD] + 2*COUNT[s207,WORLD] + 2*COUNT[s208,WORLD] + COUNT[s209,WORLD] + COUNT[s210,WORLD] + COUNT[s211,WORLD] + COUNT[s212,WORLD] + COUNT[s213,WORLD] + COUNT[s214,WORLD] + COUNT[s215,WORLD] + COUNT[s216,WORLD] + COUNT[s217,WORLD] + COUNT[s218,WORLD] + 2*COUNT[s219,WORLD] + 2*COUNT[s220,WORLD] + 2*COUNT[s221,WORLD] + 2*COUNT[s222,WORLD] + 2*COUNT[s223,WORLD] + 2*COUNT[s224,WORLD] + 2*COUNT[s225,WORLD] + 2*COUNT[s226,WORLD] + 2*COUNT[s227,WORLD] + 2*COUNT[s228,WORLD] + 2*COUNT[s229,WORLD] + 2*COUNT[s230,WORLD] + 2*COUNT[s231,WORLD] + 2*COUNT[s232,WORLD] + 2*COUNT[s233,WORLD] + 2*COUNT[s234,WORLD] + COUNT[s235,WORLD] + COUNT[s236,WORLD] + COUNT[s237,WORLD] + COUNT[s238,WORLD] + 2*COUNT[s239,WORLD] + COUNT[s240,WORLD] + COUNT[s241,WORLD] + COUNT[s242,WORLD] + COUNT[s243,WORLD] + 2*COUNT[s244,WORLD] + 2*COUNT[s245,WORLD] + 2*COUNT[s246,WORLD] + 2*COUNT[s247,WORLD] + COUNT[s248,WORLD] + COUNT[s249,WORLD] + COUNT[s250,WORLD] + COUNT[s251,WORLD] + 2*COUNT[s252,WORLD] + 2*COUNT[s253,WORLD] + COUNT[s254,WORLD] + 2*COUNT[s255,WORLD] + 2*COUNT[s256,WORLD] + 2*COUNT[s257,WORLD] + COUNT[s258,WORLD] + 2*COUNT[s259,WORLD] + 2*COUNT[s260,WORLD] + 2*COUNT[s261,WORLD] + 2*COUNT[s262,WORLD] + 2*COUNT[s263,WORLD] + 2*COUNT[s264,WORLD] + 2*COUNT[s265,WORLD] + 2*COUNT[s266,WORLD] + 2*COUNT[s267,WORLD] + 2*COUNT[s269,WORLD] + 2*COUNT[s270,WORLD] + 2*COUNT[s271,WORLD] + 2*COUNT[s272,WORLD] + 2*COUNT[s273,WORLD] + 2*COUNT[s274,WORLD] + 2*COUNT[s275,WORLD] + 2*COUNT[s276,WORLD] + 2*COUNT[s277,WORLD] + 2*COUNT[s278,WORLD] + 2*COUNT[s279,WORLD] + 2*COUNT[s280,WORLD] + 2*COUNT[s281,WORLD] + 2*COUNT[s282,WORLD] + 2*COUNT[s283,WORLD] + 2*COUNT[s284,WORLD] + 2*COUNT[s285,WORLD] + 2*COUNT[s286,WORLD] + 2*COUNT[s287,WORLD] + 2*COUNT[s288,WORLD] + 2*COUNT[s289,WORLD] + 2*COUNT[s290,WORLD] + 2*COUNT[s291,WORLD] + 2*COUNT[s292,WORLD] + 2*COUNT[s293,WORLD] + 2*COUNT[s294,WORLD] + 2*COUNT[s295,WORLD] + 2*COUNT[s296,WORLD] + 2*COUNT[s297,WORLD] + 2*COUNT[s298,WORLD] + 2*COUNT[s299,WORLD] + 2*COUNT[s300,WORLD] + 2*COUNT[s301,WORLD] + 2*COUNT[s302,WORLD] + 2*COUNT[s303,WORLD] + COUNT[s304,WORLD] + COUNT[s305,WORLD] + COUNT[s306,WORLD] + COUNT[s307,WORLD] + COUNT[s308,WORLD] + COUNT[s309,WORLD] + COUNT[s310,WORLD] + COUNT[s311,WORLD] + COUNT[s312,WORLD] + 2*COUNT[s313,WORLD] + 2*COUNT[s314,WORLD] + 2*COUNT[s315,WORLD] + COUNT[s316,WORLD] + COUNT[s317,WORLD] + COUNT[s318,WORLD] + 2*COUNT[s319,WORLD] + 2*COUNT[s320,WORLD] + 2*COUNT[s321,WORLD] + 2*COUNT[s322,WORLD] + 2*COUNT[s323,WORLD] + 2*COUNT[s324,WORLD] + 2*COUNT[s325,WORLD] + 2*COUNT[s326,WORLD] + 2*COUNT[s327,WORLD] + 2*COUNT[s328,WORLD] + 2*COUNT[s329,WORLD] + 2*COUNT[s330,WORLD] + 2*COUNT[s331,WORLD] + 2*COUNT[s332,WORLD] + 2*COUNT[s333,WORLD] + 2*COUNT[s334,WORLD] + 2*COUNT[s335,WORLD] + 2*COUNT[s336,WORLD] + COUNT[s337,WORLD] + COUNT[s338,WORLD] + 2*COUNT[s339,WORLD] + 2*COUNT[s340,WORLD] + COUNT[s341,WORLD] + COUNT[s342,WORLD] + 2*COUNT[s343,WORLD] + COUNT[s344,WORLD] + 2*COUNT[s345,WORLD] + COUNT[s346,WORLD] + 2*COUNT[s347,WORLD] + 2*COUNT[s348,WORLD] + 2*COUNT[s349,WORLD] + 2*COUNT[s350,WORLD] + 2*COUNT[s351,WORLD] + 2*COUNT[s352,WORLD] + 2*COUNT[s353,WORLD] + 2*COUNT[s354,WORLD]       :"RecPgamma",
+   { COUNT[s12,WORLD] + COUNT[s15,WORLD] + COUNT[s16,WORLD] + COUNT[s17,WORLD] + COUNT[s19,WORLD] + COUNT[s20,WORLD] + COUNT[s22,WORLD] + COUNT[s24,WORLD] + 2*COUNT[s25,WORLD] + COUNT[s26,WORLD] + COUNT[s27,WORLD] + COUNT[s28,WORLD] + COUNT[s29,WORLD] + COUNT[s32,WORLD] + COUNT[s33,WORLD] + COUNT[s34,WORLD] + COUNT[s35,WORLD] + COUNT[s36,WORLD] + COUNT[s38,WORLD] + COUNT[s39,WORLD] + 2*COUNT[s40,WORLD] + COUNT[s41,WORLD] + COUNT[s42,WORLD] + COUNT[s43,WORLD] + COUNT[s44,WORLD] + COUNT[s45,WORLD] + COUNT[s47,WORLD] + 2*COUNT[s48,WORLD] + 2*COUNT[s49,WORLD] + COUNT[s50,WORLD] + 2*COUNT[s51,WORLD] + 2*COUNT[s52,WORLD] + 2*COUNT[s53,WORLD] + 2*COUNT[s54,WORLD] + COUNT[s55,WORLD] + 2*COUNT[s56,WORLD] + COUNT[s58,WORLD] + 2*COUNT[s59,WORLD] + COUNT[s60,WORLD] + COUNT[s61,WORLD] + COUNT[s62,WORLD] + COUNT[s63,WORLD] + COUNT[s64,WORLD] + COUNT[s65,WORLD] + COUNT[s66,WORLD] + COUNT[s67,WORLD] + COUNT[s68,WORLD] + COUNT[s69,WORLD] + COUNT[s70,WORLD] + COUNT[s71,WORLD] + COUNT[s72,WORLD] + COUNT[s73,WORLD] + 2*COUNT[s74,WORLD] + 2*COUNT[s75,WORLD] + COUNT[s76,WORLD] + COUNT[s77,WORLD] + COUNT[s79,WORLD] + COUNT[s80,WORLD] + COUNT[s81,WORLD] + COUNT[s82,WORLD] + 2*COUNT[s83,WORLD] + 2*COUNT[s84,WORLD] + 2*COUNT[s85,WORLD] + 2*COUNT[s86,WORLD] + 2*COUNT[s87,WORLD] + 2*COUNT[s88,WORLD] + 2*COUNT[s89,WORLD] + 2*COUNT[s90,WORLD] + 2*COUNT[s91,WORLD] + 2*COUNT[s92,WORLD] + COUNT[s93,WORLD] + COUNT[s94,WORLD] + COUNT[s95,WORLD] + 2*COUNT[s96,WORLD] + 2*COUNT[s97,WORLD] + 2*COUNT[s98,WORLD] + 2*COUNT[s99,WORLD] + 2*COUNT[s100,WORLD] + 2*COUNT[s101,WORLD] + 2*COUNT[s102,WORLD] + 2*COUNT[s103,WORLD] + 2*COUNT[s104,WORLD] + 2*COUNT[s105,WORLD] + 2*COUNT[s106,WORLD] + 2*COUNT[s107,WORLD] + 2*COUNT[s108,WORLD] + 2*COUNT[s109,WORLD] + COUNT[s110,WORLD] + COUNT[s111,WORLD] + COUNT[s112,WORLD] + COUNT[s113,WORLD] + COUNT[s114,WORLD] + COUNT[s115,WORLD] + COUNT[s116,WORLD] + COUNT[s117,WORLD] + COUNT[s118,WORLD] + 2*COUNT[s119,WORLD] + COUNT[s120,WORLD] + 2*COUNT[s121,WORLD] + COUNT[s122,WORLD] + COUNT[s123,WORLD] + COUNT[s124,WORLD] + 2*COUNT[s125,WORLD] + 2*COUNT[s126,WORLD] + 2*COUNT[s127,WORLD] + 2*COUNT[s128,WORLD] + 2*COUNT[s129,WORLD] + 2*COUNT[s130,WORLD] + COUNT[s131,WORLD] + 2*COUNT[s132,WORLD] + COUNT[s133,WORLD] + COUNT[s134,WORLD] + COUNT[s135,WORLD] + 2*COUNT[s136,WORLD] + 2*COUNT[s137,WORLD] + 2*COUNT[s138,WORLD] + 2*COUNT[s139,WORLD] + COUNT[s140,WORLD] + COUNT[s141,WORLD] + 2*COUNT[s142,WORLD] + 2*COUNT[s143,WORLD] + 2*COUNT[s144,WORLD] + 2*COUNT[s145,WORLD] + COUNT[s146,WORLD] + COUNT[s147,WORLD] + 2*COUNT[s148,WORLD] + 2*COUNT[s149,WORLD] + 2*COUNT[s150,WORLD] + 2*COUNT[s151,WORLD] + 2*COUNT[s152,WORLD] + 2*COUNT[s153,WORLD] + 2*COUNT[s154,WORLD] + 2*COUNT[s155,WORLD] + 2*COUNT[s156,WORLD] + 2*COUNT[s157,WORLD] + 2*COUNT[s158,WORLD] + 2*COUNT[s159,WORLD] + 2*COUNT[s160,WORLD] + 2*COUNT[s161,WORLD] + 2*COUNT[s162,WORLD] + 2*COUNT[s163,WORLD] + 2*COUNT[s164,WORLD] + 2*COUNT[s165,WORLD] + 2*COUNT[s166,WORLD] + 2*COUNT[s167,WORLD] + 2*COUNT[s168,WORLD] + 2*COUNT[s169,WORLD] + 2*COUNT[s170,WORLD] + 2*COUNT[s171,WORLD] + 2*COUNT[s172,WORLD] + 2*COUNT[s173,WORLD] + COUNT[s174,WORLD] + COUNT[s175,WORLD] + 2*COUNT[s176,WORLD] + 2*COUNT[s177,WORLD] + 2*COUNT[s178,WORLD] + 2*COUNT[s180,WORLD] + 2*COUNT[s181,WORLD] + 2*COUNT[s182,WORLD] + 2*COUNT[s183,WORLD] + 2*COUNT[s184,WORLD] + 2*COUNT[s185,WORLD] + 2*COUNT[s186,WORLD] + 2*COUNT[s187,WORLD] + 2*COUNT[s188,WORLD] + 2*COUNT[s189,WORLD] + 2*COUNT[s190,WORLD] + 2*COUNT[s191,WORLD] + 2*COUNT[s192,WORLD] + 2*COUNT[s193,WORLD] + 2*COUNT[s194,WORLD] + 2*COUNT[s195,WORLD] + 2*COUNT[s196,WORLD] + 2*COUNT[s197,WORLD] + 2*COUNT[s198,WORLD] + 2*COUNT[s199,WORLD] + COUNT[s200,WORLD] + COUNT[s201,WORLD] + COUNT[s202,WORLD] + 2*COUNT[s203,WORLD] + 2*COUNT[s204,WORLD] + COUNT[s205,WORLD] + 2*COUNT[s206,WORLD] + 2*COUNT[s207,WORLD] + 2*COUNT[s208,WORLD] + COUNT[s209,WORLD] + COUNT[s210,WORLD] + COUNT[s211,WORLD] + COUNT[s212,WORLD] + COUNT[s213,WORLD] + COUNT[s214,WORLD] + COUNT[s215,WORLD] + COUNT[s216,WORLD] + COUNT[s217,WORLD] + COUNT[s218,WORLD] + 2*COUNT[s219,WORLD] + 2*COUNT[s220,WORLD] + 2*COUNT[s221,WORLD] + 2*COUNT[s222,WORLD] + 2*COUNT[s223,WORLD] + 2*COUNT[s224,WORLD] + 2*COUNT[s225,WORLD] + 2*COUNT[s226,WORLD] + 2*COUNT[s227,WORLD] + 2*COUNT[s228,WORLD] + 2*COUNT[s229,WORLD] + 2*COUNT[s230,WORLD] + 2*COUNT[s231,WORLD] + 2*COUNT[s232,WORLD] + 2*COUNT[s233,WORLD] + 2*COUNT[s234,WORLD] + COUNT[s235,WORLD] + COUNT[s236,WORLD] + COUNT[s237,WORLD] + COUNT[s238,WORLD] + 2*COUNT[s239,WORLD] + COUNT[s240,WORLD] + COUNT[s241,WORLD] + COUNT[s242,WORLD] + COUNT[s243,WORLD] + 2*COUNT[s244,WORLD] + 2*COUNT[s245,WORLD] + 2*COUNT[s246,WORLD] + 2*COUNT[s247,WORLD] + COUNT[s248,WORLD] + COUNT[s249,WORLD] + COUNT[s250,WORLD] + COUNT[s251,WORLD] + 2*COUNT[s252,WORLD] + 2*COUNT[s253,WORLD] + COUNT[s254,WORLD] + 2*COUNT[s255,WORLD] + 2*COUNT[s256,WORLD] + 2*COUNT[s257,WORLD] + COUNT[s258,WORLD] + 2*COUNT[s259,WORLD] + 2*COUNT[s260,WORLD] + 2*COUNT[s261,WORLD] + 2*COUNT[s262,WORLD] + 2*COUNT[s263,WORLD] + 2*COUNT[s264,WORLD] + 2*COUNT[s265,WORLD] + 2*COUNT[s266,WORLD] + 2*COUNT[s267,WORLD] + 2*COUNT[s269,WORLD] + 2*COUNT[s270,WORLD] + 2*COUNT[s271,WORLD] + 2*COUNT[s272,WORLD] + 2*COUNT[s273,WORLD] + 2*COUNT[s274,WORLD] + 2*COUNT[s275,WORLD] + 2*COUNT[s276,WORLD] + 2*COUNT[s277,WORLD] + 2*COUNT[s278,WORLD] + 2*COUNT[s279,WORLD] + 2*COUNT[s280,WORLD] + 2*COUNT[s281,WORLD] + 2*COUNT[s282,WORLD] + 2*COUNT[s283,WORLD] + 2*COUNT[s284,WORLD] + 2*COUNT[s285,WORLD] + 2*COUNT[s286,WORLD] + 2*COUNT[s287,WORLD] + 2*COUNT[s288,WORLD] + 2*COUNT[s289,WORLD] + 2*COUNT[s290,WORLD] + 2*COUNT[s291,WORLD] + 2*COUNT[s292,WORLD] + 2*COUNT[s293,WORLD] + 2*COUNT[s294,WORLD] + 2*COUNT[s295,WORLD] + 2*COUNT[s296,WORLD] + 2*COUNT[s297,WORLD] + 2*COUNT[s298,WORLD] + 2*COUNT[s299,WORLD] + 2*COUNT[s300,WORLD] + 2*COUNT[s301,WORLD] + 2*COUNT[s302,WORLD] + 2*COUNT[s303,WORLD] + COUNT[s304,WORLD] + COUNT[s305,WORLD] + COUNT[s306,WORLD] + COUNT[s307,WORLD] + COUNT[s308,WORLD] + COUNT[s309,WORLD] + COUNT[s310,WORLD] + COUNT[s311,WORLD] + COUNT[s312,WORLD] + 2*COUNT[s313,WORLD] + 2*COUNT[s314,WORLD] + 2*COUNT[s315,WORLD] + COUNT[s316,WORLD] + COUNT[s317,WORLD] + COUNT[s318,WORLD] + 2*COUNT[s319,WORLD] + 2*COUNT[s320,WORLD] + 2*COUNT[s321,WORLD] + 2*COUNT[s322,WORLD] + 2*COUNT[s323,WORLD] + 2*COUNT[s324,WORLD] + 2*COUNT[s325,WORLD] + 2*COUNT[s326,WORLD] + 2*COUNT[s327,WORLD] + 2*COUNT[s328,WORLD] + 2*COUNT[s329,WORLD] + 2*COUNT[s330,WORLD] + 2*COUNT[s331,WORLD] + 2*COUNT[s332,WORLD] + 2*COUNT[s333,WORLD] + 2*COUNT[s334,WORLD] + 2*COUNT[s335,WORLD] + 2*COUNT[s336,WORLD] + COUNT[s337,WORLD] + COUNT[s338,WORLD] + 2*COUNT[s339,WORLD] + 2*COUNT[s340,WORLD] + COUNT[s341,WORLD] + COUNT[s342,WORLD] + 2*COUNT[s343,WORLD] + COUNT[s344,WORLD] + 2*COUNT[s345,WORLD] + COUNT[s346,WORLD] + 2*COUNT[s347,WORLD] + 2*COUNT[s348,WORLD] + 2*COUNT[s349,WORLD] + 2*COUNT[s350,WORLD] + 2*COUNT[s351,WORLD] + 2*COUNT[s352,WORLD] + 2*COUNT[s353,WORLD] + 2*COUNT[s354,WORLD] }=> "./react_data/RecPgamma.dat"
 
    /*RecSyk*/
-    COUNT[s22,WORLD] + COUNT[s32,WORLD] + COUNT[s33,WORLD] + COUNT[s35,WORLD] + COUNT[s38,WORLD] + COUNT[s39,WORLD] + COUNT[s43,WORLD] + COUNT[s47,WORLD] + COUNT[s51,WORLD] + COUNT[s53,WORLD] + COUNT[s56,WORLD] + COUNT[s58,WORLD] + 2*COUNT[s59,WORLD] + COUNT[s60,WORLD] + COUNT[s61,WORLD] + COUNT[s62,WORLD] + COUNT[s63,WORLD] + COUNT[s66,WORLD] + COUNT[s67,WORLD] + COUNT[s68,WORLD] + COUNT[s69,WORLD] + COUNT[s70,WORLD] + COUNT[s72,WORLD] + COUNT[s73,WORLD] + COUNT[s74,WORLD] + COUNT[s76,WORLD] + COUNT[s77,WORLD] + COUNT[s79,WORLD] + COUNT[s80,WORLD] + COUNT[s82,WORLD] + COUNT[s83,WORLD] + COUNT[s84,WORLD] + COUNT[s86,WORLD] + COUNT[s87,WORLD] + COUNT[s88,WORLD] + COUNT[s89,WORLD] + COUNT[s90,WORLD] + COUNT[s92,WORLD] + COUNT[s93,WORLD] + COUNT[s95,WORLD] + 2*COUNT[s96,WORLD] + 2*COUNT[s97,WORLD] + COUNT[s98,WORLD] + 2*COUNT[s99,WORLD] + 2*COUNT[s100,WORLD] + 2*COUNT[s101,WORLD] + COUNT[s102,WORLD] + 2*COUNT[s103,WORLD] + 2*COUNT[s104,WORLD] + COUNT[s105,WORLD] + 2*COUNT[s106,WORLD] + COUNT[s108,WORLD] + 2*COUNT[s109,WORLD] + COUNT[s110,WORLD] + COUNT[s111,WORLD] + COUNT[s112,WORLD] + COUNT[s113,WORLD] + COUNT[s114,WORLD] + COUNT[s115,WORLD] + COUNT[s116,WORLD] + COUNT[s117,WORLD] + COUNT[s118,WORLD] + COUNT[s119,WORLD] + COUNT[s120,WORLD] + COUNT[s121,WORLD] + COUNT[s122,WORLD] + COUNT[s123,WORLD] + COUNT[s124,WORLD] + COUNT[s125,WORLD] + COUNT[s126,WORLD] + COUNT[s127,WORLD] + COUNT[s128,WORLD] + 2*COUNT[s129,WORLD] + COUNT[s130,WORLD] + COUNT[s131,WORLD] + 2*COUNT[s132,WORLD] + COUNT[s133,WORLD] + COUNT[s134,WORLD] + COUNT[s135,WORLD] + 2*COUNT[s136,WORLD] + COUNT[s137,WORLD] + COUNT[s138,WORLD] + 2*COUNT[s139,WORLD] + COUNT[s140,WORLD] + COUNT[s141,WORLD] + COUNT[s142,WORLD] + COUNT[s143,WORLD] + COUNT[s144,WORLD] + COUNT[s145,WORLD] + COUNT[s146,WORLD] + COUNT[s147,WORLD] + 2*COUNT[s148,WORLD] + 2*COUNT[s149,WORLD] + 2*COUNT[s150,WORLD] + 2*COUNT[s151,WORLD] + 2*COUNT[s152,WORLD] + 2*COUNT[s153,WORLD] + 2*COUNT[s154,WORLD] + 2*COUNT[s155,WORLD] + 2*COUNT[s156,WORLD] + COUNT[s157,WORLD] + COUNT[s158,WORLD] + COUNT[s159,WORLD] + 2*COUNT[s160,WORLD] + 2*COUNT[s161,WORLD] + 2*COUNT[s162,WORLD] + 2*COUNT[s163,WORLD] + 2*COUNT[s164,WORLD] + 2*COUNT[s165,WORLD] + 2*COUNT[s166,WORLD] + 2*COUNT[s167,WORLD] + 2*COUNT[s168,WORLD] + 2*COUNT[s169,WORLD] + 2*COUNT[s170,WORLD] + 2*COUNT[s171,WORLD] + 2*COUNT[s172,WORLD] + 2*COUNT[s173,WORLD] + COUNT[s174,WORLD] + COUNT[s175,WORLD] + 2*COUNT[s176,WORLD] + 2*COUNT[s177,WORLD] + COUNT[s178,WORLD] + 2*COUNT[s180,WORLD] + 2*COUNT[s181,WORLD] + 2*COUNT[s182,WORLD] + 2*COUNT[s183,WORLD] + 2*COUNT[s184,WORLD] + 2*COUNT[s185,WORLD] + 2*COUNT[s186,WORLD] + 2*COUNT[s187,WORLD] + 2*COUNT[s188,WORLD] + 2*COUNT[s189,WORLD] + 2*COUNT[s190,WORLD] + 2*COUNT[s191,WORLD] + 2*COUNT[s192,WORLD] + 2*COUNT[s193,WORLD] + 2*COUNT[s194,WORLD] + 2*COUNT[s195,WORLD] + 2*COUNT[s196,WORLD] + 2*COUNT[s197,WORLD] + 2*COUNT[s198,WORLD] + 2*COUNT[s199,WORLD] + COUNT[s200,WORLD] + COUNT[s201,WORLD] + COUNT[s202,WORLD] + COUNT[s203,WORLD] + COUNT[s204,WORLD] + COUNT[s205,WORLD] + COUNT[s206,WORLD] + 2*COUNT[s207,WORLD] + 2*COUNT[s208,WORLD] + COUNT[s209,WORLD] + COUNT[s210,WORLD] + COUNT[s211,WORLD] + COUNT[s212,WORLD] + COUNT[s213,WORLD] + COUNT[s214,WORLD] + COUNT[s215,WORLD] + COUNT[s216,WORLD] + COUNT[s217,WORLD] + COUNT[s218,WORLD] + COUNT[s219,WORLD] + 2*COUNT[s220,WORLD] + 2*COUNT[s221,WORLD] + 2*COUNT[s222,WORLD] + 2*COUNT[s223,WORLD] + 2*COUNT[s224,WORLD] + 2*COUNT[s225,WORLD] + 2*COUNT[s226,WORLD] + 2*COUNT[s227,WORLD] + 2*COUNT[s228,WORLD] + 2*COUNT[s229,WORLD] + 2*COUNT[s230,WORLD] + 2*COUNT[s231,WORLD] + 2*COUNT[s232,WORLD] + 2*COUNT[s233,WORLD] + 2*COUNT[s234,WORLD] + COUNT[s235,WORLD] + COUNT[s236,WORLD] + COUNT[s237,WORLD] + COUNT[s238,WORLD] + COUNT[s239,WORLD] + COUNT[s240,WORLD] + COUNT[s241,WORLD] + COUNT[s242,WORLD] + COUNT[s243,WORLD] + COUNT[s244,WORLD] + COUNT[s245,WORLD] + COUNT[s246,WORLD] + COUNT[s247,WORLD] + COUNT[s248,WORLD] + COUNT[s249,WORLD] + COUNT[s250,WORLD] + COUNT[s251,WORLD] + COUNT[s252,WORLD] + COUNT[s253,WORLD] + COUNT[s254,WORLD] + COUNT[s255,WORLD] + COUNT[s256,WORLD] + COUNT[s257,WORLD] + COUNT[s258,WORLD] + COUNT[s259,WORLD] + 2*COUNT[s260,WORLD] + 2*COUNT[s261,WORLD] + 2*COUNT[s262,WORLD] + 2*COUNT[s263,WORLD] + 2*COUNT[s264,WORLD] + 2*COUNT[s265,WORLD] + 2*COUNT[s266,WORLD] + COUNT[s267,WORLD] + COUNT[s269,WORLD] + COUNT[s270,WORLD] + COUNT[s271,WORLD] + COUNT[s272,WORLD] + COUNT[s273,WORLD] + 2*COUNT[s274,WORLD] + 2*COUNT[s275,WORLD] + 2*COUNT[s276,WORLD] + 2*COUNT[s277,WORLD] + 2*COUNT[s278,WORLD] + 2*COUNT[s279,WORLD] + 2*COUNT[s280,WORLD] + 2*COUNT[s281,WORLD] + 2*COUNT[s282,WORLD] + 2*COUNT[s283,WORLD] + 2*COUNT[s284,WORLD] + 2*COUNT[s285,WORLD] + 2*COUNT[s286,WORLD] + 2*COUNT[s287,WORLD] + 2*COUNT[s288,WORLD] + 2*COUNT[s289,WORLD] + 2*COUNT[s290,WORLD] + 2*COUNT[s291,WORLD] + 2*COUNT[s292,WORLD] + 2*COUNT[s293,WORLD] + 2*COUNT[s294,WORLD] + 2*COUNT[s295,WORLD] + 2*COUNT[s296,WORLD] + 2*COUNT[s297,WORLD] + 2*COUNT[s298,WORLD] + 2*COUNT[s299,WORLD] + 2*COUNT[s300,WORLD] + 2*COUNT[s301,WORLD] + 2*COUNT[s302,WORLD] + 2*COUNT[s303,WORLD] + COUNT[s304,WORLD] + COUNT[s305,WORLD] + COUNT[s306,WORLD] + COUNT[s307,WORLD] + COUNT[s308,WORLD] + COUNT[s309,WORLD] + COUNT[s310,WORLD] + COUNT[s311,WORLD] + COUNT[s312,WORLD] + COUNT[s313,WORLD] + COUNT[s314,WORLD] + COUNT[s315,WORLD] + COUNT[s316,WORLD] + COUNT[s317,WORLD] + COUNT[s318,WORLD] + COUNT[s319,WORLD] + COUNT[s320,WORLD] + COUNT[s321,WORLD] + 2*COUNT[s322,WORLD] + 2*COUNT[s323,WORLD] + 2*COUNT[s324,WORLD] + 2*COUNT[s325,WORLD] + 2*COUNT[s326,WORLD] + 2*COUNT[s327,WORLD] + 2*COUNT[s328,WORLD] + 2*COUNT[s329,WORLD] + 2*COUNT[s330,WORLD] + 2*COUNT[s331,WORLD] + 2*COUNT[s332,WORLD] + 2*COUNT[s333,WORLD] + 2*COUNT[s334,WORLD] + 2*COUNT[s335,WORLD] + 2*COUNT[s336,WORLD] + COUNT[s337,WORLD] + COUNT[s338,WORLD] + COUNT[s339,WORLD] + 2*COUNT[s340,WORLD] + COUNT[s341,WORLD] + COUNT[s342,WORLD] + COUNT[s343,WORLD] + COUNT[s344,WORLD] + COUNT[s345,WORLD] + COUNT[s346,WORLD] + COUNT[s347,WORLD] + 2*COUNT[s348,WORLD] + 2*COUNT[s349,WORLD] + 2*COUNT[s350,WORLD] + 2*COUNT[s351,WORLD] + 2*COUNT[s352,WORLD] + 2*COUNT[s353,WORLD] + 2*COUNT[s354,WORLD]       :"RecSyk",
+   { COUNT[s22,WORLD] + COUNT[s32,WORLD] + COUNT[s33,WORLD] + COUNT[s35,WORLD] + COUNT[s38,WORLD] + COUNT[s39,WORLD] + COUNT[s43,WORLD] + COUNT[s47,WORLD] + COUNT[s51,WORLD] + COUNT[s53,WORLD] + COUNT[s56,WORLD] + COUNT[s58,WORLD] + 2*COUNT[s59,WORLD] + COUNT[s60,WORLD] + COUNT[s61,WORLD] + COUNT[s62,WORLD] + COUNT[s63,WORLD] + COUNT[s66,WORLD] + COUNT[s67,WORLD] + COUNT[s68,WORLD] + COUNT[s69,WORLD] + COUNT[s70,WORLD] + COUNT[s72,WORLD] + COUNT[s73,WORLD] + COUNT[s74,WORLD] + COUNT[s76,WORLD] + COUNT[s77,WORLD] + COUNT[s79,WORLD] + COUNT[s80,WORLD] + COUNT[s82,WORLD] + COUNT[s83,WORLD] + COUNT[s84,WORLD] + COUNT[s86,WORLD] + COUNT[s87,WORLD] + COUNT[s88,WORLD] + COUNT[s89,WORLD] + COUNT[s90,WORLD] + COUNT[s92,WORLD] + COUNT[s93,WORLD] + COUNT[s95,WORLD] + 2*COUNT[s96,WORLD] + 2*COUNT[s97,WORLD] + COUNT[s98,WORLD] + 2*COUNT[s99,WORLD] + 2*COUNT[s100,WORLD] + 2*COUNT[s101,WORLD] + COUNT[s102,WORLD] + 2*COUNT[s103,WORLD] + 2*COUNT[s104,WORLD] + COUNT[s105,WORLD] + 2*COUNT[s106,WORLD] + COUNT[s108,WORLD] + 2*COUNT[s109,WORLD] + COUNT[s110,WORLD] + COUNT[s111,WORLD] + COUNT[s112,WORLD] + COUNT[s113,WORLD] + COUNT[s114,WORLD] + COUNT[s115,WORLD] + COUNT[s116,WORLD] + COUNT[s117,WORLD] + COUNT[s118,WORLD] + COUNT[s119,WORLD] + COUNT[s120,WORLD] + COUNT[s121,WORLD] + COUNT[s122,WORLD] + COUNT[s123,WORLD] + COUNT[s124,WORLD] + COUNT[s125,WORLD] + COUNT[s126,WORLD] + COUNT[s127,WORLD] + COUNT[s128,WORLD] + 2*COUNT[s129,WORLD] + COUNT[s130,WORLD] + COUNT[s131,WORLD] + 2*COUNT[s132,WORLD] + COUNT[s133,WORLD] + COUNT[s134,WORLD] + COUNT[s135,WORLD] + 2*COUNT[s136,WORLD] + COUNT[s137,WORLD] + COUNT[s138,WORLD] + 2*COUNT[s139,WORLD] + COUNT[s140,WORLD] + COUNT[s141,WORLD] + COUNT[s142,WORLD] + COUNT[s143,WORLD] + COUNT[s144,WORLD] + COUNT[s145,WORLD] + COUNT[s146,WORLD] + COUNT[s147,WORLD] + 2*COUNT[s148,WORLD] + 2*COUNT[s149,WORLD] + 2*COUNT[s150,WORLD] + 2*COUNT[s151,WORLD] + 2*COUNT[s152,WORLD] + 2*COUNT[s153,WORLD] + 2*COUNT[s154,WORLD] + 2*COUNT[s155,WORLD] + 2*COUNT[s156,WORLD] + COUNT[s157,WORLD] + COUNT[s158,WORLD] + COUNT[s159,WORLD] + 2*COUNT[s160,WORLD] + 2*COUNT[s161,WORLD] + 2*COUNT[s162,WORLD] + 2*COUNT[s163,WORLD] + 2*COUNT[s164,WORLD] + 2*COUNT[s165,WORLD] + 2*COUNT[s166,WORLD] + 2*COUNT[s167,WORLD] + 2*COUNT[s168,WORLD] + 2*COUNT[s169,WORLD] + 2*COUNT[s170,WORLD] + 2*COUNT[s171,WORLD] + 2*COUNT[s172,WORLD] + 2*COUNT[s173,WORLD] + COUNT[s174,WORLD] + COUNT[s175,WORLD] + 2*COUNT[s176,WORLD] + 2*COUNT[s177,WORLD] + COUNT[s178,WORLD] + 2*COUNT[s180,WORLD] + 2*COUNT[s181,WORLD] + 2*COUNT[s182,WORLD] + 2*COUNT[s183,WORLD] + 2*COUNT[s184,WORLD] + 2*COUNT[s185,WORLD] + 2*COUNT[s186,WORLD] + 2*COUNT[s187,WORLD] + 2*COUNT[s188,WORLD] + 2*COUNT[s189,WORLD] + 2*COUNT[s190,WORLD] + 2*COUNT[s191,WORLD] + 2*COUNT[s192,WORLD] + 2*COUNT[s193,WORLD] + 2*COUNT[s194,WORLD] + 2*COUNT[s195,WORLD] + 2*COUNT[s196,WORLD] + 2*COUNT[s197,WORLD] + 2*COUNT[s198,WORLD] + 2*COUNT[s199,WORLD] + COUNT[s200,WORLD] + COUNT[s201,WORLD] + COUNT[s202,WORLD] + COUNT[s203,WORLD] + COUNT[s204,WORLD] + COUNT[s205,WORLD] + COUNT[s206,WORLD] + 2*COUNT[s207,WORLD] + 2*COUNT[s208,WORLD] + COUNT[s209,WORLD] + COUNT[s210,WORLD] + COUNT[s211,WORLD] + COUNT[s212,WORLD] + COUNT[s213,WORLD] + COUNT[s214,WORLD] + COUNT[s215,WORLD] + COUNT[s216,WORLD] + COUNT[s217,WORLD] + COUNT[s218,WORLD] + COUNT[s219,WORLD] + 2*COUNT[s220,WORLD] + 2*COUNT[s221,WORLD] + 2*COUNT[s222,WORLD] + 2*COUNT[s223,WORLD] + 2*COUNT[s224,WORLD] + 2*COUNT[s225,WORLD] + 2*COUNT[s226,WORLD] + 2*COUNT[s227,WORLD] + 2*COUNT[s228,WORLD] + 2*COUNT[s229,WORLD] + 2*COUNT[s230,WORLD] + 2*COUNT[s231,WORLD] + 2*COUNT[s232,WORLD] + 2*COUNT[s233,WORLD] + 2*COUNT[s234,WORLD] + COUNT[s235,WORLD] + COUNT[s236,WORLD] + COUNT[s237,WORLD] + COUNT[s238,WORLD] + COUNT[s239,WORLD] + COUNT[s240,WORLD] + COUNT[s241,WORLD] + COUNT[s242,WORLD] + COUNT[s243,WORLD] + COUNT[s244,WORLD] + COUNT[s245,WORLD] + COUNT[s246,WORLD] + COUNT[s247,WORLD] + COUNT[s248,WORLD] + COUNT[s249,WORLD] + COUNT[s250,WORLD] + COUNT[s251,WORLD] + COUNT[s252,WORLD] + COUNT[s253,WORLD] + COUNT[s254,WORLD] + COUNT[s255,WORLD] + COUNT[s256,WORLD] + COUNT[s257,WORLD] + COUNT[s258,WORLD] + COUNT[s259,WORLD] + 2*COUNT[s260,WORLD] + 2*COUNT[s261,WORLD] + 2*COUNT[s262,WORLD] + 2*COUNT[s263,WORLD] + 2*COUNT[s264,WORLD] + 2*COUNT[s265,WORLD] + 2*COUNT[s266,WORLD] + COUNT[s267,WORLD] + COUNT[s269,WORLD] + COUNT[s270,WORLD] + COUNT[s271,WORLD] + COUNT[s272,WORLD] + COUNT[s273,WORLD] + 2*COUNT[s274,WORLD] + 2*COUNT[s275,WORLD] + 2*COUNT[s276,WORLD] + 2*COUNT[s277,WORLD] + 2*COUNT[s278,WORLD] + 2*COUNT[s279,WORLD] + 2*COUNT[s280,WORLD] + 2*COUNT[s281,WORLD] + 2*COUNT[s282,WORLD] + 2*COUNT[s283,WORLD] + 2*COUNT[s284,WORLD] + 2*COUNT[s285,WORLD] + 2*COUNT[s286,WORLD] + 2*COUNT[s287,WORLD] + 2*COUNT[s288,WORLD] + 2*COUNT[s289,WORLD] + 2*COUNT[s290,WORLD] + 2*COUNT[s291,WORLD] + 2*COUNT[s292,WORLD] + 2*COUNT[s293,WORLD] + 2*COUNT[s294,WORLD] + 2*COUNT[s295,WORLD] + 2*COUNT[s296,WORLD] + 2*COUNT[s297,WORLD] + 2*COUNT[s298,WORLD] + 2*COUNT[s299,WORLD] + 2*COUNT[s300,WORLD] + 2*COUNT[s301,WORLD] + 2*COUNT[s302,WORLD] + 2*COUNT[s303,WORLD] + COUNT[s304,WORLD] + COUNT[s305,WORLD] + COUNT[s306,WORLD] + COUNT[s307,WORLD] + COUNT[s308,WORLD] + COUNT[s309,WORLD] + COUNT[s310,WORLD] + COUNT[s311,WORLD] + COUNT[s312,WORLD] + COUNT[s313,WORLD] + COUNT[s314,WORLD] + COUNT[s315,WORLD] + COUNT[s316,WORLD] + COUNT[s317,WORLD] + COUNT[s318,WORLD] + COUNT[s319,WORLD] + COUNT[s320,WORLD] + COUNT[s321,WORLD] + 2*COUNT[s322,WORLD] + 2*COUNT[s323,WORLD] + 2*COUNT[s324,WORLD] + 2*COUNT[s325,WORLD] + 2*COUNT[s326,WORLD] + 2*COUNT[s327,WORLD] + 2*COUNT[s328,WORLD] + 2*COUNT[s329,WORLD] + 2*COUNT[s330,WORLD] + 2*COUNT[s331,WORLD] + 2*COUNT[s332,WORLD] + 2*COUNT[s333,WORLD] + 2*COUNT[s334,WORLD] + 2*COUNT[s335,WORLD] + 2*COUNT[s336,WORLD] + COUNT[s337,WORLD] + COUNT[s338,WORLD] + COUNT[s339,WORLD] + 2*COUNT[s340,WORLD] + COUNT[s341,WORLD] + COUNT[s342,WORLD] + COUNT[s343,WORLD] + COUNT[s344,WORLD] + COUNT[s345,WORLD] + COUNT[s346,WORLD] + COUNT[s347,WORLD] + 2*COUNT[s348,WORLD] + 2*COUNT[s349,WORLD] + 2*COUNT[s350,WORLD] + 2*COUNT[s351,WORLD] + 2*COUNT[s352,WORLD] + 2*COUNT[s353,WORLD] + 2*COUNT[s354,WORLD] }=> "./react_data/RecSyk.dat"
 
    /*RecSykPS*/
-    COUNT[s139,WORLD] + COUNT[s174,WORLD] + COUNT[s175,WORLD] + COUNT[s176,WORLD] + COUNT[s177,WORLD] + COUNT[s178,WORLD] + COUNT[s180,WORLD] + COUNT[s181,WORLD] + COUNT[s182,WORLD] + COUNT[s183,WORLD] + COUNT[s184,WORLD] + COUNT[s185,WORLD] + COUNT[s186,WORLD] + COUNT[s187,WORLD] + COUNT[s188,WORLD] + COUNT[s189,WORLD] + COUNT[s190,WORLD] + COUNT[s191,WORLD] + COUNT[s192,WORLD] + COUNT[s193,WORLD] + COUNT[s194,WORLD] + COUNT[s195,WORLD] + COUNT[s196,WORLD] + COUNT[s197,WORLD] + COUNT[s198,WORLD] + 2*COUNT[s199,WORLD] + COUNT[s200,WORLD] + COUNT[s201,WORLD] + COUNT[s202,WORLD] + COUNT[s203,WORLD] + COUNT[s204,WORLD] + COUNT[s205,WORLD] + COUNT[s206,WORLD] + COUNT[s207,WORLD] + COUNT[s208,WORLD] + COUNT[s209,WORLD] + COUNT[s210,WORLD] + COUNT[s211,WORLD] + COUNT[s212,WORLD] + COUNT[s213,WORLD] + COUNT[s214,WORLD] + COUNT[s215,WORLD] + COUNT[s216,WORLD] + COUNT[s217,WORLD] + COUNT[s218,WORLD] + COUNT[s219,WORLD] + COUNT[s220,WORLD] + COUNT[s221,WORLD] + COUNT[s222,WORLD] + COUNT[s223,WORLD] + COUNT[s224,WORLD] + COUNT[s225,WORLD] + 2*COUNT[s226,WORLD] + COUNT[s227,WORLD] + COUNT[s228,WORLD] + COUNT[s229,WORLD] + COUNT[s230,WORLD] + COUNT[s231,WORLD] + COUNT[s232,WORLD] + COUNT[s233,WORLD] + COUNT[s234,WORLD] + COUNT[s235,WORLD] + COUNT[s236,WORLD] + COUNT[s237,WORLD] + COUNT[s238,WORLD] + COUNT[s239,WORLD] + COUNT[s240,WORLD] + COUNT[s241,WORLD] + COUNT[s242,WORLD] + COUNT[s243,WORLD] + COUNT[s244,WORLD] + COUNT[s245,WORLD] + COUNT[s246,WORLD] + COUNT[s247,WORLD] + COUNT[s248,WORLD] + COUNT[s249,WORLD] + COUNT[s250,WORLD] + COUNT[s251,WORLD] + COUNT[s252,WORLD] + COUNT[s253,WORLD] + COUNT[s254,WORLD] + COUNT[s255,WORLD] + COUNT[s256,WORLD] + COUNT[s257,WORLD] + COUNT[s258,WORLD] + COUNT[s259,WORLD] + COUNT[s260,WORLD] + COUNT[s261,WORLD] + COUNT[s262,WORLD] + COUNT[s263,WORLD] + COUNT[s264,WORLD] + COUNT[s265,WORLD] + COUNT[s266,WORLD] + COUNT[s267,WORLD] + COUNT[s269,WORLD] + COUNT[s270,WORLD] + COUNT[s271,WORLD] + COUNT[s272,WORLD] + COUNT[s273,WORLD] + COUNT[s274,WORLD] + COUNT[s275,WORLD] + COUNT[s276,WORLD] + COUNT[s277,WORLD] + COUNT[s278,WORLD] + COUNT[s279,WORLD] + COUNT[s280,WORLD] + COUNT[s281,WORLD] + COUNT[s282,WORLD] + COUNT[s283,WORLD] + COUNT[s284,WORLD] + COUNT[s285,WORLD] + COUNT[s286,WORLD] + COUNT[s287,WORLD] + COUNT[s288,WORLD] + COUNT[s289,WORLD] + COUNT[s290,WORLD] + COUNT[s291,WORLD] + COUNT[s292,WORLD] + 2*COUNT[s293,WORLD] + 2*COUNT[s294,WORLD] + 2*COUNT[s295,WORLD] + 2*COUNT[s296,WORLD] + 2*COUNT[s297,WORLD] + 2*COUNT[s298,WORLD] + 2*COUNT[s299,WORLD] + 2*COUNT[s300,WORLD] + 2*COUNT[s301,WORLD] + 2*COUNT[s302,WORLD] + 2*COUNT[s303,WORLD] + COUNT[s304,WORLD] + COUNT[s305,WORLD] + COUNT[s306,WORLD] + COUNT[s307,WORLD] + COUNT[s308,WORLD] + COUNT[s309,WORLD] + COUNT[s310,WORLD] + COUNT[s311,WORLD] + COUNT[s312,WORLD] + COUNT[s313,WORLD] + COUNT[s314,WORLD] + COUNT[s315,WORLD] + COUNT[s316,WORLD] + COUNT[s317,WORLD] + COUNT[s318,WORLD] + COUNT[s319,WORLD] + COUNT[s320,WORLD] + COUNT[s321,WORLD] + 2*COUNT[s322,WORLD] + 2*COUNT[s323,WORLD] + 2*COUNT[s324,WORLD] + 2*COUNT[s325,WORLD] + 2*COUNT[s326,WORLD] + 2*COUNT[s327,WORLD] + 2*COUNT[s328,WORLD] + 2*COUNT[s329,WORLD] + 2*COUNT[s330,WORLD] + 2*COUNT[s331,WORLD] + 2*COUNT[s332,WORLD] + 2*COUNT[s333,WORLD] + 2*COUNT[s334,WORLD] + 2*COUNT[s335,WORLD] + 2*COUNT[s336,WORLD] + COUNT[s337,WORLD] + COUNT[s338,WORLD] + COUNT[s339,WORLD] + 2*COUNT[s340,WORLD] + COUNT[s341,WORLD] + COUNT[s342,WORLD] + COUNT[s343,WORLD] + COUNT[s344,WORLD] + COUNT[s345,WORLD] + COUNT[s346,WORLD] + COUNT[s347,WORLD] + 2*COUNT[s348,WORLD] + 2*COUNT[s349,WORLD] + 2*COUNT[s350,WORLD] + 2*COUNT[s351,WORLD] + 2*COUNT[s352,WORLD] + 2*COUNT[s353,WORLD] + 2*COUNT[s354,WORLD]     :"RecSykPS",
+   { COUNT[s139,WORLD] + COUNT[s174,WORLD] + COUNT[s175,WORLD] + COUNT[s176,WORLD] + COUNT[s177,WORLD] + COUNT[s178,WORLD] + COUNT[s180,WORLD] + COUNT[s181,WORLD] + COUNT[s182,WORLD] + COUNT[s183,WORLD] + COUNT[s184,WORLD] + COUNT[s185,WORLD] + COUNT[s186,WORLD] + COUNT[s187,WORLD] + COUNT[s188,WORLD] + COUNT[s189,WORLD] + COUNT[s190,WORLD] + COUNT[s191,WORLD] + COUNT[s192,WORLD] + COUNT[s193,WORLD] + COUNT[s194,WORLD] + COUNT[s195,WORLD] + COUNT[s196,WORLD] + COUNT[s197,WORLD] + COUNT[s198,WORLD] + 2*COUNT[s199,WORLD] + COUNT[s200,WORLD] + COUNT[s201,WORLD] + COUNT[s202,WORLD] + COUNT[s203,WORLD] + COUNT[s204,WORLD] + COUNT[s205,WORLD] + COUNT[s206,WORLD] + COUNT[s207,WORLD] + COUNT[s208,WORLD] + COUNT[s209,WORLD] + COUNT[s210,WORLD] + COUNT[s211,WORLD] + COUNT[s212,WORLD] + COUNT[s213,WORLD] + COUNT[s214,WORLD] + COUNT[s215,WORLD] + COUNT[s216,WORLD] + COUNT[s217,WORLD] + COUNT[s218,WORLD] + COUNT[s219,WORLD] + COUNT[s220,WORLD] + COUNT[s221,WORLD] + COUNT[s222,WORLD] + COUNT[s223,WORLD] + COUNT[s224,WORLD] + COUNT[s225,WORLD] + 2*COUNT[s226,WORLD] + COUNT[s227,WORLD] + COUNT[s228,WORLD] + COUNT[s229,WORLD] + COUNT[s230,WORLD] + COUNT[s231,WORLD] + COUNT[s232,WORLD] + COUNT[s233,WORLD] + COUNT[s234,WORLD] + COUNT[s235,WORLD] + COUNT[s236,WORLD] + COUNT[s237,WORLD] + COUNT[s238,WORLD] + COUNT[s239,WORLD] + COUNT[s240,WORLD] + COUNT[s241,WORLD] + COUNT[s242,WORLD] + COUNT[s243,WORLD] + COUNT[s244,WORLD] + COUNT[s245,WORLD] + COUNT[s246,WORLD] + COUNT[s247,WORLD] + COUNT[s248,WORLD] + COUNT[s249,WORLD] + COUNT[s250,WORLD] + COUNT[s251,WORLD] + COUNT[s252,WORLD] + COUNT[s253,WORLD] + COUNT[s254,WORLD] + COUNT[s255,WORLD] + COUNT[s256,WORLD] + COUNT[s257,WORLD] + COUNT[s258,WORLD] + COUNT[s259,WORLD] + COUNT[s260,WORLD] + COUNT[s261,WORLD] + COUNT[s262,WORLD] + COUNT[s263,WORLD] + COUNT[s264,WORLD] + COUNT[s265,WORLD] + COUNT[s266,WORLD] + COUNT[s267,WORLD] + COUNT[s269,WORLD] + COUNT[s270,WORLD] + COUNT[s271,WORLD] + COUNT[s272,WORLD] + COUNT[s273,WORLD] + COUNT[s274,WORLD] + COUNT[s275,WORLD] + COUNT[s276,WORLD] + COUNT[s277,WORLD] + COUNT[s278,WORLD] + COUNT[s279,WORLD] + COUNT[s280,WORLD] + COUNT[s281,WORLD] + COUNT[s282,WORLD] + COUNT[s283,WORLD] + COUNT[s284,WORLD] + COUNT[s285,WORLD] + COUNT[s286,WORLD] + COUNT[s287,WORLD] + COUNT[s288,WORLD] + COUNT[s289,WORLD] + COUNT[s290,WORLD] + COUNT[s291,WORLD] + COUNT[s292,WORLD] + 2*COUNT[s293,WORLD] + 2*COUNT[s294,WORLD] + 2*COUNT[s295,WORLD] + 2*COUNT[s296,WORLD] + 2*COUNT[s297,WORLD] + 2*COUNT[s298,WORLD] + 2*COUNT[s299,WORLD] + 2*COUNT[s300,WORLD] + 2*COUNT[s301,WORLD] + 2*COUNT[s302,WORLD] + 2*COUNT[s303,WORLD] + COUNT[s304,WORLD] + COUNT[s305,WORLD] + COUNT[s306,WORLD] + COUNT[s307,WORLD] + COUNT[s308,WORLD] + COUNT[s309,WORLD] + COUNT[s310,WORLD] + COUNT[s311,WORLD] + COUNT[s312,WORLD] + COUNT[s313,WORLD] + COUNT[s314,WORLD] + COUNT[s315,WORLD] + COUNT[s316,WORLD] + COUNT[s317,WORLD] + COUNT[s318,WORLD] + COUNT[s319,WORLD] + COUNT[s320,WORLD] + COUNT[s321,WORLD] + 2*COUNT[s322,WORLD] + 2*COUNT[s323,WORLD] + 2*COUNT[s324,WORLD] + 2*COUNT[s325,WORLD] + 2*COUNT[s326,WORLD] + 2*COUNT[s327,WORLD] + 2*COUNT[s328,WORLD] + 2*COUNT[s329,WORLD] + 2*COUNT[s330,WORLD] + 2*COUNT[s331,WORLD] + 2*COUNT[s332,WORLD] + 2*COUNT[s333,WORLD] + 2*COUNT[s334,WORLD] + 2*COUNT[s335,WORLD] + 2*COUNT[s336,WORLD] + COUNT[s337,WORLD] + COUNT[s338,WORLD] + COUNT[s339,WORLD] + 2*COUNT[s340,WORLD] + COUNT[s341,WORLD] + COUNT[s342,WORLD] + COUNT[s343,WORLD] + COUNT[s344,WORLD] + COUNT[s345,WORLD] + COUNT[s346,WORLD] + COUNT[s347,WORLD] + 2*COUNT[s348,WORLD] + 2*COUNT[s349,WORLD] + 2*COUNT[s350,WORLD] + 2*COUNT[s351,WORLD] + 2*COUNT[s352,WORLD] + 2*COUNT[s353,WORLD] + 2*COUNT[s354,WORLD] }=> "./react_data/RecSykPS.dat"
 
-   /*RecRecLigLyn*/
-    COUNT[s9,WORLD] + COUNT[s11,WORLD] + COUNT[s12,WORLD] + COUNT[s20,WORLD] + COUNT[s22,WORLD] + COUNT[s34,WORLD] + COUNT[s39,WORLD] + COUNT[s43,WORLD] + COUNT[s44,WORLD] + COUNT[s48,WORLD] + COUNT[s52,WORLD] + COUNT[s53,WORLD] + COUNT[s68,WORLD] + COUNT[s73,WORLD] + COUNT[s79,WORLD] + COUNT[s83,WORLD] + COUNT[s87,WORLD] + COUNT[s88,WORLD] + COUNT[s89,WORLD] + COUNT[s96,WORLD] + COUNT[s101,WORLD] + COUNT[s103,WORLD] + COUNT[s116,WORLD] + COUNT[s123,WORLD] + COUNT[s125,WORLD] + COUNT[s127,WORLD] + COUNT[s128,WORLD] + COUNT[s129,WORLD] + COUNT[s150,WORLD] + COUNT[s153,WORLD] + COUNT[s160,WORLD] + COUNT[s165,WORLD] + COUNT[s176,WORLD] + COUNT[s177,WORLD] + COUNT[s185,WORLD] + COUNT[s186,WORLD] + COUNT[s187,WORLD] + COUNT[s188,WORLD] + COUNT[s193,WORLD] + COUNT[s194,WORLD] + COUNT[s201,WORLD] + COUNT[s203,WORLD] + COUNT[s219,WORLD] + COUNT[s220,WORLD] + COUNT[s221,WORLD] + COUNT[s222,WORLD] + COUNT[s223,WORLD] + COUNT[s224,WORLD] + COUNT[s225,WORLD] + COUNT[s226,WORLD] + COUNT[s236,WORLD] + COUNT[s237,WORLD] + COUNT[s242,WORLD] + COUNT[s245,WORLD] + COUNT[s246,WORLD] + COUNT[s269,WORLD] + COUNT[s271,WORLD] + COUNT[s282,WORLD] + COUNT[s283,WORLD] + COUNT[s296,WORLD] + COUNT[s297,WORLD] + COUNT[s301,WORLD] + COUNT[s305,WORLD] + COUNT[s307,WORLD] + COUNT[s309,WORLD] + COUNT[s311,WORLD] + COUNT[s313,WORLD] + COUNT[s314,WORLD] + COUNT[s323,WORLD] + COUNT[s325,WORLD] + COUNT[s328,WORLD] + COUNT[s332,WORLD]     :"RecRecLigLyn"
-   }=> "counts.txt"
+   /*SykTest*/
+   { COUNT[s3,WORLD] + COUNT[s22,WORLD] + COUNT[s32,WORLD] + COUNT[s33,WORLD] + COUNT[s35,WORLD] + COUNT[s38,WORLD] + COUNT[s39,WORLD] + COUNT[s43,WORLD] + COUNT[s47,WORLD] + COUNT[s51,WORLD] + COUNT[s53,WORLD] + COUNT[s56,WORLD] + COUNT[s58,WORLD] + 2*COUNT[s59,WORLD] + COUNT[s60,WORLD] + COUNT[s61,WORLD] + COUNT[s62,WORLD] + COUNT[s63,WORLD] + COUNT[s66,WORLD] + COUNT[s67,WORLD] + COUNT[s68,WORLD] + COUNT[s69,WORLD] + COUNT[s70,WORLD] + COUNT[s72,WORLD] + COUNT[s73,WORLD] + COUNT[s74,WORLD] + COUNT[s76,WORLD] + COUNT[s77,WORLD] + COUNT[s78,WORLD] + COUNT[s79,WORLD] + COUNT[s80,WORLD] + COUNT[s82,WORLD] + COUNT[s83,WORLD] + COUNT[s84,WORLD] + COUNT[s86,WORLD] + COUNT[s87,WORLD] + COUNT[s88,WORLD] + COUNT[s89,WORLD] + COUNT[s90,WORLD] + COUNT[s92,WORLD] + COUNT[s93,WORLD] + COUNT[s95,WORLD] + 2*COUNT[s96,WORLD] + 2*COUNT[s97,WORLD] + COUNT[s98,WORLD] + 2*COUNT[s99,WORLD] + 2*COUNT[s100,WORLD] + 2*COUNT[s101,WORLD] + COUNT[s102,WORLD] + 2*COUNT[s103,WORLD] + 2*COUNT[s104,WORLD] + COUNT[s105,WORLD] + 2*COUNT[s106,WORLD] + COUNT[s108,WORLD] + 2*COUNT[s109,WORLD] + COUNT[s110,WORLD] + COUNT[s111,WORLD] + COUNT[s112,WORLD] + COUNT[s113,WORLD] + COUNT[s114,WORLD] + COUNT[s115,WORLD] + COUNT[s116,WORLD] + COUNT[s117,WORLD] + COUNT[s118,WORLD] + COUNT[s119,WORLD] + COUNT[s120,WORLD] + COUNT[s121,WORLD] + COUNT[s122,WORLD] + COUNT[s123,WORLD] + COUNT[s124,WORLD] + COUNT[s125,WORLD] + COUNT[s126,WORLD] + COUNT[s127,WORLD] + COUNT[s128,WORLD] + 2*COUNT[s129,WORLD] + COUNT[s130,WORLD] + COUNT[s131,WORLD] + 2*COUNT[s132,WORLD] + COUNT[s133,WORLD] + COUNT[s134,WORLD] + COUNT[s135,WORLD] + 2*COUNT[s136,WORLD] + COUNT[s137,WORLD] + COUNT[s138,WORLD] + 2*COUNT[s139,WORLD] + COUNT[s140,WORLD] + COUNT[s141,WORLD] + COUNT[s142,WORLD] + COUNT[s143,WORLD] + COUNT[s144,WORLD] + COUNT[s145,WORLD] + COUNT[s146,WORLD] + COUNT[s147,WORLD] + 2*COUNT[s148,WORLD] + 2*COUNT[s149,WORLD] + 2*COUNT[s150,WORLD] + 2*COUNT[s151,WORLD] + 2*COUNT[s152,WORLD] + 2*COUNT[s153,WORLD] + 2*COUNT[s154,WORLD] + 2*COUNT[s155,WORLD] + 2*COUNT[s156,WORLD] + COUNT[s157,WORLD] + COUNT[s158,WORLD] + COUNT[s159,WORLD] + 2*COUNT[s160,WORLD] + 2*COUNT[s161,WORLD] + 2*COUNT[s162,WORLD] + 2*COUNT[s163,WORLD] + 2*COUNT[s164,WORLD] + 2*COUNT[s165,WORLD] + 2*COUNT[s166,WORLD] + 2*COUNT[s167,WORLD] + 2*COUNT[s168,WORLD] + 2*COUNT[s169,WORLD] + 2*COUNT[s170,WORLD] + 2*COUNT[s171,WORLD] + 2*COUNT[s172,WORLD] + 2*COUNT[s173,WORLD] + COUNT[s174,WORLD] + COUNT[s175,WORLD] + 2*COUNT[s176,WORLD] + 2*COUNT[s177,WORLD] + COUNT[s178,WORLD] + COUNT[s179,WORLD] + 2*COUNT[s180,WORLD] + 2*COUNT[s181,WORLD] + 2*COUNT[s182,WORLD] + 2*COUNT[s183,WORLD] + 2*COUNT[s184,WORLD] + 2*COUNT[s185,WORLD] + 2*COUNT[s186,WORLD] + 2*COUNT[s187,WORLD] + 2*COUNT[s188,WORLD] + 2*COUNT[s189,WORLD] + 2*COUNT[s190,WORLD] + 2*COUNT[s191,WORLD] + 2*COUNT[s192,WORLD] + 2*COUNT[s193,WORLD] + 2*COUNT[s194,WORLD] + 2*COUNT[s195,WORLD] + 2*COUNT[s196,WORLD] + 2*COUNT[s197,WORLD] + 2*COUNT[s198,WORLD] + 2*COUNT[s199,WORLD] + COUNT[s200,WORLD] + COUNT[s201,WORLD] + COUNT[s202,WORLD] + COUNT[s203,WORLD] + COUNT[s204,WORLD] + COUNT[s205,WORLD] + COUNT[s206,WORLD] + 2*COUNT[s207,WORLD] + 2*COUNT[s208,WORLD] + COUNT[s209,WORLD] + COUNT[s210,WORLD] + COUNT[s211,WORLD] + COUNT[s212,WORLD] + COUNT[s213,WORLD] + COUNT[s214,WORLD] + COUNT[s215,WORLD] + COUNT[s216,WORLD] + COUNT[s217,WORLD] + COUNT[s218,WORLD] + COUNT[s219,WORLD] + 2*COUNT[s220,WORLD] + 2*COUNT[s221,WORLD] + 2*COUNT[s222,WORLD] + 2*COUNT[s223,WORLD] + 2*COUNT[s224,WORLD] + 2*COUNT[s225,WORLD] + 2*COUNT[s226,WORLD] + 2*COUNT[s227,WORLD] + 2*COUNT[s228,WORLD] + 2*COUNT[s229,WORLD] + 2*COUNT[s230,WORLD] + 2*COUNT[s231,WORLD] + 2*COUNT[s232,WORLD] + 2*COUNT[s233,WORLD] + 2*COUNT[s234,WORLD] + COUNT[s235,WORLD] + COUNT[s236,WORLD] + COUNT[s237,WORLD] + COUNT[s238,WORLD] + COUNT[s239,WORLD] + COUNT[s240,WORLD] + COUNT[s241,WORLD] + COUNT[s242,WORLD] + COUNT[s243,WORLD] + COUNT[s244,WORLD] + COUNT[s245,WORLD] + COUNT[s246,WORLD] + COUNT[s247,WORLD] + COUNT[s248,WORLD] + COUNT[s249,WORLD] + COUNT[s250,WORLD] + COUNT[s251,WORLD] + COUNT[s252,WORLD] + COUNT[s253,WORLD] + COUNT[s254,WORLD] + COUNT[s255,WORLD] + COUNT[s256,WORLD] + COUNT[s257,WORLD] + COUNT[s258,WORLD] + COUNT[s259,WORLD] + 2*COUNT[s260,WORLD] + 2*COUNT[s261,WORLD] + 2*COUNT[s262,WORLD] + 2*COUNT[s263,WORLD] + 2*COUNT[s264,WORLD] + 2*COUNT[s265,WORLD] + 2*COUNT[s266,WORLD] + COUNT[s267,WORLD] + COUNT[s268,WORLD] + COUNT[s269,WORLD] + COUNT[s270,WORLD] + COUNT[s271,WORLD] + COUNT[s272,WORLD] + COUNT[s273,WORLD] + 2*COUNT[s274,WORLD] + 2*COUNT[s275,WORLD] + 2*COUNT[s276,WORLD] + 2*COUNT[s277,WORLD] + 2*COUNT[s278,WORLD] + 2*COUNT[s279,WORLD] + 2*COUNT[s280,WORLD] + 2*COUNT[s281,WORLD] + 2*COUNT[s282,WORLD] + 2*COUNT[s283,WORLD] + 2*COUNT[s284,WORLD] + 2*COUNT[s285,WORLD] + 2*COUNT[s286,WORLD] + 2*COUNT[s287,WORLD] + 2*COUNT[s288,WORLD] + 2*COUNT[s289,WORLD] + 2*COUNT[s290,WORLD] + 2*COUNT[s291,WORLD] + 2*COUNT[s292,WORLD] + 2*COUNT[s293,WORLD] + 2*COUNT[s294,WORLD] + 2*COUNT[s295,WORLD] + 2*COUNT[s296,WORLD] + 2*COUNT[s297,WORLD] + 2*COUNT[s298,WORLD] + 2*COUNT[s299,WORLD] + 2*COUNT[s300,WORLD] + 2*COUNT[s301,WORLD] + 2*COUNT[s302,WORLD] + 2*COUNT[s303,WORLD] + COUNT[s304,WORLD] + COUNT[s305,WORLD] + COUNT[s306,WORLD] + COUNT[s307,WORLD] + COUNT[s308,WORLD] + COUNT[s309,WORLD] + COUNT[s310,WORLD] + COUNT[s311,WORLD] + COUNT[s312,WORLD] + COUNT[s313,WORLD] + COUNT[s314,WORLD] + COUNT[s315,WORLD] + COUNT[s316,WORLD] + COUNT[s317,WORLD] + COUNT[s318,WORLD] + COUNT[s319,WORLD] + COUNT[s320,WORLD] + COUNT[s321,WORLD] + 2*COUNT[s322,WORLD] + 2*COUNT[s323,WORLD] + 2*COUNT[s324,WORLD] + 2*COUNT[s325,WORLD] + 2*COUNT[s326,WORLD] + 2*COUNT[s327,WORLD] + 2*COUNT[s328,WORLD] + 2*COUNT[s329,WORLD] + 2*COUNT[s330,WORLD] + 2*COUNT[s331,WORLD] + 2*COUNT[s332,WORLD] + 2*COUNT[s333,WORLD] + 2*COUNT[s334,WORLD] + 2*COUNT[s335,WORLD] + 2*COUNT[s336,WORLD] + COUNT[s337,WORLD] + COUNT[s338,WORLD] + COUNT[s339,WORLD] + 2*COUNT[s340,WORLD] + COUNT[s341,WORLD] + COUNT[s342,WORLD] + COUNT[s343,WORLD] + COUNT[s344,WORLD] + COUNT[s345,WORLD] + COUNT[s346,WORLD] + COUNT[s347,WORLD] + 2*COUNT[s348,WORLD] + 2*COUNT[s349,WORLD] + 2*COUNT[s350,WORLD] + 2*COUNT[s351,WORLD] + 2*COUNT[s352,WORLD] + 2*COUNT[s353,WORLD] + 2*COUNT[s354,WORLD] }=> "./react_data/SykTest.dat"
+
+   /*LynTest*/
+   { COUNT[s2,WORLD] + COUNT[s6,WORLD] + COUNT[s7,WORLD] + COUNT[s9,WORLD] + 2*COUNT[s10,WORLD] + COUNT[s11,WORLD] + COUNT[s12,WORLD] + 2*COUNT[s17,WORLD] + COUNT[s20,WORLD] + 2*COUNT[s21,WORLD] + COUNT[s22,WORLD] + COUNT[s26,WORLD] + COUNT[s27,WORLD] + COUNT[s30,WORLD] + COUNT[s31,WORLD] + COUNT[s34,WORLD] + 2*COUNT[s35,WORLD] + COUNT[s37,WORLD] + COUNT[s39,WORLD] + 2*COUNT[s40,WORLD] + 2*COUNT[s41,WORLD] + 2*COUNT[s42,WORLD] + COUNT[s43,WORLD] + COUNT[s44,WORLD] + COUNT[s46,WORLD] + COUNT[s48,WORLD] + COUNT[s50,WORLD] + COUNT[s52,WORLD] + COUNT[s53,WORLD] + COUNT[s55,WORLD] + 2*COUNT[s57,WORLD] + COUNT[s58,WORLD] + COUNT[s60,WORLD] + COUNT[s61,WORLD] + COUNT[s64,WORLD] + COUNT[s65,WORLD] + COUNT[s68,WORLD] + 2*COUNT[s69,WORLD] + COUNT[s71,WORLD] + COUNT[s73,WORLD] + 2*COUNT[s74,WORLD] + 2*COUNT[s75,WORLD] + 2*COUNT[s76,WORLD] + 2*COUNT[s77,WORLD] + COUNT[s79,WORLD] + COUNT[s81,WORLD] + COUNT[s83,WORLD] + COUNT[s85,WORLD] + COUNT[s87,WORLD] + COUNT[s88,WORLD] + COUNT[s89,WORLD] + COUNT[s91,WORLD] + COUNT[s93,WORLD] + 2*COUNT[s94,WORLD] + COUNT[s95,WORLD] + COUNT[s96,WORLD] + COUNT[s98,WORLD] + 2*COUNT[s100,WORLD] + COUNT[s101,WORLD] + 2*COUNT[s102,WORLD] + COUNT[s103,WORLD] + COUNT[s105,WORLD] + 2*COUNT[s107,WORLD] + COUNT[s108,WORLD] + COUNT[s110,WORLD] + COUNT[s111,WORLD] + COUNT[s114,WORLD] + COUNT[s115,WORLD] + COUNT[s116,WORLD] + COUNT[s118,WORLD] + 2*COUNT[s119,WORLD] + 2*COUNT[s120,WORLD] + 2*COUNT[s121,WORLD] + 2*COUNT[s122,WORLD] + COUNT[s123,WORLD] + COUNT[s125,WORLD] + COUNT[s127,WORLD] + COUNT[s128,WORLD] + COUNT[s129,WORLD] + COUNT[s131,WORLD] + COUNT[s133,WORLD] + COUNT[s134,WORLD] + COUNT[s135,WORLD] + 2*COUNT[s136,WORLD] + 2*COUNT[s137,WORLD] + 2*COUNT[s138,WORLD] + COUNT[s140,WORLD] + COUNT[s141,WORLD] + COUNT[s142,WORLD] + COUNT[s143,WORLD] + COUNT[s144,WORLD] + COUNT[s145,WORLD] + 2*COUNT[s146,WORLD] + 2*COUNT[s147,WORLD] + COUNT[s148,WORLD] + COUNT[s149,WORLD] + COUNT[s150,WORLD] + 2*COUNT[s151,WORLD] + 2*COUNT[s152,WORLD] + COUNT[s153,WORLD] + COUNT[s155,WORLD] + COUNT[s156,WORLD] + COUNT[s157,WORLD] + 2*COUNT[s158,WORLD] + 2*COUNT[s159,WORLD] + COUNT[s160,WORLD] + COUNT[s162,WORLD] + COUNT[s163,WORLD] + 2*COUNT[s164,WORLD] + COUNT[s165,WORLD] + 2*COUNT[s166,WORLD] + 2*COUNT[s167,WORLD] + COUNT[s169,WORLD] + COUNT[s170,WORLD] + 2*COUNT[s171,WORLD] + 2*COUNT[s172,WORLD] + 2*COUNT[s173,WORLD] + COUNT[s176,WORLD] + COUNT[s177,WORLD] + 2*COUNT[s184,WORLD] + COUNT[s185,WORLD] + COUNT[s186,WORLD] + COUNT[s187,WORLD] + COUNT[s188,WORLD] + COUNT[s193,WORLD] + COUNT[s194,WORLD] + 2*COUNT[s197,WORLD] + 2*COUNT[s198,WORLD] + COUNT[s201,WORLD] + COUNT[s203,WORLD] + COUNT[s205,WORLD] + COUNT[s206,WORLD] + COUNT[s207,WORLD] + COUNT[s208,WORLD] + COUNT[s209,WORLD] + COUNT[s210,WORLD] + COUNT[s215,WORLD] + COUNT[s216,WORLD] + COUNT[s219,WORLD] + COUNT[s220,WORLD] + COUNT[s221,WORLD] + COUNT[s222,WORLD] + COUNT[s223,WORLD] + COUNT[s224,WORLD] + COUNT[s225,WORLD] + COUNT[s226,WORLD] + COUNT[s227,WORLD] + 2*COUNT[s228,WORLD] + 2*COUNT[s229,WORLD] + COUNT[s230,WORLD] + COUNT[s231,WORLD] + COUNT[s232,WORLD] + COUNT[s233,WORLD] + COUNT[s234,WORLD] + 2*COUNT[s235,WORLD] + COUNT[s236,WORLD] + COUNT[s237,WORLD] + 2*COUNT[s239,WORLD] + 2*COUNT[s240,WORLD] + 2*COUNT[s241,WORLD] + COUNT[s242,WORLD] + COUNT[s245,WORLD] + COUNT[s246,WORLD] + COUNT[s248,WORLD] + COUNT[s249,WORLD] + COUNT[s250,WORLD] + COUNT[s251,WORLD] + 2*COUNT[s252,WORLD] + 2*COUNT[s253,WORLD] + COUNT[s254,WORLD] + COUNT[s255,WORLD] + COUNT[s256,WORLD] + COUNT[s257,WORLD] + 2*COUNT[s258,WORLD] + 2*COUNT[s259,WORLD] + 2*COUNT[s261,WORLD] + 2*COUNT[s262,WORLD] + COUNT[s263,WORLD] + COUNT[s264,WORLD] + 2*COUNT[s265,WORLD] + 2*COUNT[s266,WORLD] + COUNT[s269,WORLD] + COUNT[s271,WORLD] + 2*COUNT[s273,WORLD] + 2*COUNT[s274,WORLD] + 2*COUNT[s275,WORLD] + COUNT[s277,WORLD] + COUNT[s280,WORLD] + COUNT[s281,WORLD] + COUNT[s282,WORLD] + COUNT[s283,WORLD] + 2*COUNT[s284,WORLD] + 2*COUNT[s285,WORLD] + 2*COUNT[s286,WORLD] + COUNT[s288,WORLD] + COUNT[s289,WORLD] + COUNT[s290,WORLD] + 2*COUNT[s291,WORLD] + 2*COUNT[s292,WORLD] + 2*COUNT[s295,WORLD] + COUNT[s296,WORLD] + COUNT[s297,WORLD] + COUNT[s301,WORLD] + 2*COUNT[s303,WORLD] + COUNT[s305,WORLD] + COUNT[s307,WORLD] + 2*COUNT[s308,WORLD] + COUNT[s309,WORLD] + COUNT[s311,WORLD] + COUNT[s313,WORLD] + COUNT[s314,WORLD] + COUNT[s316,WORLD] + 2*COUNT[s317,WORLD] + COUNT[s318,WORLD] + COUNT[s319,WORLD] + 2*COUNT[s320,WORLD] + COUNT[s321,WORLD] + COUNT[s322,WORLD] + COUNT[s323,WORLD] + 2*COUNT[s324,WORLD] + COUNT[s325,WORLD] + COUNT[s327,WORLD] + COUNT[s328,WORLD] + COUNT[s330,WORLD] + 2*COUNT[s331,WORLD] + COUNT[s332,WORLD] + 2*COUNT[s333,WORLD] + COUNT[s335,WORLD] + 2*COUNT[s336,WORLD] + COUNT[s337,WORLD] + COUNT[s338,WORLD] + COUNT[s339,WORLD] + COUNT[s340,WORLD] + 2*COUNT[s341,WORLD] + COUNT[s342,WORLD] + 2*COUNT[s343,WORLD] + COUNT[s344,WORLD] + COUNT[s345,WORLD] + 2*COUNT[s346,WORLD] + 2*COUNT[s347,WORLD] + 2*COUNT[s348,WORLD] + COUNT[s349,WORLD] + 2*COUNT[s350,WORLD] + COUNT[s351,WORLD] + 2*COUNT[s352,WORLD] + COUNT[s353,WORLD] + 2*COUNT[s354,WORLD] }=> "./react_data/LynTest.dat"
+
+   /*RecTest*/
+   { COUNT[s4,WORLD] + COUNT[s5,WORLD] + COUNT[s6,WORLD] + COUNT[s7,WORLD] + 2*COUNT[s8,WORLD] + 2*COUNT[s9,WORLD] + 2*COUNT[s10,WORLD] + 2*COUNT[s11,WORLD] + 2*COUNT[s12,WORLD] + COUNT[s13,WORLD] + COUNT[s14,WORLD] + COUNT[s15,WORLD] + COUNT[s16,WORLD] + 2*COUNT[s17,WORLD] + 2*COUNT[s18,WORLD] + 2*COUNT[s19,WORLD] + 2*COUNT[s20,WORLD] + 2*COUNT[s21,WORLD] + 2*COUNT[s22,WORLD] + 2*COUNT[s23,WORLD] + 2*COUNT[s24,WORLD] + 2*COUNT[s25,WORLD] + COUNT[s26,WORLD] + COUNT[s27,WORLD] + COUNT[s28,WORLD] + COUNT[s29,WORLD] + COUNT[s30,WORLD] + COUNT[s31,WORLD] + COUNT[s32,WORLD] + COUNT[s33,WORLD] + 2*COUNT[s34,WORLD] + 2*COUNT[s35,WORLD] + 2*COUNT[s36,WORLD] + 2*COUNT[s37,WORLD] + 2*COUNT[s38,WORLD] + 2*COUNT[s39,WORLD] + 2*COUNT[s40,WORLD] + 2*COUNT[s41,WORLD] + 2*COUNT[s42,WORLD] + 2*COUNT[s43,WORLD] + 2*COUNT[s44,WORLD] + 2*COUNT[s45,WORLD] + 2*COUNT[s46,WORLD] + 2*COUNT[s47,WORLD] + 2*COUNT[s48,WORLD] + 2*COUNT[s49,WORLD] + 2*COUNT[s50,WORLD] + 2*COUNT[s51,WORLD] + 2*COUNT[s52,WORLD] + 2*COUNT[s53,WORLD] + 2*COUNT[s54,WORLD] + 2*COUNT[s55,WORLD] + 2*COUNT[s56,WORLD] + 2*COUNT[s57,WORLD] + 2*COUNT[s58,WORLD] + 2*COUNT[s59,WORLD] + COUNT[s60,WORLD] + COUNT[s61,WORLD] + COUNT[s62,WORLD] + COUNT[s63,WORLD] + COUNT[s64,WORLD] + COUNT[s65,WORLD] + COUNT[s66,WORLD] + COUNT[s67,WORLD] + 2*COUNT[s68,WORLD] + 2*COUNT[s69,WORLD] + 2*COUNT[s70,WORLD] + 2*COUNT[s71,WORLD] + 2*COUNT[s72,WORLD] + 2*COUNT[s73,WORLD] + 2*COUNT[s74,WORLD] + 2*COUNT[s75,WORLD] + 2*COUNT[s76,WORLD] + 2*COUNT[s77,WORLD] + 2*COUNT[s79,WORLD] + 2*COUNT[s80,WORLD] + 2*COUNT[s81,WORLD] + 2*COUNT[s82,WORLD] + 2*COUNT[s83,WORLD] + 2*COUNT[s84,WORLD] + 2*COUNT[s85,WORLD] + 2*COUNT[s86,WORLD] + 2*COUNT[s87,WORLD] + 2*COUNT[s88,WORLD] + 2*COUNT[s89,WORLD] + 2*COUNT[s90,WORLD] + 2*COUNT[s91,WORLD] + 2*COUNT[s92,WORLD] + 2*COUNT[s93,WORLD] + 2*COUNT[s94,WORLD] + 2*COUNT[s95,WORLD] + 2*COUNT[s96,WORLD] + 2*COUNT[s97,WORLD] + 2*COUNT[s98,WORLD] + 2*COUNT[s99,WORLD] + 2*COUNT[s100,WORLD] + 2*COUNT[s101,WORLD] + 2*COUNT[s102,WORLD] + 2*COUNT[s103,WORLD] + 2*COUNT[s104,WORLD] + 2*COUNT[s105,WORLD] + 2*COUNT[s106,WORLD] + 2*COUNT[s107,WORLD] + 2*COUNT[s108,WORLD] + 2*COUNT[s109,WORLD] + COUNT[s110,WORLD] + COUNT[s111,WORLD] + COUNT[s112,WORLD] + COUNT[s113,WORLD] + COUNT[s114,WORLD] + COUNT[s115,WORLD] + 2*COUNT[s116,WORLD] + 2*COUNT[s117,WORLD] + 2*COUNT[s118,WORLD] + 2*COUNT[s119,WORLD] + 2*COUNT[s120,WORLD] + 2*COUNT[s121,WORLD] + 2*COUNT[s122,WORLD] + 2*COUNT[s123,WORLD] + 2*COUNT[s124,WORLD] + 2*COUNT[s125,WORLD] + 2*COUNT[s126,WORLD] + 2*COUNT[s127,WORLD] + 2*COUNT[s128,WORLD] + 2*COUNT[s129,WORLD] + 2*COUNT[s130,WORLD] + 2*COUNT[s131,WORLD] + 2*COUNT[s132,WORLD] + COUNT[s133,WORLD] + COUNT[s134,WORLD] + 2*COUNT[s135,WORLD] + 2*COUNT[s136,WORLD] + 2*COUNT[s137,WORLD] + 2*COUNT[s138,WORLD] + 2*COUNT[s139,WORLD] + 2*COUNT[s140,WORLD] + 2*COUNT[s141,WORLD] + 2*COUNT[s142,WORLD] + 2*COUNT[s143,WORLD] + 2*COUNT[s144,WORLD] + 2*COUNT[s145,WORLD] + 2*COUNT[s146,WORLD] + 2*COUNT[s147,WORLD] + 2*COUNT[s148,WORLD] + 2*COUNT[s149,WORLD] + 2*COUNT[s150,WORLD] + 2*COUNT[s151,WORLD] + 2*COUNT[s152,WORLD] + 2*COUNT[s153,WORLD] + 2*COUNT[s154,WORLD] + 2*COUNT[s155,WORLD] + 2*COUNT[s156,WORLD] + 2*COUNT[s157,WORLD] + 2*COUNT[s158,WORLD] + 2*COUNT[s159,WORLD] + 2*COUNT[s160,WORLD] + 2*COUNT[s161,WORLD] + 2*COUNT[s162,WORLD] + 2*COUNT[s163,WORLD] + 2*COUNT[s164,WORLD] + 2*COUNT[s165,WORLD] + 2*COUNT[s166,WORLD] + 2*COUNT[s167,WORLD] + 2*COUNT[s168,WORLD] + 2*COUNT[s169,WORLD] + 2*COUNT[s170,WORLD] + 2*COUNT[s171,WORLD] + 2*COUNT[s172,WORLD] + 2*COUNT[s173,WORLD] + COUNT[s174,WORLD] + COUNT[s175,WORLD] + 2*COUNT[s176,WORLD] + 2*COUNT[s177,WORLD] + 2*COUNT[s178,WORLD] + 2*COUNT[s180,WORLD] + 2*COUNT[s181,WORLD] + 2*COUNT[s182,WORLD] + 2*COUNT[s183,WORLD] + 2*COUNT[s184,WORLD] + 2*COUNT[s185,WORLD] + 2*COUNT[s186,WORLD] + 2*COUNT[s187,WORLD] + 2*COUNT[s188,WORLD] + 2*COUNT[s189,WORLD] + 2*COUNT[s190,WORLD] + 2*COUNT[s191,WORLD] + 2*COUNT[s192,WORLD] + 2*COUNT[s193,WORLD] + 2*COUNT[s194,WORLD] + 2*COUNT[s195,WORLD] + 2*COUNT[s196,WORLD] + 2*COUNT[s197,WORLD] + 2*COUNT[s198,WORLD] + 2*COUNT[s199,WORLD] + 2*COUNT[s200,WORLD] + 2*COUNT[s201,WORLD] + 2*COUNT[s202,WORLD] + 2*COUNT[s203,WORLD] + 2*COUNT[s204,WORLD] + 2*COUNT[s205,WORLD] + 2*COUNT[s206,WORLD] + 2*COUNT[s207,WORLD] + 2*COUNT[s208,WORLD] + COUNT[s209,WORLD] + COUNT[s210,WORLD] + COUNT[s211,WORLD] + COUNT[s212,WORLD] + COUNT[s213,WORLD] + COUNT[s214,WORLD] + COUNT[s215,WORLD] + COUNT[s216,WORLD] + COUNT[s217,WORLD] + COUNT[s218,WORLD] + 2*COUNT[s219,WORLD] + 2*COUNT[s220,WORLD] + 2*COUNT[s221,WORLD] + 2*COUNT[s222,WORLD] + 2*COUNT[s223,WORLD] + 2*COUNT[s224,WORLD] + 2*COUNT[s225,WORLD] + 2*COUNT[s226,WORLD] + 2*COUNT[s227,WORLD] + 2*COUNT[s228,WORLD] + 2*COUNT[s229,WORLD] + 2*COUNT[s230,WORLD] + 2*COUNT[s231,WORLD] + 2*COUNT[s232,WORLD] + 2*COUNT[s233,WORLD] + 2*COUNT[s234,WORLD] + 2*COUNT[s235,WORLD] + 2*COUNT[s236,WORLD] + 2*COUNT[s237,WORLD] + 2*COUNT[s238,WORLD] + 2*COUNT[s239,WORLD] + 2*COUNT[s240,WORLD] + 2*COUNT[s241,WORLD] + 2*COUNT[s242,WORLD] + 2*COUNT[s243,WORLD] + 2*COUNT[s244,WORLD] + 2*COUNT[s245,WORLD] + 2*COUNT[s246,WORLD] + 2*COUNT[s247,WORLD] + 2*COUNT[s248,WORLD] + COUNT[s249,WORLD] + COUNT[s250,WORLD] + 2*COUNT[s251,WORLD] + 2*COUNT[s252,WORLD] + 2*COUNT[s253,WORLD] + 2*COUNT[s254,WORLD] + 2*COUNT[s255,WORLD] + 2*COUNT[s256,WORLD] + 2*COUNT[s257,WORLD] + 2*COUNT[s258,WORLD] + 2*COUNT[s259,WORLD] + 2*COUNT[s260,WORLD] + 2*COUNT[s261,WORLD] + 2*COUNT[s262,WORLD] + 2*COUNT[s263,WORLD] + 2*COUNT[s264,WORLD] + 2*COUNT[s265,WORLD] + 2*COUNT[s266,WORLD] + 2*COUNT[s267,WORLD] + 2*COUNT[s269,WORLD] + 2*COUNT[s270,WORLD] + 2*COUNT[s271,WORLD] + 2*COUNT[s272,WORLD] + 2*COUNT[s273,WORLD] + 2*COUNT[s274,WORLD] + 2*COUNT[s275,WORLD] + 2*COUNT[s276,WORLD] + 2*COUNT[s277,WORLD] + 2*COUNT[s278,WORLD] + 2*COUNT[s279,WORLD] + 2*COUNT[s280,WORLD] + 2*COUNT[s281,WORLD] + 2*COUNT[s282,WORLD] + 2*COUNT[s283,WORLD] + 2*COUNT[s284,WORLD] + 2*COUNT[s285,WORLD] + 2*COUNT[s286,WORLD] + 2*COUNT[s287,WORLD] + 2*COUNT[s288,WORLD] + 2*COUNT[s289,WORLD] + 2*COUNT[s290,WORLD] + 2*COUNT[s291,WORLD] + 2*COUNT[s292,WORLD] + 2*COUNT[s293,WORLD] + 2*COUNT[s294,WORLD] + 2*COUNT[s295,WORLD] + 2*COUNT[s296,WORLD] + 2*COUNT[s297,WORLD] + 2*COUNT[s298,WORLD] + 2*COUNT[s299,WORLD] + 2*COUNT[s300,WORLD] + 2*COUNT[s301,WORLD] + 2*COUNT[s302,WORLD] + 2*COUNT[s303,WORLD] + 2*COUNT[s304,WORLD] + 2*COUNT[s305,WORLD] + 2*COUNT[s306,WORLD] + 2*COUNT[s307,WORLD] + 2*COUNT[s308,WORLD] + 2*COUNT[s309,WORLD] + 2*COUNT[s310,WORLD] + 2*COUNT[s311,WORLD] + 2*COUNT[s312,WORLD] + 2*COUNT[s313,WORLD] + 2*COUNT[s314,WORLD] + 2*COUNT[s315,WORLD] + 2*COUNT[s316,WORLD] + 2*COUNT[s317,WORLD] + 2*COUNT[s318,WORLD] + 2*COUNT[s319,WORLD] + 2*COUNT[s320,WORLD] + 2*COUNT[s321,WORLD] + 2*COUNT[s322,WORLD] + 2*COUNT[s323,WORLD] + 2*COUNT[s324,WORLD] + 2*COUNT[s325,WORLD] + 2*COUNT[s326,WORLD] + 2*COUNT[s327,WORLD] + 2*COUNT[s328,WORLD] + 2*COUNT[s329,WORLD] + 2*COUNT[s330,WORLD] + 2*COUNT[s331,WORLD] + 2*COUNT[s332,WORLD] + 2*COUNT[s333,WORLD] + 2*COUNT[s334,WORLD] + 2*COUNT[s335,WORLD] + 2*COUNT[s336,WORLD] + COUNT[s337,WORLD] + COUNT[s338,WORLD] + 2*COUNT[s339,WORLD] + 2*COUNT[s340,WORLD] + 2*COUNT[s341,WORLD] + 2*COUNT[s342,WORLD] + 2*COUNT[s343,WORLD] + 2*COUNT[s344,WORLD] + 2*COUNT[s345,WORLD] + 2*COUNT[s346,WORLD] + 2*COUNT[s347,WORLD] + 2*COUNT[s348,WORLD] + 2*COUNT[s349,WORLD] + 2*COUNT[s350,WORLD] + 2*COUNT[s351,WORLD] + 2*COUNT[s352,WORLD] + 2*COUNT[s353,WORLD] + 2*COUNT[s354,WORLD] }=> "./react_data/RecTest.dat"
+
 }
 
