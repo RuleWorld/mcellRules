@@ -177,8 +177,9 @@ def processDiffussionElements(parameters, extendedData):
                 data = {'name':propertyValue[1].strip(), 'parameters': []}
                 moleculeProperties[molecule[0][0]].append((propertyValue[0], data))
         if 'diffusionFunction' in molecule[1]:
-                data = {'name': molecule[1]['diffusionFunction'][1]['functionName'], 
-                'parameters':molecule[1]['diffusionFunction'][1]['parameters']}
+                parameters = molecule[1]['diffusionFunction'][1]['parameters']
+                data = {'name': '"{0}"'.format(molecule[1]['diffusionFunction'][1]['functionName']), 
+                'parameters':[(x['key'], x['value']) for x in parameters]}
                 moleculeProperties[molecule[0][0]].append((molecule[1]['diffusionFunction'][0], data))
 
     for seed in extendedData['initialization']:
@@ -203,6 +204,16 @@ def processDiffussionElements(parameters, extendedData):
     return {'modelProperties':modelProperties, 'moleculeProperties': moleculeProperties, 
             'compartmentProperties': compartmentProperties}
 
+def writeDefaultFunctions():
+    defaultFunctions = StringIO()
+
+    defaultFunctions.write('begin functions\n')
+    defaultFunctions.write('\teinstein_stokes(p_kb, p_t, p_rs, p_mu)= p_kb*p_t/(6*3.141592*p_mu*p_rs)\n')
+    defaultFunctions.write('\tsaffman_delbruck(p_kb, p_t, p_rc, p_mu, p_mu_ex, p_gamma, p_h) = p_kb*p_t*log((p_mu*p_h/(p_rc*p_mu_ex)-p_gamma))/(4*3.141592*p_mu*p_h)\n')
+    defaultFunctions.write('end functions\n')
+
+    return defaultFunctions.getvalue()
+
 def constructBNGFromMDLR(mdlrPath,nfsimFlag=False, separateSpatial=True):
     '''
     initializes a bngl file and an extended-bng-xml file with a MDLr file description
@@ -216,7 +227,6 @@ def constructBNGFromMDLR(mdlrPath,nfsimFlag=False, separateSpatial=True):
     finalBNGLStr = StringIO()
     finalBNGLStr.write('begin model\n')
     parameterStr = processParameters(statements)
-
     moleculeStr,moleculeList = processMolecules(sections['molecules'])
     seedspecies, compartments = processInitCompartments(sections['initialization']['entries'])
     if not nfsimFlag:
@@ -226,11 +236,14 @@ def constructBNGFromMDLR(mdlrPath,nfsimFlag=False, separateSpatial=True):
         #observables = processMTObservables(moleculeList)
     reactions = processReactionRules(sections['reactions'])
 
+    #functions = writeDefaultFunctions()
+
     finalBNGLStr.write(parameterStr)
     finalBNGLStr.write(moleculeStr)
     finalBNGLStr.write(compartments)
     finalBNGLStr.write(seedspecies)
     finalBNGLStr.write(observables)
+    #finalBNGLStr.write(functions)
     #finalBNGLStr.write('begin observables\nend observables\n')
     finalBNGLStr.write(reactions)
     finalBNGLStr.write('end model\n')

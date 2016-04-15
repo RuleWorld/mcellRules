@@ -41,7 +41,7 @@ def getNamesFromDefinitionString(defStr):
     return [x[:-1] for x in speciesNames]
 
 
-def xml2HNautySpeciesDefinitions(inputMDLRFile):
+def xml2HNautySpeciesDefinitions(inputMDLRFile, outputDir):
     """
     Temporary function for translating xml bng definitions to nautty species definition strings
 
@@ -55,6 +55,7 @@ def xml2HNautySpeciesDefinitions(inputMDLRFile):
     """
 
     #get a bng-xml file
+
     call(['bngdev', '-xml', '-check', inputMDLRFile + '.bngl'])
 
     #extract seed species defition
@@ -100,6 +101,7 @@ if __name__ == "__main__":
 
     # mdl to bngl
     resultDict = readMDL.constructBNGFromMDLR(namespace.input, namespace.nfsim)
+    outputDir = os.sep.join(namespace.output.split(os.sep)[:-1])
     # create bngl file
     readMDL.outputBNGL(resultDict['bnglstr'], bnglPath)
 
@@ -118,7 +120,7 @@ if __name__ == "__main__":
 
     else:
 
-        nautyDict = xml2HNautySpeciesDefinitions(namespace.input)
+        nautyDict = xml2HNautySpeciesDefinitions(namespace.input, outputDir)
 
         #append extended bng-xml to the bng-xml definition (the one that doesn't include seed information)
         bngxmlestr = writeBXe.mergeBXBXe(namespace.input + '_total.xml', namespace.input + '_extended.xml')

@@ -36,9 +36,11 @@ def write2BNGXMLe(propertiesDict, modelName):
         listOfMoleculeProperties = etree.SubElement(moleculeNode,"ListOfProperties")
         for propertyEntry in propertiesDict['moleculeProperties'][element]:
             propertyNode = createPropertyNode(listOfMoleculeProperties, propertyEntry[0].strip().lower(), propertyEntry[1]['name'].strip())
-            #propertyNode = etree.SubElement(listOfMoleculeProperties, "Property", id=propertyEntry[0].strip().lower(), value=propertyEntry[1]['name'].strip())
-            for parameter in propertyEntry[1]['parameters']:
-                etree.SubElement(propertyNode, "Parameter",value=parameter)
+            if len(propertyEntry[1]['parameters']) > 0:
+                sublistOfMoleculeProperties = etree.SubElement(propertyNode,"ListOfProperties")
+                #propertyNode = etree.SubElement(listOfMoleculeProperties, "Property", id=propertyEntry[0].strip().lower(), value=propertyEntry[1]['name'].strip())
+                for parameter in propertyEntry[1]['parameters']:
+                    etree.SubElement(sublistOfMoleculeProperties, "Property",id=parameter[0],value=parameter[1])
 
     return etree.tostring(root, pretty_print=True)
 

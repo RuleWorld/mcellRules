@@ -1,0 +1,55 @@
+<bngexperimental name="fceri2.mdlr" version="1.1">
+  <ListOfProperties>
+    <Property id="kb" type="num" value="KB"/>
+    <Property id="temperature" type="num" value="T"/>
+    <Property id="rs" type="num" value="Rs"/>
+    <Property id="width" type="num" value="0.01"/>
+    <Property id="nav" type="num" value="Nav"/>
+    <Property id="rc" type="num" value="Rc"/>
+    <Property id="gamma" type="num" value="gamma"/>
+  </ListOfProperties>
+  <ListOfCompartments>
+    <Compartment id="CP">
+      <ListOfProperties>
+        <Property id="viscosity" type="num" value="mu_CP"/>
+      </ListOfProperties>
+    </Compartment>
+    <Compartment id="EC">
+      <ListOfProperties>
+        <Property id="viscosity" type="num" value="mu_EC"/>
+      </ListOfProperties>
+    </Compartment>
+    <Compartment id="PM">
+      <ListOfProperties>
+        <Property id="viscosity" type="num" value="mu_PM"/>
+      </ListOfProperties>
+    </Compartment>
+  </ListOfCompartments>
+  <ListOfMoleculeTypes>
+    <MoleculeType id="Syk">
+      <ListOfProperties>
+        <Property id="diffusion_function" type="str" value="Einstein_Stokes"/>
+      </ListOfProperties>
+    </MoleculeType>
+    <MoleculeType id="Rec">
+      <ListOfProperties>
+        <Property id="diffusion_function" type="str" value="Saffman_Delbruck"/>
+      </ListOfProperties>
+    </MoleculeType>
+    <MoleculeType id="Lyn">
+      <ListOfProperties>
+        <Property id="diffusion_function" type="str" value="Saffman_Delbruck"/>
+      </ListOfProperties>
+    </MoleculeType>
+    <MoleculeType id="Lig">
+      <ListOfProperties>
+        <Property id="diffusion_function" type="str" value="Einstein_Stokes">
+          <ListOfProperties>
+            <Property id="rs" value="Rs"/>
+            <Property id="temperature" value="T"/>
+          </ListOfProperties>
+        </Property>
+      </ListOfProperties>
+    </MoleculeType>
+  </ListOfMoleculeTypes>
+</bngexperimental>

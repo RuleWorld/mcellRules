@@ -71,8 +71,8 @@ nestedBrackets = nestedExpr('[', ']', content=section_enclosure_)
 nestedCurlies = nestedExpr('{', '}', content=section_enclosure_) 
 section_enclosure_ << (statement | Group(identifier + ZeroOrMore(identifier) + nestedCurlies) |  Group(identifier + '@' + restOfLine) | Word(alphas, alphanums + "_[]") | identifier | Suppress(',') | '@' | real)
 
-function_entry_ = Group(identifier.setResultsName('functionName') + Suppress(lparen) + 
-                 delimitedList(identifier, delim=',').setResultsName('parameters') + Suppress(rparen))
+function_entry_ = Suppress(dbquotes) + Group(identifier.setResultsName('functionName') + Suppress(lparen) + 
+                 delimitedList(Group(identifier.setResultsName('key') + Suppress(equal) + identifier.setResultsName('value')), delim=',').setResultsName('parameters') + Suppress(rparen)) + Suppress(dbquotes)
 
 name = Word(alphanums + '_') 
 species = Suppress('()') + Optional(Suppress('@' + Word(alphanums + '_-'))) + ZeroOrMore(Suppress('+') + Word(alphanums + "_" + ":#-")
@@ -105,7 +105,7 @@ hashed_system_constants = Group(hashsymbol + Suppress(system_constants_) + lbrac
 
 # hash molecule_entry
 diffusion_entry_ = Group(diffusion_function_ + Suppress(equal) + function_entry_)
-molecule_entry = Group(molecule_definition + Optional(Group(lbrace + Optional(diffusion_entry_.setResultsName('diffusionFunction')) + (ZeroOrMore(diffusion_entry_ | statement)).setResultsName('moleculeParameters') + rbrace)))
+molecule_entry = Group(molecule_definition + Optional(Group(lbrace + Optional(diffusion_entry_.setResultsName('diffusionFunction')) + (ZeroOrMore(statement)).setResultsName('moleculeParameters') + rbrace)))
 hashed_molecule_section = Group(hashsymbol + Suppress(define_molecules_) + lbrace + OneOrMore(molecule_entry) + rbrace)
 
 # hash reaction entry
