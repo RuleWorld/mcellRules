@@ -5218,7 +5218,7 @@ INSTANTIATE Scene OBJECT
 /* Observables bloc */
 REACTION_DATA_OUTPUT
 {
-   STEP = 5e-4
+   STEP = 2e-2
    HEADER = ""
    {
     /*LynFree*/

@@ -211,7 +211,7 @@ MODIFY_SURFACE_REGIONS
     //COUNT[Lyn(U!1).Rec(b~Y!1,a!2).Lig(l!2), WORLD]} => "./react_data/LynRecLig.dat"
 
     {COUNT[Rec(b~pY!?), WORLD] } => "./react_data/RecPbeta.dat"
-    {COUNT[Rec(a!1).Lig(l!1,l), WORLD]} => "./react_data/RecMon.dat"
+    {COUNT[Rec(a!1).Lig(l!1,l), WORLD] + COUNT[Rec(a), WORLD]} => "./react_data/RecMon.dat"
     {COUNT[Rec(a!1).Lig(l!1,l!2).Rec(a!2), WORLD]} => "./react_data/RecDim.dat"
     {COUNT[Lig(l!1,l!2).Lyn(U!3,SH2).Rec(a!2,b!3).Rec(a!1,b), WORLD]} => "./react_data/RecRecLigLyn.dat"
 

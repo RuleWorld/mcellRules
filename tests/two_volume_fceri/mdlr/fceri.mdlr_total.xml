@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Created by BioNetGen 2.2.6  -->
 <sbml xmlns="http://www.sbml.org/sbml/level3" level="3" version="1">
   <model id="fceri.mdlr">
     <ListOfParameters>
@@ -56,19 +54,19 @@
       </MoleculeType>
       <MoleculeType id="Lyn">
         <ListOfComponentTypes>
-          <ComponentType id="U"/>
           <ComponentType id="SH2"/>
+          <ComponentType id="U"/>
         </ListOfComponentTypes>
       </MoleculeType>
       <MoleculeType id="Rec">
         <ListOfComponentTypes>
-          <ComponentType id="g">
+          <ComponentType id="b">
             <ListOfAllowedStates>
               <AllowedState id="Y"/>
               <AllowedState id="pY"/>
             </ListOfAllowedStates>
           </ComponentType>
-          <ComponentType id="b">
+          <ComponentType id="g">
             <ListOfAllowedStates>
               <AllowedState id="Y"/>
               <AllowedState id="pY"/>
@@ -79,19 +77,19 @@
       </MoleculeType>
       <MoleculeType id="Syk">
         <ListOfComponentTypes>
-          <ComponentType id="tSH2"/>
-          <ComponentType id="l">
-            <ListOfAllowedStates>
-              <AllowedState id="Y"/>
-              <AllowedState id="pY"/>
-            </ListOfAllowedStates>
-          </ComponentType>
           <ComponentType id="a">
             <ListOfAllowedStates>
               <AllowedState id="Y"/>
               <AllowedState id="pY"/>
             </ListOfAllowedStates>
           </ComponentType>
+          <ComponentType id="l">
+            <ListOfAllowedStates>
+              <AllowedState id="Y"/>
+              <AllowedState id="pY"/>
+            </ListOfAllowedStates>
+          </ComponentType>
+          <ComponentType id="tSH2"/>
         </ListOfComponentTypes>
       </MoleculeType>
     </ListOfMoleculeTypes>
@@ -1727,9 +1725,9 @@
       </ReactionRule>
     </ListOfReactionRules>
     <ListOfObservables>
-      <Observable id="O1" name="LynFree" type="Species">
+      <Observable id="O1" name="LynFree" type="Molecules">
         <ListOfPatterns>
-          <Pattern id="O1_P1" matchOnce="1">
+          <Pattern id="O1_P1">
             <ListOfMolecules>
               <Molecule id="O1_P1_M1" name="Lyn">
                 <ListOfComponents>
@@ -1741,9 +1739,9 @@
           </Pattern>
         </ListOfPatterns>
       </Observable>
-      <Observable id="O2" name="RecPbeta" type="Species">
+      <Observable id="O2" name="RecPbeta" type="Molecules">
         <ListOfPatterns>
-          <Pattern id="O2_P1" matchOnce="1">
+          <Pattern id="O2_P1">
             <ListOfMolecules>
               <Molecule id="O2_P1_M1" name="Rec">
                 <ListOfComponents>
@@ -1754,9 +1752,9 @@
           </Pattern>
         </ListOfPatterns>
       </Observable>
-      <Observable id="O3" name="RecMon" type="Species">
+      <Observable id="O3" name="RecMon" type="Molecules">
         <ListOfPatterns>
-          <Pattern id="O3_P1" matchOnce="1">
+          <Pattern id="O3_P1">
             <ListOfMolecules>
               <Molecule id="O3_P1_M1" name="Lig">
                 <ListOfComponents>
@@ -1774,11 +1772,20 @@
               <Bond id="O3_P1_B1" site1="O3_P1_M1_C1" site2="O3_P1_M2_C1"/>
             </ListOfBonds>
           </Pattern>
+          <Pattern id="O3_P2">
+            <ListOfMolecules>
+              <Molecule id="O3_P2_M1" name="Rec">
+                <ListOfComponents>
+                  <Component id="O3_P2_M1_C1" name="a" numberOfBonds="0"/>
+                </ListOfComponents>
+              </Molecule>
+            </ListOfMolecules>
+          </Pattern>
         </ListOfPatterns>
       </Observable>
-      <Observable id="O4" name="RecDim" type="Species">
+      <Observable id="O4" name="RecDim" type="Molecules">
         <ListOfPatterns>
-          <Pattern id="O4_P1" matchOnce="1">
+          <Pattern id="O4_P1">
             <ListOfMolecules>
               <Molecule id="O4_P1_M1" name="Lig">
                 <ListOfComponents>
@@ -1804,9 +1811,9 @@
           </Pattern>
         </ListOfPatterns>
       </Observable>
-      <Observable id="O5" name="RecRecLigLyn" type="Species">
+      <Observable id="O5" name="RecRecLigLyn" type="Molecules">
         <ListOfPatterns>
-          <Pattern id="O5_P1" matchOnce="1">
+          <Pattern id="O5_P1">
             <ListOfMolecules>
               <Molecule id="O5_P1_M1" name="Rec">
                 <ListOfComponents>
@@ -1841,9 +1848,9 @@
           </Pattern>
         </ListOfPatterns>
       </Observable>
-      <Observable id="O6" name="RecPgamma" type="Species">
+      <Observable id="O6" name="RecPgamma" type="Molecules">
         <ListOfPatterns>
-          <Pattern id="O6_P1" matchOnce="1">
+          <Pattern id="O6_P1">
             <ListOfMolecules>
               <Molecule id="O6_P1_M1" name="Rec">
                 <ListOfComponents>
@@ -1852,7 +1859,7 @@
               </Molecule>
             </ListOfMolecules>
           </Pattern>
-          <Pattern id="O6_P2" matchOnce="1">
+          <Pattern id="O6_P2">
             <ListOfMolecules>
               <Molecule id="O6_P2_M1" name="Rec">
                 <ListOfComponents>
@@ -1863,9 +1870,9 @@
           </Pattern>
         </ListOfPatterns>
       </Observable>
-      <Observable id="O7" name="RecSyk" type="Species">
+      <Observable id="O7" name="RecSyk" type="Molecules">
         <ListOfPatterns>
-          <Pattern id="O7_P1" matchOnce="1">
+          <Pattern id="O7_P1">
             <ListOfMolecules>
               <Molecule id="O7_P1_M1" name="Syk">
                 <ListOfComponents>
@@ -1884,9 +1891,9 @@
           </Pattern>
         </ListOfPatterns>
       </Observable>
-      <Observable id="O8" name="RecSykPS" type="Species">
+      <Observable id="O8" name="RecSykPS" type="Molecules">
         <ListOfPatterns>
-          <Pattern id="O8_P1" matchOnce="1">
+          <Pattern id="O8_P1">
             <ListOfMolecules>
               <Molecule id="O8_P1_M1" name="Syk">
                 <ListOfComponents>

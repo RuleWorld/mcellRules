@@ -2,36 +2,36 @@ INSTANTIATE Scene OBJECT
 {
 	EC OBJECT EC {}
 	CP OBJECT CP {}
-	Release_Site_s1 RELEASE_SITE //bng:@EC::Lig(l,l)
+	ligand_rel RELEASE_SITE //@EC::Lig(l,l)
 	{
 		SHAPE = Scene.EC[ALL] - Scene.CP[ALL]
 		MOLECULE = volume_proxy
-		NUMBER_TO_RELEASE = 6000
+		NUMBER_TO_RELEASE = Lig_tot
 		RELEASE_PROBABILITY = 1
 		GRAPH_PATTERN = "c:l~NO_STATE!2,c:l~NO_STATE!2,m:Lig@EC!0!1,"
 	}
-	Release_Site_s2 RELEASE_SITE //bng:@PM::Lyn(SH2,U)
+	lyn_rel RELEASE_SITE //@PM::Lyn(SH2,U)
 	{
 		SHAPE = Scene.CP[ALL]
 		MOLECULE = surface_proxy'
-		NUMBER_TO_RELEASE = 280
+		NUMBER_TO_RELEASE = Lyn_tot
 		RELEASE_PROBABILITY = 1
-		GRAPH_PATTERN = "c:SH2~NO_STATE!2,c:U~NO_STATE!2,m:Lyn@PM!1!0,"
+		GRAPH_PATTERN = "c:SH2~NO_STATE!2,c:U~NO_STATE!2,m:Lyn@PM!0!1,"
 	}
-	Release_Site_s3 RELEASE_SITE //bng:@CP::Syk(a~Y,l~Y,tSH2)
+	syk_rel RELEASE_SITE //@CP::Syk(a~Y,l~Y,tSH2)
 	{
 		SHAPE = Scene.CP[ALL]
 		MOLECULE = volume_proxy
-		NUMBER_TO_RELEASE = 400
+		NUMBER_TO_RELEASE = Syk_tot
 		RELEASE_PROBABILITY = 1
-		GRAPH_PATTERN = "c:a~Y!3,c:l~Y!3,c:tSH2~NO_STATE!3,m:Syk@CP!2!1!0,"
+		GRAPH_PATTERN = "c:a~Y!3,c:l~Y!3,c:tSH2~NO_STATE!3,m:Syk@CP!0!1!2,"
 	}
-	Release_Site_s4 RELEASE_SITE //bng:@PM::Rec(a,b~Y,g~Y)
+	receptor_rel RELEASE_SITE //@PM::Rec(a,b~Y,g~Y)
 	{
 		SHAPE = Scene.CP[ALL]
 		MOLECULE = surface_proxy'
-		NUMBER_TO_RELEASE = 400
+		NUMBER_TO_RELEASE = Rec_tot
 		RELEASE_PROBABILITY = 1
-		GRAPH_PATTERN = "c:a~NO_STATE!3,c:b~Y!3,c:g~Y!3,m:Rec@PM!2!1!0,"
+		GRAPH_PATTERN = "c:a~NO_STATE!3,c:b~Y!3,c:g~Y!3,m:Rec@PM!1!2!0,"
 	}
 }
