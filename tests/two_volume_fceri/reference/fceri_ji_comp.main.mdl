@@ -11,20 +11,7 @@ DEFINE_SURFACE_CLASSES
 
 MODIFY_SURFACE_REGIONS
 {
-   EC[wall]
-   {
-      SURFACE_CLASS = reflect
-   }
-   EC[obj_wall]
-   {
-      SURFACE_CLASS = reflect
-   }
-   CP[PM]
-   {
-      SURFACE_CLASS = reflect
-   }
-   CP[obj_wall]
-   {
+   CP[ALL]{
       SURFACE_CLASS = reflect
    }
 }
@@ -5187,28 +5174,28 @@ INSTANTIATE Scene OBJECT
 
    s1_rel RELEASE_SITE
    {
-    SHAPE = Scene.EC[obj_wall] - Scene.CP[obj_wall]
+    SHAPE = Scene.EC[ALL] - Scene.CP[ALL]
     MOLECULE = s1
     NUMBER_TO_RELEASE = Lig_tot
     RELEASE_PROBABILITY = 1
    }
    s2_rel RELEASE_SITE
    {
-    SHAPE = Scene.CP[PM]
+    SHAPE = Scene.CP[ALL]
     MOLECULE = s2'
     NUMBER_TO_RELEASE = Lyn_tot
     RELEASE_PROBABILITY = 1
    }
    s3_rel RELEASE_SITE
    {
-    SHAPE = Scene.CP
+    SHAPE = Scene.CP[ALL]
     MOLECULE = s3
     NUMBER_TO_RELEASE = Syk_tot
     RELEASE_PROBABILITY = 1
    }
    s4_rel RELEASE_SITE
    {
-    SHAPE = Scene.CP[PM]
+    SHAPE = Scene.CP[ALL]
     MOLECULE = s4'
     NUMBER_TO_RELEASE = Rec_tot
     RELEASE_PROBABILITY = 1
