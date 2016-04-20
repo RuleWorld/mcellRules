@@ -1,7 +1,7 @@
 INSTANTIATE Scene OBJECT
 {
-	EC OBJECT EC {}
-	CP OBJECT CP {}
+	EC OBJECT EC { SCALE = [1, 1, 1]}
+	CP OBJECT CP { SCALE = [1, 1, 1]}
 	ligand_rel RELEASE_SITE //@EC::Lig(l,l)
 	{
 		SHAPE = Scene.EC[ALL] - Scene.CP[ALL]

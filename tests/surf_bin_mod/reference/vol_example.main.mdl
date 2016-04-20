@@ -1,0 +1,63 @@
+ITERATIONS =  20000
+TIME_STEP =  5e-6
+VACANCY_SEARCH_DISTANCE =  100
+INCLUDE_FILE = "icogeometry.mdl"
+Nav =  6.022e8               /* Avogadro number based on a volume size of 1 cubic um */
+rxn_layer_t =  0.01
+vol_wall =  56.5695045056029  /*Surface area*/
+vol_EC =  39
+vol_PM =  4.836624601  /*Surface area*/
+vol_CP =  1
+NaV =  602200000
+Lig_tot =  6.0e3
+Rec_tot =  4.0e2
+kp1 =  1
+km1 =  0.01
+kp2 =  1
+km2 =  0.01
+T =  298.15      /* Temperature, K */
+h =  rxn_layer_t      /* Thickness of 2D compartment, um */
+Rs =  0.002564      /* Radius of a (spherical) molecule in 3D compartment, um */
+Rc =  0.0015      /* Radius of a (cylindrical) molecule in 2D compartment, um */
+gamma =  0.5722      /* Euler's constant */
+KB =  1.3806488e-19     /* Boltzmann constant, cm^2.kg/K.s^2 */
+mu_wall =  1e-9      /* Viscosity in compartment wall, kg/um.s */
+mu_EC =  1e-9      /* Viscosity in compartment EC, kg/um.s */
+mu_PM =  1e-9      /* Viscosity in compartment PM, kg/um.s */
+mu_CP =  1e-9      /* Viscosity in compartment CP, kg/um.s */
+
+INCLUDE_FILE = "vol_example.molecules.mdl"
+INCLUDE_FILE = "vol_example.reactions.mdl"
+INCLUDE_FILE = "vol_example.seed.mdl"
+
+DEFINE_SURFACE_CLASSES{
+	reflect{
+		REFLECTIVE = ALL_MOLECULES
+	}
+
+}
+
+
+MODIFY_SURFACE_REGIONS{
+	CP[ALL]{
+		SURFACE_CLASS = reflect
+	}
+
+}
+
+
+/* Observables bloc */
+
+REACTION_DATA_OUTPUT
+{
+  STEP = 5e-4
+  HEADER = ""
+  {
+    COUNT[ligand, WORLD]                                : "LigFree",
+    COUNT[pligand,WORLD] + COUNT[pcomplex,WORLD]        : "Phosp",
+    COUNT[complex, WORLD]                                 : "RecBound",
+    COUNT[receptor, WORLD]                                : "RecFree"
+
+  } => "counts.txt"
+}
+
