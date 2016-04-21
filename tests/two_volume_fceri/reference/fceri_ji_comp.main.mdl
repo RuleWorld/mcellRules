@@ -2,7 +2,12 @@ ITERATIONS = 100000
 TIME_STEP = 2e-4
 VACANCY_SEARCH_DISTANCE = 100
 
-INCLUDE_FILE = "fceri_ji_comp.geometry.mdl"
+INCLUDE_FILE = "icogeometry.mdl"
+
+PARTITION_X = [ [-1.5 TO 1.5 STEP 1] ]
+PARTITION_Y = [ [-1.5 TO 1.5 STEP 1] ]
+PARTITION_Z = [ [-1.5 TO 1.5 STEP 1] ]
+
 
 DEFINE_SURFACE_CLASSES
 {
