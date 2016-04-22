@@ -30,6 +30,12 @@ INCLUDE_FILE = "vol_example.molecules.mdl"
 INCLUDE_FILE = "vol_example.reactions.mdl"
 INCLUDE_FILE = "vol_example.seed.mdl"
 
+PARTITION_X = [ [-1.5 TO 1.5 STEP 1] ]
+PARTITION_Y = [ [-1.5 TO 1.5 STEP 1] ]
+PARTITION_Z = [ [-1.5 TO 1.5 STEP 1] ]
+
+
+
 DEFINE_SURFACE_CLASSES{
 	reflect{
 		REFLECTIVE = ALL_MOLECULES

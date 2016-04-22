@@ -301,4 +301,20 @@
     <ListOfFunctions>
     </ListOfFunctions>
   </model>
-</sbml>
+<bngexperimental name="surf_bin_mod.mdlr" version="1.1">
+  <ListOfCompartments/>
+  <ListOfMoleculeTypes>
+    <MoleculeType id="Rec">
+      <ListOfProperties>
+        <Property id="diffusion_function" type="num" value="1"/>
+        <Property id="dimensionality" type="num" value="2"/>
+      </ListOfProperties>
+    </MoleculeType>
+    <MoleculeType id="Lig">
+      <ListOfProperties>
+        <Property id="diffusion_function" type="num" value="1"/>
+        <Property id="dimensionality" type="num" value="2"/>
+      </ListOfProperties>
+    </MoleculeType>
+  </ListOfMoleculeTypes>
+</bngexperimental></sbml>
