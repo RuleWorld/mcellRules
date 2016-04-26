@@ -1,5 +1,5 @@
-ITERATIONS =  20000
-TIME_STEP =  5e-6
+ITERATIONS =  10000
+TIME_STEP =  1e-5
 VACANCY_SEARCH_DISTANCE =  100
 INCLUDE_FILE = "icogeometry.mdl"
 Nav =  6.022e8               /* Avogadro number based on a volume size of 1 cubic um */
@@ -30,12 +30,6 @@ INCLUDE_FILE = "vol_example.molecules.mdl"
 INCLUDE_FILE = "vol_example.reactions.mdl"
 INCLUDE_FILE = "vol_example.seed.mdl"
 
-PARTITION_X = [ [-1.5 TO 1.5 STEP 1] ]
-PARTITION_Y = [ [-1.5 TO 1.5 STEP 1] ]
-PARTITION_Z = [ [-1.5 TO 1.5 STEP 1] ]
-
-
-
 DEFINE_SURFACE_CLASSES{
 	reflect{
 		REFLECTIVE = ALL_MOLECULES
@@ -56,14 +50,13 @@ MODIFY_SURFACE_REGIONS{
 
 REACTION_DATA_OUTPUT
 {
-  STEP = 5e-4
+  STEP = 1e-3
   HEADER = ""
   {
-    COUNT[ligand, WORLD]                                : "LigFree",
-    COUNT[pligand,WORLD] + COUNT[pcomplex,WORLD]        : "PhospLig",
-    COUNT[complex, WORLD]                                 : "RecBound",
+    COUNT[dimer,WORLD]                                     : "Dimers",
+    COUNT[ligand, WORLD]                                  : "LigFree",
+    COUNT[complex, WORLD] + COUNT[dimer,WORLD]            : "RecBound",
     COUNT[receptor, WORLD]                                : "RecFree"
-
   } => "counts.txt"
 }
 

@@ -1,0 +1,5 @@
+DEFINE_REACTIONS
+{
+    surface_proxy; -> surface_proxy; [1]
+    surface_proxy; + surface_proxy; -> surface_proxy; + surface_proxy; [1]
+}
