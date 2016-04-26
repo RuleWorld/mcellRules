@@ -1,10 +1,10 @@
 DEFINE_REACTIONS
 {
-    ligand; + receptor; -> complex; [100]
-    complex; -> ligand; + receptor; [10]
-    complex; -> pcomplex; [10]
-    pcomplex; -> complex; [5]
-    pligand; -> ligand; [5]
-    pcomplex; -> pligand; + receptor; [10]
-    pligand; + receptor; -> pcomplex; [100]
+    ligand' + receptor' -> complex' [100]
+    complex' -> ligand' + receptor' [10]
+    complex' -> pcomplex' [10]
+    pcomplex' -> complex' [5]
+    pligand' -> ligand' [5]
+    pcomplex' -> pligand' + receptor' [10]
+    pligand' + receptor' -> pcomplex' [100]
 }
