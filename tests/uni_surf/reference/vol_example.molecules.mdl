@@ -1,0 +1,12 @@
+DEFINE_MOLECULES
+{
+	ligand //proxy surface type. the instance contains the actual information
+	{ 
+		DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+	}
+	pligand //proxy surface type. the instance contains the actual information
+	{ 
+		DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+	}
+
+}

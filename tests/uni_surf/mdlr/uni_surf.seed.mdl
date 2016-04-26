@@ -1,0 +1,13 @@
+INSTANTIATE Scene OBJECT
+{
+	EC OBJECT EC {}
+	CP OBJECT CP {}
+	ligand_rel RELEASE_SITE //@PM::Lig(p~0)
+	{
+		SHAPE = Scene.CP[ALL]
+		MOLECULE = surface_proxy'
+		NUMBER_TO_RELEASE = 500
+		RELEASE_PROBABILITY = 1
+		GRAPH_PATTERN = "c:p~0!1,m:Lig@PM!0,"
+	}
+}

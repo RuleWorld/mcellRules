@@ -1,0 +1,5 @@
+DEFINE_REACTIONS
+{
+    ligand; -> pligand; [100]
+    pligand; -> ligand; [10]
+}
