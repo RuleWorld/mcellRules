@@ -1,0 +1,36 @@
+DEFINE_MOLECULES
+{
+	receptor //proxy surface type. the instance contains the actual information
+	{ 
+		DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+	}
+
+	complex //proxy molecule type. the instance contains the actual information
+	{ 
+		DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+	}
+	pcomplex //proxy molecule type. the instance contains the actual information
+	{ 
+		DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+	}
+
+	ligand //proxy surface type. the instance contains the actual information
+	{ 
+		DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+	}
+	pligand //proxy surface type. the instance contains the actual information
+	{ 
+		DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+	}
+
+	dimer //proxy surface type. the instance contains the actual information
+	{ 
+		DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+	}
+
+	pdimer //proxy surface type. the instance contains the actual information
+	{ 
+		DIFFUSION_CONSTANT_2D = KB*T*LOG((mu_PM*h/(Rc*(mu_EC+mu_CP)/2))-gamma)/(4*PI*mu_PM*h)
+	}
+
+}
