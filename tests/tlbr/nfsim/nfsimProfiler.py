@@ -27,7 +27,7 @@ def callNFSim(options):
     seed = str(random.randint(1, 1000000))
     with open(os.devnull, "w") as f:
         result = call([nfsimExecutable, '-xml', os.path.join('beta_{0}'.format(options['beta']), 'tlbr.xml'), '-cb', 
-                      '-sim', '10', '-osteps', '50', '-o', '{0}/output_{1}'.format(outputdir, seed),
+                      '-sim', '20', '-osteps', '50', '-o', '{0}/output_{1}'.format(outputdir, seed),
                       '-seed', '{0}'.format(seed)], stdout=f)
 
     return seed
@@ -83,7 +83,16 @@ def processGDATOutput(postOptions):
 
     headers, timeCourse = loadResults(gdatFile, ' ')
     headers = headers[1:]
-    localTrajectory = pd.DataFrame(timeCourse, columns=headers)
+    trajectorydata = defaultdict(list)
+    trajectorydata['iteration'] = postOptions['workerIdx']
+    trajectorydata['Origin'] = 'NFsim'
+    for line in timeCourse:
+        for idx in range(1, len(headers)):
+            trajectorydata['Seconds'].append(line[0])
+            trajectorydata['Value'].append(line[idx])
+            trajectorydata['Observable'].append(headers[idx])
+    
+    localTrajectory = pd.DataFrame(trajectorydata)
     postOptions['dataset'] = pd.concat([postOptions['dataset'], localTrajectory], ignore_index=True)
 
 
