@@ -13,8 +13,12 @@
       <Parameter id="cTot" type="Constant" value="0.84"/>
       <Parameter id="beta" type="Constant" value="50"/>
       <Parameter id="koff" type="Constant" value="0.01"/>
-      <Parameter id="kp1" type="Constant" value="4.14e6"/>
-      <Parameter id="kp2" type="Constant" value="1.036662520e9"/>
+      <!--<Parameter id="kp1" type="Constant" value="4.14e2"/>
+      <Parameter id="kp2" type="Constant" value="1.036662520e6"/>-->
+      <Parameter id="K1" type="Constant" value="1.084e+8"/>
+      <Parameter id="K2" type="Constant" value="3.372e+10"/>
+      <Parameter id="kp1" type="Constant" value="1.084e6"/>
+      <Parameter id="kp2" type="Constant" value="3.372e+8"/>
     </ListOfParameters>
     <ListOfMoleculeTypes>
       <MoleculeType id="L">
@@ -538,13 +542,13 @@
   <ListOfMoleculeTypes>
     <MoleculeType id="R">
       <ListOfProperties>
-        <Property id="diffusion_function" type="num" value="1e-5"/>
-        <Property id="dimensionality" type="num" value="2"/>
+        <Property id="diffusion_function" type="num" value="1e-3"/>
+        <Property id="dimensionality" type="num" value="3"/>
       </ListOfProperties>
     </MoleculeType>
     <MoleculeType id="L">
       <ListOfProperties>
-        <Property id="diffusion_function" type="num" value="1e-4"/>
+        <Property id="diffusion_function" type="num" value="1e-3"/>
         <Property id="dimensionality" type="num" value="3"/>
       </ListOfProperties>
     </MoleculeType>
