@@ -1,7 +1,7 @@
 ITERATIONS =  20000
 TIME_STEP =  1e-3
 VACANCY_SEARCH_DISTANCE =  100
-INCLUDE_FILE = "icogeometry.mdl"
+INCLUDE_FILE = "icogeometry2.mdl"
 
 PARTITION_X = [ [-1.5 TO 1.5 STEP 1] ]
 PARTITION_Y = [ [-1.5 TO 1.5 STEP 1] ]

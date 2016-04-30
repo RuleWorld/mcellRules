@@ -5,7 +5,7 @@ INSTANTIATE Scene OBJECT
 	{
 		SHAPE = Scene.CP[ALL]
 		MOLECULE = volume_proxy
-		NUMBER_TO_RELEASE = 4498 //Lig_tot
+		NUMBER_TO_RELEASE = 4798 //Lig_tot
 		RELEASE_PROBABILITY = 1
 		GRAPH_PATTERN = "c:r~NO_STATE!3,c:r~NO_STATE!3,c:r~NO_STATE!3,m:L@CP!0!1!2,"
 	}
