@@ -42,8 +42,10 @@ def testPlotPDEArray(mdldataset, testname, timepoints=6):
     timerows = timerows[len(timerows)/timepoints:len(timerows):len(timerows)/timepoints]
     # select a subset of the data
     mdlslice = mdldataset[mdldataset.Seconds.isin(timerows)]
-    grid = sns.FacetGrid(mdlslice, col="Observable", row='Seconds', hue='Origin', margin_titles=True,legend_out=False)
-    grid.set(xticks=np.arange(0,35,10), yticks=np.arange(0,0.3,0.1))
+    grid = sns.FacetGrid(mdlslice, col="Observable", row='Seconds', hue='Origin', margin_titles=True,legend_out=False, sharex=False, sharey=False)
+    #grid.set(yticks=np.arange(0,1,0.1))
+    [plt.setp(ax.get_xticklabels(), rotation=40) for ax in grid.axes.flat]
+    
     grid.map(sns.kdeplot, "Value")
     grid.add_legend()
 
@@ -57,6 +59,8 @@ def testPlotPDEArray(mdldataset, testname, timepoints=6):
 
 
 def testPlotSeries(mdldataset, mdlrdataset, testname):
+    mdlrdataset = mdldataset.query('Origin="R-MCell"')
+    mdldataset = mdldataset.query('Origin="Standard MCell"')
     sns.set_context("paper", font_scale=2.5)
     sns.set_style("white")
 
@@ -64,17 +68,16 @@ def testPlotSeries(mdldataset, mdlrdataset, testname):
     keys =  set(mdldataset['Observable'])
     
     numparams = len(keys)
-
     for idx,parameter in enumerate(keys):
         print idx, parameter
-        mdlslice = mdldataset.query('(Observable == "{0}")'.format(parameter))
-        #mdlrslice = mdlrdataset.query('(Observable == "{0}")'.format(parameter))
+        #mdlslice = mdldataset.query('(Observable == "{0}")'.format(parameter))
+        mdlrslice = mdlrdataset.query('(Observable == "{0}")'.format(parameter))
 
         plt.subplot(subplotdict[numparams][0], subplotdict[numparams][1], idx+1)
-        sns.tsplot(data=mdlslice, time="Seconds", unit="iteration",condition='Origin',
-               value="Value",ci=[95])
-        #sns.tsplot(data=mdlrslice, time="Seconds", unit="iteration",
-        #       value="Value",color="g",ci=[95])
+        #sns.tsplot(data=mdlslice, time="Seconds", unit="iteration",condition='Origin',
+        #       value="Value",ci=[95])
+        sns.tsplot(data=mdlrslice, time="Seconds", unit="iteration",
+               value="Value",color="g",ci=[95])
     plt.savefig('{0}b.pdf'.format(testname), bbox_inches="tight")
     plt.show()
     
@@ -92,14 +95,15 @@ if __name__ == "__main__":
 
     test = namespace.test
     database = 'timeseries3'
-    totaldataset = pandas.read_hdf('{0}DB.h5'.format(database), '{0}'.format(namespace.test))
+
+    totaldataset = pandas.read_hdf('{0}DB.h5'.format(test))
     #mdldataset = totaldataset.query('(Origin == "Standard MCell")')
     #mdlrdataset = totaldataset.query('(Origin == "R-MCell")')
     #mdlrdataset = pandas.read_hdf('{0}DB.h5'.format('timeseries'), '{0}_mdlr'.format(test))
     mdldataset = totaldataset
-    mdlrdataset = None
-    #testPlotSeries(mdldataset,mdlrdataset, test)
+    #mdlrdataset = None
+    #testPlotSeries(mdldataset,None, test)
     #testPlotSeriesArray(mdldataset,test)
-    testPlotPDEArray(mdldataset,test,3)
+    testPlotPDEArray(mdldataset,test,5)
 
 
