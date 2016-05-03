@@ -1,0 +1,38 @@
+ITERATIONS =  40000
+TIME_STEP =  1e-03
+VACANCY_SEARCH_DISTANCE =  100
+INCLUDE_FILE = "icogeometry3.mdl"
+Nav =  6.022e8               /* Avogadro number based on a volume size of 1 cubic um */
+rxn_layer_t =  0.01
+vol_wall =  56.5695045056029  /*Surface area*/
+vol_EC =  39
+Lig_tot =  4200
+Rec_tot =  300
+cTot = 0.84
+beta = 50
+koff = 0.01
+K1 =  0.1084e9        
+K2 =  33.72e9          
+kp1 =  K1*koff   
+kp2 =  K2*koff         
+
+INCLUDE_FILE = "blbr.molecules.mdl"
+INCLUDE_FILE = "blbr.reactions.mdl"
+INCLUDE_FILE = "blbr.seed.mdl"
+
+DEFINE_SURFACE_CLASSES{
+	reflect{
+		REFLECTIVE = ALL_MOLECULES
+	}
+
+}
+
+
+MODIFY_SURFACE_REGIONS{
+	CP[ALL]{
+		SURFACE_CLASS = reflect
+	}
+
+}
+
+
