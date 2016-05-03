@@ -2,6 +2,10 @@ import argparse
 import fnmatch
 import os
 import pandas
+import concurrent.futures
+import progressbar
+import multiprocessing as mp
+
 
 def getFiles(directory, extension):
     """
@@ -19,6 +23,26 @@ def getFiles(directory, extension):
     matches = [x[0] for x in matches]
 
     return matches
+def dummy(options):
+    pass
+
+
+def parallelHandling(function, options = {}, postExecutionFunction=dummy, postOptions={}):
+    futures = []
+    workers = mp.cpu_count() - 1
+    progress = progressbar.ProgressBar(maxval=options['repetitions']).start()
+    i = 0
+    print 'running in {0} cores'.format(workers)
+    with concurrent.futures.ProcessPoolExecutor(max_workers=workers) as executor:
+        for idx in range(options['repetitions']):
+            options['workerIdx'] = str(idx)
+            futures.append(executor.submit(function, options))
+        for future in concurrent.futures.as_completed(futures, timeout=3600):
+            postOptions['workerIdx'] = future.result()
+            postExecutionFunction(postOptions)
+            i += 1
+            progress.update(i)
+    progress.finish()
 
 
 def defineConsole():
@@ -27,7 +51,24 @@ def defineConsole():
     parser.add_argument('-o','--outputfile', type=str)
     return parser    
 
+def mergedataframe(datafilenames, outputdir, index):
+    outputfile = os.path.join(outputdir,'merged', index,'.h5')
+    trajectorydataset = pandas.DataFrame()
+    for df in pandalist:
+        tmp = pandas.read_hdf(df)
+        trajectorydataset = pandas.concat([trajectorydataset, tmp])
+    trajectorydataset.to_hdf(outputfile)
 
+
+def distributedMerging(datafilenames, outputdir, workers):
+    workers = mp.cpu_count() - 1
+    progress = progressbar.ProgressBar(maxval=options['repetitions']).start()
+    i = 0
+    print 'running in {0} cores'.format(workers)
+    with concurrent.futures.ProcessPoolExecutor(max_workers=workers) as executor:
+        workunit = min(len(datafilenames)/workers, 2)
+        for i in range(0, len(datafilenames), workunit):
+            futures.append(executor.submit(mergedataframe, datafilenames[i:i+workunit], outputdir, i))
 
 
 if __name__ == "__main__":
@@ -35,10 +76,18 @@ if __name__ == "__main__":
     namespace = parser.parse_args()
     pandalist = getFiles(namespace.workDirectory, 'h5')
     pandasArray = []
-    for df in pandalist:
-        pandasArray.append(pandas.read_hdf(df))
     trajectorydataset = pandas.DataFrame()
-    for df in pandasArray:
-        trajectorydataset = pandas.concat([trajectorydataset, df])
+    workers = mp.cpu_count() - 1
+
+    #distributedMerging(pandalist, 'merged', workers)
+    progress = progressbar.ProgressBar()
+    options = ['']
+    trajectorydataset = pandas.concat([pandas.read_hdf(df) for df in pandalist], ignore_index=True)
+
+    #for dfindex in progress(range(0,len(pandalist))):
+    #    df = pandalist[dfindex]
+    #    tmp = pandas.read_hdf(df)
+    #    trajectorydataset = pandas.concat([trajectorydataset, tmp],ignore_index=True)
 
     trajectorydataset.to_hdf(namespace.outputfile, 'results')
+    
