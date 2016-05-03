@@ -1,7 +1,7 @@
 DEFINE_REACTIONS
 {
-    ligand + receptor -> complex [1e11]
+    ligand + receptor -> complex [6e6]
     complex -> ligand + receptor [10]
-    receptor + complex -> dimer [1.2e11]
+    receptor + complex -> dimer [5e7]
     dimer -> receptor + complex [20]
 }
