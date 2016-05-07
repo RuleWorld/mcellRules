@@ -1,5 +1,5 @@
-ITERATIONS = 1.5e5
-TIME_STEP = 2e-4
+ITERATIONS = 2e5
+TIME_STEP = 1.5e-4
 VACANCY_SEARCH_DISTANCE = 100
 
 INCLUDE_FILE = "icogeometry.mdl"
@@ -26,9 +26,9 @@ MODIFY_SURFACE_REGIONS
    Nav = 6.022e8               /* Avogadro number based on a volume size of 1 cubic um */
    rxn_layer_t = 0.01
    vol_wall = 0.88/rxn_layer_t  /*Surface area*/
-   vol_EC = 39
+   vol_EC = 27
    vol_PM = 0.01/rxn_layer_t  /*Surface area*/
-   vol_CP = 1
+   vol_CP = 9
    Nav = 6.022e8
    Lig_tot = 6.0e3
    Rec_tot = 4.0e2

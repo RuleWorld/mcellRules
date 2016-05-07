@@ -97,13 +97,29 @@ if __name__ == "__main__":
     database = 'timeseries3'
 
     totaldataset = pandas.read_hdf('{0}DB.h5'.format(test))
+    mdldataset = totaldataset.reset_index()
+    rmcell = mdldataset.query('Origin == "R-MCell"')
+
+    nfsim = mdldataset.query('Origin == "NFsim"')
+
+    rts = set(rmcell['Seconds'])
+    nts = set(nfsim['Seconds']).intersection()
+
+    mdldataset = mdldataset[mdldataset.Seconds.isin(nts)]
+    rowdicts = []
+    for l, d in mdldataset.groupby("Seconds iteration Origin Observable".split()):
+        d = {"Seconds": l[0], "iteration": l[1], "Origin": l[2], "Observable":l[3], "Value":list(d.Value)[0]}
+        rowdicts.append(d)                               
+
+    corrected = pandas.DataFrame.from_dict(rowdicts)
+    #print corrected    
     #mdldataset = totaldataset.query('(Origin == "Standard MCell")')
     #mdlrdataset = totaldataset.query('(Origin == "R-MCell")')
     #mdlrdataset = pandas.read_hdf('{0}DB.h5'.format('timeseries'), '{0}_mdlr'.format(test))
-    mdldataset = totaldataset
+    #mdldataset = totaldataset
     #mdlrdataset = None
-    #testPlotSeries(mdldataset,None, test)
-    #testPlotSeriesArray(mdldataset,test)
-    testPlotPDEArray(mdldataset,test,5)
+    #testPlotSeries(corrected,None, test)
+    testPlotSeriesArray(corrected,test)
+    testPlotPDEArray(corrected,test,10)
 
 
