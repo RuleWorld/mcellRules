@@ -1,0 +1,12 @@
+REACTION_DATA_OUTPUT
+{
+	STEP =  1e-6
+	Species = Clusters
+	Molecules = LRmotif
+	Molecules = Lfreesite
+	Molecules = Rfreesite
+	Species = Lmonomer
+	Species = Rmonomer
+	Molecules = Ltot
+	Molecules = Rtot
+}

@@ -1,0 +1,5 @@
+DEFINE_REACTIONS
+{
+	volume_proxy -> volume_proxy [1e-15]
+	volume_proxy + volume_proxy -> volume_proxy + volume_proxy [1e-15]
+}

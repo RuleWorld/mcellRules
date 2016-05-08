@@ -1,0 +1,63 @@
+# tlbr.bngl
+# Trivalent ligand - bivalent receptor model [Peaking Params]
+#
+# Theoretical model was published and analyzed in:
+#   B Goldstein and AS Perelson.
+#   "Equilibrium theory for the clustering of bivalent cell surface receptors by trivalent ligands".
+#   Biophysical Journal 45, 1109–1123 (1984).
+#
+# Rule-based adaptation appeard as part of:
+#   MW Sneddon, JR Faeder, and T Emonet.
+#   "Efficient modeling, simulation and coarse-graining of biological complexity with NFsim".
+#   Nature Methods 8, 177–183 (2011).
+setOption("SpeciesLabel","HNauty")
+begin model
+begin parameters
+    # constants
+    NA  6.022e23             # Avogadro's number
+    # experimental conditions
+    cell_density  1e9         # cells per liter
+    Rec_cell      3e5         # receptors per cell
+    Lig_conc      8.3e-9      # initial ligand concentration, M
+    # simulation scale
+    f    0.001                # fraction of simulated cell     
+    Vol  1e-15*1055.1    #(1/cell_density)*f   # reactor volume
+  	# initial species count
+	Lig_tot  Lig_conc*NA*Vol
+	Rec_tot  Rec_cell*f
+    # equillibrium constants
+    K1       0.1084e9         # free binding equillibrium constant, /M
+    K2       33.72e9          # crosslinking equillibrium constant, /M
+    # kinetic parameters
+    koff     0.01             # unbinding rate, /s
+    kp1      K1*koff          # Free binding rate constant, /M/s
+	kp2      K2*koff          # Crosslinking rate constant, /M/s
+end parameters
+begin molecule types
+    R(l,l)
+    L(r,r)
+end molecule types
+begin seed species
+    #R(l,l)     Rec_tot
+    #L(r,r)   5973 #Lig_tot #4498 #Lig_tot
+    L(r,r!1).R(l!1,l) 2
+end seed species
+begin observables
+    Species    Clusters  R(l!0).L(r!0,r!1).R(l!1)  # Any species with crosslinked receptors
+    Molecules  LRmotif   L(r!0).R(l!0)
+    Molecules  Lfreesite L(r)
+    Molecules  Rfreesite R(l)
+    Species    Lmonomer  L(r,r)
+    Species    Rmonomer  R(l,l)
+    Molecules  Ltot      L()    
+    Molecules  Rtot      R() 
+end observables
+begin reaction rules
+	R(l!1).L(r!1) -> R(l) + L(r)                 koff
+	L(r,r)      + R(l)  ->  L(r!1,r).R(l!1)      kp1
+	L(r,r!+)    + R(l)  ->  L(r!1,r!+).R(l!1)    kp2/NA/Vol
+end reaction rules
+end model
+#generate_network({max_iter=>2, overwrite=>1})
+simulate({method=>"nf",t_start=>0,t_end=>20,n_steps=>50,verbose=>1})
+

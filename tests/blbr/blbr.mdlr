@@ -1,0 +1,115 @@
+ITERATIONS = 80000
+TIME_STEP = 5e-04
+VACANCY_SEARCH_DISTANCE = 100
+ 
+INCLUDE_FILE = "icogeometry3.mdl"
+ 
+DEFINE_SURFACE_CLASSES
+{
+   reflect {
+    REFLECTIVE = ALL_MOLECULES
+   }
+}
+ 
+MODIFY_SURFACE_REGIONS
+{
+
+   CP[ALL]
+   {
+      SURFACE_CLASS = reflect
+   }
+} 
+
+ 
+/* Model Parameters */
+   Nav = 6.022e8               /* Avogadro number based on a volume size of 1 cubic um */
+   rxn_layer_t = 0.01
+   vol_wall = 56.5695045056029  /*Surface area*/
+   vol_EC = 39
+    Lig_tot = 5973
+    Rec_tot = 300
+    cTot  =0.84
+    beta  =50
+    koff  =0.01
+
+    //kp1 = (cTot*koff)/(3.0*Lig_tot)*Nav*1000
+    //kp2 = (beta*koff/Rec_tot)*Nav*1000
+     // equillibrium constants
+      // free binding equillibrium constant, /M
+    K1  = 0.1084e9        
+    //crosslinking equillibrium constant, /M
+    K2  = 33.72e9          
+    // kinetic parameters
+     //Free binding rate constant, /M/s
+    kp1  = K1*koff   
+     // Crosslinking rate constant, /M/s      
+    kp2  = K2*koff         
+
+
+
+
+#DEFINE_MOLECULES
+{
+  L(r,r)
+  {
+      DIFFUSION_CONSTANT_3D = 1e-4
+ 
+  }
+  R(l,l){
+      DIFFUSION_CONSTANT_3D = 1e-4
+      
+  }
+}
+
+
+ 
+ 
+#DEFINE_REACTIONS
+{
+    R(l!1).L(r!1)       ->  R(l) + L(r)          [koff]
+    R(l) + L(r,r)     -> R(l!1).L(r!1,r)      [kp1]
+    R(l) + L(r,r!+)   -> R(l!1).L(r!1,r!+)    [kp2]
+}
+ 
+ 
+#INSTANTIATE Scene OBJECT
+{
+  CP OBJECT CP {
+    PARENT = EC
+    MEMBRANE = PM OBJECT CP[ALL]
+  }
+
+   ligand_rel RELEASE_SITE
+   {
+    SHAPE = Scene.CP[ALL]
+    MOLECULE = L(r,r)@CP
+    NUMBER_TO_RELEASE = Lig_tot
+    RELEASE_PROBABILITY = 1
+   }
+      receptor_rel RELEASE_SITE
+   {
+    SHAPE = Scene.CP[ALL]
+  MOLECULE = R(l,l)@CP
+    NUMBER_TO_RELEASE = Rec_tot
+    RELEASE_PROBABILITY = 1
+
+   }
+}
+ 
+
+ 
+/* Observables bloc */
+#REACTION_DATA_OUTPUT
+{
+   STEP = 1e-6
+    Species    Clusters  R(l!0).L(r!0,r!1).R(l!1)  // Any species with crosslinked receptors
+    Molecules  LRmotif   L(r!0).R(l!0)
+    Molecules  Lfreesite L(r)
+    Molecules  Rfreesite R(l)
+    Species    Lmonomer  L(r,r)
+    Species    Rmonomer  R(l,l)
+    Molecules  Ltot      L()    
+    Molecules  Rtot      R() 
+}
+
+

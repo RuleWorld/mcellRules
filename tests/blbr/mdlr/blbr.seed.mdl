@@ -1,0 +1,21 @@
+INSTANTIATE Scene OBJECT
+{
+	CP OBJECT CP {}
+	ligand_rel RELEASE_SITE //@CP::L(r,r)
+	{
+		SHAPE = Scene.CP[ALL]
+		MOLECULE = volume_proxy
+		NUMBER_TO_RELEASE = Lig_tot
+		RELEASE_PROBABILITY = 1
+		GRAPH_PATTERN = "c:r~NO_STATE!2,c:r~NO_STATE!2,m:L@CP!0!1,"
+	}
+	receptor_rel RELEASE_SITE //@CP::R(l,l)
+	{
+		SHAPE = Scene.CP[ALL]
+		MOLECULE = volume_proxy
+		NUMBER_TO_RELEASE = Rec_tot
+		RELEASE_PROBABILITY = 1
+		GRAPH_PATTERN = "c:l~NO_STATE!2,c:l~NO_STATE!2,m:R@CP!0!1,"
+		//GRAPH_PATTERN = "c:l~NO_STATE!5,c:l~NO_STATE!5!3,c:r~NO_STATE!4,c:r~NO_STATE!4!1,m:L@CP!3!2,m:R@CP!1!0,"
+	}
+}
