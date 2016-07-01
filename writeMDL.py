@@ -1,7 +1,10 @@
 import json
 import grammarDefinition as gd
-from StringIO import StringIO
 import argparse
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
 
 def readBNGLJSON(bngljson):
     with open(bngljson, 'r') as f:

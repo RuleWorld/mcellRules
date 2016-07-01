@@ -49,7 +49,7 @@ class NFSim:
         """
         #self.lib.querySystemStatus_c.restype = queryResultsStruct
         
-        mem = self.lib.systemStatus_createContainer()
+        mem = self.lib.mapvector_create()
         #queryResults = self.lib.querySystemStatus_c(option, mem)
         self.lib.querySystemStatus_c.argtypes = [c_char_p, c_void_p]
         self.lib.map_get.restype = c_char_p
@@ -58,10 +58,11 @@ class NFSim:
         self.lib.querySystemStatus_c(key,mem)
         #results = [queryResults.results[i] for i in range(0, queryResults.numOfResults)]
         results = []
-        for idx in range(0, self.lib.systemStatus_querySize(mem)):
+        for idx in range(0, self.lib.mapvector_size(mem)):
             #XXX:ideally i would like to returns all key values but that will require a lil more work on teh wrapper side
-            partialResults = self.lib.systemStatus_queryGet(mem, idx)
+            partialResults = self.lib.mapvector_get(mem, idx)
             results.append(self.lib.map_get(partialResults,"label"))
+        self.lib.mapvector_delete(mem)
         return sorted(results, key=len)
 
 
@@ -76,7 +77,7 @@ if __name__ == "__main__":
     #nfsim.initSystemNauty({"c:a~NO_STATE!4!2,c:l~NO_STATE!3,c:l~NO_STATE!3!0,m:Lig!1!2,m:Rec!0,":1})
     #print '---', nfsim.querySystemStatus("observables")
     nfsim.initSystemNauty({"c:l~NO_STATE!3!1,c:r~NO_STATE!2!0,m:L@EC!1,m:R@PM!0,":1})
-    print '----', nfsim.querySystemStatus("complex")
+    print('----', nfsim.querySystemStatus("complex"))
     
     
     """

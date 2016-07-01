@@ -1,5 +1,8 @@
 from grammarDefinition import *
-from StringIO import StringIO
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
 import smallStructures as st
 import pprint
 from subprocess import call
@@ -26,16 +29,17 @@ def createMoleculeFromPattern(moleculePattern, idx):
     tmpMolecule = st.Molecule(moleculePattern['moleculeName'], idx)
     if 'moleculeCompartment' in moleculePattern:
         tmpMolecule.compartment = moleculePattern['moleculeCompartment'][1]
-    for idx2, component in enumerate(moleculePattern['components']):
-        tmpComponent = st.Component(component['componentName'],'{0}_{1}'.format(idx,idx2))
-        if 'state' in component:
-            for state in component['state']:
-                if state != '':
-                    tmpComponent.addState(state)
-        if 'bond' in component.keys():
-            for bond in component['bond']:
-                tmpComponent.addBond(bond)
-        tmpMolecule.addComponent(tmpComponent)
+    if 'components' in moleculePattern.keys():
+        for idx2, component in enumerate(moleculePattern['components']):
+            tmpComponent = st.Component(component['componentName'],'{0}_{1}'.format(idx,idx2))
+            if 'state' in component:
+                for state in component['state']:
+                    if state != '':
+                        tmpComponent.addState(state)
+            if 'bond' in component.keys():
+                for bond in component['bond']:
+                    tmpComponent.addBond(bond)
+            tmpMolecule.addComponent(tmpComponent)
     return tmpMolecule
 
 
@@ -106,15 +110,23 @@ def processObservables(observables):
     ostr = StringIO()
     ostr.write('begin observables\n')
     for observable in observables:
-        
         if 'patterns' in observable.keys() and 'outputfile' in observable.keys():
-            tmpObservable = '\tSpecies '
+            tmpObservable = '\tMolecules '
             tmpObservable += '{0} '.format(observable['outputfile'].split('/')[-1].split('.')[0])
             patternList = []
             for pattern in observable['patterns']:
                 patternList.append(str(createSpeciesFromPattern(pattern['speciesPattern'])))
             tmpObservable +=  ', '.join(patternList)
             ostr.write(tmpObservable + '\n')
+        elif 'obskey' in observable.keys():
+            tmpObservable = '\t{0} '.format(observable['obskey'])
+            tmpObservable += '{0} '.format(observable['obsname'])
+            patternList = []
+            for pattern in observable['obspatterns']:
+                patternList.append(str(createSpeciesFromPattern(pattern)))
+            tmpObservable +=  ', '.join(patternList)
+            ostr.write(tmpObservable + '\n')
+
     ostr.write('end observables\n')
     return ostr.getvalue()
 
@@ -123,7 +135,6 @@ def processMTObservables(moleculeTypes):
     creates a list of observables from just molecule types
     '''
     ostr = StringIO()
-    print ".......", molecuk
     raise Exception
 
     ostr.write('begin observables\n')
@@ -177,10 +188,20 @@ def processDiffussionElements(parameters, extendedData):
                 data = {'name':propertyValue[1].strip(), 'parameters': []}
                 moleculeProperties[molecule[0][0]].append((propertyValue[0], data))
         if 'diffusionFunction' in molecule[1]:
+            if 'function' in molecule[1]['diffusionFunction'].keys():
                 parameters = molecule[1]['diffusionFunction'][1]['parameters']
                 data = {'name': '"{0}"'.format(molecule[1]['diffusionFunction'][1]['functionName']), 
                 'parameters':[(x['key'], x['value']) for x in parameters]}
-                moleculeProperties[molecule[0][0]].append((molecule[1]['diffusionFunction'][0], data))
+            else:
+                data = {'name':molecule[1]['diffusionFunction'][1].strip(), 'parameters': []}
+            #moleculeProperties[molecule[0][0]].append((molecule[1]['diffusionFunction'][0], data))
+            if '3D' in molecule[1]['diffusionFunction'].keys():
+                dimensionality = {'name':'3','parameters':[]}
+            if '2D' in molecule[1]['diffusionFunction'].keys():
+                dimensionality = {'name':'2','parameters':[]}
+
+            moleculeProperties[molecule[0][0]].append(('diffusion_function', data))
+            moleculeProperties[molecule[0][0]].append(('dimensionality', dimensionality))
 
     for seed in extendedData['initialization']:
         if 'compartmentName' in seed.keys():
@@ -273,7 +294,7 @@ def constructBNGFromMDLR(mdlrPath,nfsimFlag=False, separateSpatial=True):
 def bngl2json(bnglFile):
     call(['bngdev',bnglFile])
     sbmlName = '.'.join(bnglFile.split('.')[:-1]) + '_sbml.xml'
-    print sbmlName
+    print(sbmlName)
     call(['./sbml2json','-i', sbmlName])
 
 
