@@ -82,19 +82,19 @@ MODIFY_SURFACE_REGIONS
 {
   Lig(l,l)
   {
-      DIFFUSION_CONSTANT_3D = Einstein_Stokes(T, mu, Rs)
+      DIFFUSION_CONSTANT_3D = 1e-4
   }
   Lyn(U,SH2)
   {
-      DIFFUSION_CONSTANT_2D = Einstein_Stokes(T, mu, Rs)
+      DIFFUSION_CONSTANT_2D = 1e-4
   }
   Syk(tSH2,l~Y~pY,a~Y~pY)
   {
-      DIFFUSION_CONSTANT_3D = Einstein_Stokes(T, mu, Rs)
+      DIFFUSION_CONSTANT_3D = 1e-4
   }
   Rec(a,b~Y~pY,g~Y~pY)
   {
-      DIFFUSION_CONSTANT_2D = Einstein_Stokes(T, mu, Rs)
+      DIFFUSION_CONSTANT_2D = 1e-4
   }
 
 }
