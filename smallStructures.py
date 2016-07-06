@@ -270,13 +270,15 @@ class Species:
         self.sort()
         name = ''
 
+
         moleculeStrings = [x.toString() for x in self.molecules]
         if self.compartment != '':
             name += '@{0}::'.format(self.compartment)
-            name += '.'.join([x.strip('@{0}'.format(self.compartment)) for x in moleculeStrings])
+            #name += '.'.join(moleculeStrings)
+            moleculeStrings = [x if '@{0}'.format(self.compartment) not in x else x[:-len('@{0}'.format(self.compartment))] for x in moleculeStrings ]
+            name += '.'.join(moleculeStrings)
         else:
             name += '.'.join(moleculeStrings)
-        
 
         '''
         name = name.replace('~','')
@@ -748,6 +750,8 @@ class Component:
         
         return component,compDictionary
  
+    def __lt__(self, other):
+        return str(self) < str(other)
 
 class States:
     def __init__(self,name='',idx=''):

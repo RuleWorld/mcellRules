@@ -50,6 +50,7 @@ def createSpecies(pattern):
     tmpDict = {}
     species = st.Species()
     species.idx = pattern.get('id')
+    species.trueName = pattern.get('name')
     compartment = pattern.get('compartment')
     if compartment != None:
         species.compartment = compartment

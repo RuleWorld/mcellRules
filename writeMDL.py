@@ -302,12 +302,10 @@ def constructMCell(xmlStructs, mdlrPath, outputFileName, nautyDict):
             mdlrseeds.append(entries)
 
     idx = 1
-
     for bngseed, mdlrseed in zip(xmlStructs['seedspecies'], mdlrseeds):
 
         seedMDL.write('\t{0} {1} //{2}\n'.format(mdlrseed[0], mdlrseed[1], str(bngseed['structure'])))
         seedMDL.write('\t{\n')
-
         #print the shape option first
         for element in mdlrseed[2]:
             if element[0] == 'SHAPE':
@@ -323,7 +321,7 @@ def constructMCell(xmlStructs, mdlrPath, outputFileName, nautyDict):
             else:
                 pass
                 #graphpattern = element[1].strip()
-        seedMDL.write('\t\tGRAPH_PATTERN = "{0}"\n'.format(nautyDict[str(bngseed['structure'])]))
+        seedMDL.write('\t\tGRAPH_PATTERN = "{0}"\n'.format(nautyDict[bngseed['structure'].trueName]))
 
         seedMDL.write('\t}\n')
     seedMDL.write('}\n')
