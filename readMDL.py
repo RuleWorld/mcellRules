@@ -79,7 +79,7 @@ def processInitCompartments(initializations):
                 if entry[0] == 'MOLECULE':
                     pattern = species_definition.parseString(entry[1])
                     tmpSpecies = createSpeciesFromPattern(pattern[0])
-                elif entry[0] == 'NUMBER_TO_RELEASE':
+                elif entry[0] in ['NUMBER_TO_RELEASE', 'CONCENTRATION']:
                     initialConditions = entry[1]
             sstr.write('\t {0} {1}\n'.format(str(tmpSpecies),initialConditions))
         else:
