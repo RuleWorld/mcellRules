@@ -55,7 +55,7 @@ real = Combine(integer +
                Optional(point + Optional(number)) +
                Optional(e + integer))
 numarg = (real | integer)
-identifier = Word(alphas, alphanums + "_")
+identifier = Word(alphas + "_", alphanums + "_")
 dotidentifier = Word(alphas, alphanums + "_" + ".")
 bracketidentifier = identifier + lbracket + Word(alphas) + rbracket
 statement = Group(identifier + equal + (quotedString | restOfLine))
@@ -89,7 +89,7 @@ component_statement = Group(identifier.setResultsName('componentName') + Optiona
                       )
 
 molecule_definition = Group(identifier.setResultsName('moleculeName') +
-                            Optional((lparen + delimitedList(component_definition, delim=',').setResultsName('components') + rparen)) +
+                            Optional((lparen + Optional(delimitedList(component_definition, delim=',').setResultsName('components')) + rparen)) +
                             Optional(Group('@' + Word(alphanums + '_-')).setResultsName('moleculeCompartment')))
 molecule_instance = Group(identifier.setResultsName('moleculeName') +
                           Optional((lparen + Optional(delimitedList(component_statement, delim=',').setResultsName('components')) + rparen)) +
