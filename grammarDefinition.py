@@ -27,6 +27,7 @@ system_constants_ = Keyword("SYSTEM_CONSTANTS")
 
 # molecule keywords
 define_molecules_ = Keyword("DEFINE_MOLECULES")
+define_functions_ = Keyword("DEFINE_FUNCTIONS")
 diffusion_constant_3d_ = Keyword("DIFFUSION_CONSTANT_3D")
 diffusion_constant_2d_ = Keyword("DIFFUSION_CONSTANT_2D")
 diffusion_function_ = Keyword("DIFFUSION_FUNCTION")
@@ -62,7 +63,7 @@ statement = Group(identifier + equal + (quotedString | restOfLine))
 
 
 #math
-mathElements = (numarg |   ',' |  '+' | '-' | '*' | '/' | '^' | '&' | '>' | '<' | '=' | '|' ) + Optional(identifier)
+mathElements = (numarg |   ',' |  '+' | '-' | '*' | '/' | '^' | '&' | '>' | '<' | '=' | '|' | identifier)
 nestedMathDefinition     = nestedExpr( '(', ')', content=mathElements)
 mathDefinition = OneOrMore(mathElements)
 
@@ -98,7 +99,7 @@ species_definition = Group(Optional(Group('@' + Word(alphanums + '_')).setResult
                            delimitedList(molecule_instance, delim='.').setResultsName('speciesPattern'))
 reaction_definition = Group(Group(delimitedList(species_definition, delim='+')).setResultsName('reactants') + (uni_arrow | bi_arrow) +
                             Group(delimitedList(species_definition, delim='+')).setResultsName('products') + 
-                            Group(lbracket + (numarg | identifier) + Optional(comma + (numarg| identifier)) + rbracket).setResultsName('rate'))
+                            Group(lbracket + (numarg | (identifier + Suppress(Optional('()')))) + Optional(comma + (numarg| (identifier + Suppress(Optional('()'))))) + rbracket).setResultsName('rate'))
 
 # generic hash section grammar
 hashed_section = (hashsymbol + Group(OneOrMore(name) + section_enclosure2_))
@@ -111,6 +112,12 @@ hashed_system_constants = Group(hashsymbol + Suppress(system_constants_) + lbrac
 diffusion_entry_ = Group((diffusion_constant_2d_.setResultsName('2D') | diffusion_constant_3d_.setResultsName('3D')) + Suppress(equal) + (function_entry_.setResultsName('function') | (identifier | numarg).setResultsName('variable')))
 molecule_entry = Group(molecule_definition + Optional(Group(lbrace + Optional(diffusion_entry_.setResultsName('diffusionFunction')) + (ZeroOrMore(statement)).setResultsName('moleculeParameters') + rbrace)))
 hashed_molecule_section = Group(hashsymbol + Suppress(define_molecules_) + lbrace + OneOrMore(molecule_entry) + rbrace)
+
+#hash function entry
+function_name = Group(identifier + '()')
+math_function_entry = Group(function_name.setResultsName('functionName') + Suppress(equal) + Group(restOfLine).setResultsName('functionBody'))
+hashed_function_section = Group(hashsymbol + Suppress(define_functions_) + lbrace + ZeroOrMore(math_function_entry) +rbrace)
+
 
 # hash reaction entry
 hashed_reaction_section = Group(hashsymbol + Suppress(define_reactions_) + lbrace + OneOrMore(reaction_definition) + rbrace)
@@ -135,7 +142,10 @@ other_sections = section_enclosure_
 grammar = ZeroOrMore(Suppress(other_sections) | Suppress(statement) | hashed_system_constants.setResultsName('systemConstants') 
                      | hashed_molecule_section.setResultsName('molecules') | hashed_reaction_section.setResultsName('reactions') 
                      | hashed_observable_section.setResultsName('observables') 
-                     | hashed_initialization_section.setResultsName('initialization') | Suppress(hashed_section))
+                     | hashed_initialization_section.setResultsName('initialization') 
+                     | hashed_function_section.setResultsName('math_functions')
+                     #| Suppress(hashed_section)
+                     )
 
 nonhashedgrammar = ZeroOrMore(Suppress(statement) | Suppress(hashed_section) | Dict(other_sections))
 

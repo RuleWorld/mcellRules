@@ -224,6 +224,15 @@ def processDiffussionElements(parameters, extendedData):
 
     return {'modelProperties':modelProperties, 'moleculeProperties': moleculeProperties, 
             'compartmentProperties': compartmentProperties}
+def processFunctions(rawFunctions):
+    ofun = StringIO()
+    ofun.write('begin functions\n')
+    for function in rawFunctions:
+
+        ofun.write('{0}() ={1}\n'.format(function['functionName'][0], function['functionBody'][0]))
+    ofun.write('end functions\n')
+
+    return ofun.getvalue()
 
 def writeDefaultFunctions():
     defaultFunctions = StringIO()
@@ -250,6 +259,8 @@ def constructBNGFromMDLR(mdlrPath,nfsimFlag=False, separateSpatial=True):
     parameterStr = processParameters(statements)
     moleculeStr,moleculeList = processMolecules(sections['molecules'])
     seedspecies, compartments = processInitCompartments(sections['initialization']['entries'])
+    functions = processFunctions(sections['math_functions'])
+    
     if not nfsimFlag:
         observables = processObservables(sections['observables'])
     else:
@@ -264,7 +275,7 @@ def constructBNGFromMDLR(mdlrPath,nfsimFlag=False, separateSpatial=True):
     finalBNGLStr.write(compartments)
     finalBNGLStr.write(seedspecies)
     finalBNGLStr.write(observables)
-    #finalBNGLStr.write(functions)
+    finalBNGLStr.write(functions)
     #finalBNGLStr.write('begin observables\nend observables\n')
     finalBNGLStr.write(reactions)
     finalBNGLStr.write('end model\n')
