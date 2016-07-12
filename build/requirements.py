@@ -4,6 +4,8 @@ def nfsim():
     subprocess.call(['git', 'clone', 'https://github.com/RuleWorld/nfsim.git'])
     os.chdir('nfsim')
     subprocess.call(['git', 'checkout', 'nfsim_lib_shared_ptr'])
+    subprocess.call(['git', 'pull'])
+
     try:
         os.mkdir('lib')
     except OSError:
@@ -17,6 +19,7 @@ def nfsim():
 def nfsim_lib():
     subprocess.call(['git', 'clone', 'https://github.com/jjtapia/nfsimCInterface'])
     os.chdir('nfsimCInterface')
+    subprocess.call(['git', 'pull'])
 
     try:
         os.mkdir('lib')
@@ -44,6 +47,8 @@ def mcell():
     subprocess.call(['git', 'clone', 'https://github.com/mcellteam/mcell.git'])
     os.chdir('mcell')
     subprocess.call(['git','checkout','nfsim_diffusion'])
+    subprocess.call(['git', 'pull'])
+
     try:
         os.mkdir('lib')
     except OSError:

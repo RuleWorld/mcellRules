@@ -281,8 +281,9 @@ def constructBNGFromMDLR(mdlrPath,nfsimFlag=False, separateSpatial=True):
     finalBNGLStr.write('end model\n')
 
     #add processing actions
-    finalBNGLStr.write('generate_network({overwrite=>1})\n')
-    finalBNGLStr.write('writeSBML()\n')
+    if not nfsimFlag:
+        finalBNGLStr.write('generate_network({overwrite=>1})\n')
+        finalBNGLStr.write('writeSBML()\n')
 
     '''
     eventually this stuff should be integrated into bionetgen proper
