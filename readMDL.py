@@ -1,4 +1,7 @@
 from grammarDefinition import *
+from __future__ import print_function
+import sys
+
 try:
     from StringIO import StringIO
 except ImportError:
@@ -9,6 +12,13 @@ from subprocess import call
 from collections import defaultdict
 import writeBNGXMLe
 import os
+
+
+def eprint(*args, **kwargs):
+    '''
+    stderr printing
+    '''
+    print(*args, file=sys.stderr, **kwargs)
 
 def processParameters(statements):
     pstr = StringIO()
@@ -257,14 +267,26 @@ def constructBNGFromMDLR(mdlrPath,nfsimFlag=False, separateSpatial=True):
     finalBNGLStr = StringIO()
     finalBNGLStr.write('begin model\n')
     parameterStr = processParameters(statements)
-    moleculeStr,moleculeList = processMolecules(sections['molecules'])
-    seedspecies, compartments = processInitCompartments(sections['initialization']['entries'])
-    functions = processFunctions(sections['math_functions'])
+    try:
+        moleculeStr,moleculeList = processMolecules(sections['molecules'])
+    except 'KeyError':
+        eprint('There is an issue with the molecules section in the mdlr file')
+    try:
+        seedspecies, compartments = processInitCompartments(sections['initialization']['entries'])
+    except KeyError:
+        eprint('There is an issue with the initialization section in the mdlr file')
+    if 'math_functions' in sections:
+        functions = processFunctions(sections['math_functions'])
+    else:
+        functions = ''
     
     if not nfsimFlag:
         observables = processObservables(sections['observables'])
     else:
-        observables = processObservables(sections['observables'])
+        try:
+            observables = processObservables(sections['observables'])
+        except KeyError:
+            eprint('There is an issue with the observables section in the mdlr file')
         #observables = processMTObservables(moleculeList)
     reactions = processReactionRules(sections['reactions'])
 
