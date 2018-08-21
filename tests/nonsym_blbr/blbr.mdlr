@@ -1,0 +1,120 @@
+ITERATIONS = 20000
+TIME_STEP = 5e-04
+VACANCY_SEARCH_DISTANCE = 100
+ 
+INCLUDE_FILE = "icogeometry3.mdl"
+ 
+DEFINE_SURFACE_CLASSES
+{
+   reflect {
+    REFLECTIVE = ALL_MOLECULES
+   }
+}
+ 
+MODIFY_SURFACE_REGIONS
+{
+
+   CP[ALL]
+   {
+      SURFACE_CLASS = reflect
+   }
+} 
+
+ 
+/* Model Parameters */
+   Nav = 6.022e8               /* Avogadro number based on a volume size of 1 cubic um */
+   rxn_layer_t = 0.01
+   vol_wall = 56.5695045056029  /*Surface area*/
+   vol_EC = 39
+    Lig_tot = 4200
+    Rec_tot = 300
+    cTot  =0.84
+    beta  =50
+    koff  =0.01
+
+    //kp1 = (cTot*koff)/(3.0*Lig_tot)*Nav*1000
+    //kp2 = (beta*koff/Rec_tot)*Nav*1000
+     // equillibrium constants
+      // free binding equillibrium constant, /M
+    K1  = 0.1084e9        
+    //crosslinking equillibrium constant, /M
+    K2  = 33.72e9          
+    // kinetic parameters
+     //Free binding rate constant, /M/s
+    kp1  = K1*koff   
+     // Crosslinking rate constant, /M/s      
+    kp2  = K2*koff         
+
+
+
+
+#DEFINE_MOLECULES
+{
+  L(r1,r2)
+  {
+      DIFFUSION_CONSTANT_3D = 1e-5
+ 
+  }
+  R(l1,l2){
+      DIFFUSION_CONSTANT_3D = 1e-5
+      
+  }
+}
+
+
+ 
+ 
+#DEFINE_REACTIONS
+{
+    R(l1) + L(r1,r2)     -> R(l1!1).L(r1!1,r2)      [kp1]
+    R(l1) + L(r1,r2)     -> R(l1!1).L(r1,r2!1)      [kp1]
+    R(l2) + L(r1,r2)     -> R(l2!1).L(r1!1,r2)      [kp1]
+    R(l2) + L(r1,r2)     -> R(l2!1).L(r1,r2!1)      [kp1]
+
+    R(l1) + L(r1,r2!+)     -> R(l1!1).L(r1!1,r2!+)      [kp2]
+    R(l1) + L(r1!+,r2)     -> R(l1!1).L(r1!+,r2!1)      [kp2]
+    R(l2) + L(r1,r2!+)     -> R(l2!1).L(r1!1,r2!+)      [kp2]
+    R(l2) + L(r1!+,r2)     -> R(l2!1).L(r1!+,r2!1)      [kp2]
+
+}
+ 
+ 
+#INSTANTIATE Scene OBJECT
+{
+  CP OBJECT CP {
+  }
+
+   ligand_rel RELEASE_SITE
+   {
+    SHAPE = Scene.CP[ALL]
+    MOLECULE = L(r1,r2)@CP
+    NUMBER_TO_RELEASE = 5973
+    RELEASE_PROBABILITY = 1
+   }
+      receptor_rel RELEASE_SITE
+   {
+    SHAPE = Scene.CP[ALL]
+  MOLECULE = R(l1,l2)@CP
+    NUMBER_TO_RELEASE = 300
+    RELEASE_PROBABILITY = 1
+
+   }
+}
+ 
+
+ 
+/* Observables bloc */
+#REACTION_DATA_OUTPUT
+{
+   STEP = 1e-6
+    Species    Clusters  L(r1!+,r2!+)
+    Molecules  LRmotif   L(r1!0).R(l2!0), L(r1!0).R(l1!0), L(r2!0).R(l2!0), L(r2!0).R(l1!0)
+    Molecules  Lfreesite L(r1), L(r2)
+    Molecules  Rfreesite R(l1), R(l2)
+    Species    Lmonomer  L(r1,r2)
+    Species    Rmonomer  R(l1,l2)
+    Molecules  Ltot      L()    
+    Molecules  Rtot      R() 
+}
+
+
